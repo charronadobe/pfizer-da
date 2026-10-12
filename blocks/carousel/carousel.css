@@ -1,0 +1,716 @@
+/* stylelint-disable selector-class-pattern, unit-disallowed-list, no-descending-specificity */
+
+/* -----------------------------------------------------------------------------
+ * 1. Variables and Base Configuration
+ * -------------------------------------------------------------------------- */
+
+.carousel-wrapper {
+  --carousel-content-spacing: var(--space-4xl);
+}
+
+@media (width >= 1200px) {
+  .carousel-wrapper {
+    --carousel-content-spacing: 0;
+  }
+}
+
+main > div.carousel-container {
+  margin: 0;
+}
+
+/* Carousel base styles - no animations for better LCP */
+.carousel {
+  opacity: 1;
+}
+
+main > .section > div.carousel-wrapper {
+  --display-m-font-size: 2rem;
+  --display-m-letter-spacing: 0;
+  --link-m-font-size: 1rem;
+  --content-padding: var(--space-xl);
+  --title-font: var(--heading-font-family);
+
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+  max-height: 45rem;
+}
+
+.carousel-wrapper .secondary {
+  --title-font: var(--heading-font-family);
+}
+
+/* -----------------------------------------------------------------------------
+ * 2. Carousel Layout and Structure
+ * -------------------------------------------------------------------------- */
+.carousel .carousel-slides-container {
+  position: relative;
+  height: 720px;
+}
+
+.carousel .carousel-slides,
+.carousel .carousel-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Slides Container - no animations for better LCP */
+.carousel .carousel-slides {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow: auto hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar */
+.carousel .carousel-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * 2.1 Slide Styles - No animations
+ * -------------------------------------------------------------------------- */
+
+/* Individual Slide */
+.carousel .carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  gap: 50%;
+}
+
+/* Secondary Carousel Slide */
+.carousel-wrapper .secondary .carousel-slide {
+  gap: 0;
+}
+
+/* Slide Alignment Variations */
+.carousel .carousel-slide:has(.carousel-slide-content[data-align='center']) {
+  align-items: center;
+}
+
+.carousel .carousel-slide:has(.carousel-slide-content[data-align='right']) {
+  align-items: flex-end;
+}
+
+/* Slide Images */
+.carousel .carousel-slide .carousel-slide-image picture {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel .carousel-slide .carousel-slide-image picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* -----------------------------------------------------------------------------
+ * 3. Slide Content Styling
+ * -------------------------------------------------------------------------- */
+.carousel .carousel-slide .carousel-slide-content {
+  z-index: 1;
+  position: relative;
+  max-width: var(--grid-container-width);
+  margin: auto;
+  width: 100%;
+  padding: var(--space-xl) var(--space-4xl);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto; /* Ensure content is interactive */
+  color: var(--foreground-color, var(--color-ink));
+  background-color: transparent;
+}
+
+@media (width >= 900px) {
+  .carousel .carousel-slide .carousel-slide-content {
+    padding: var(--space-3xl) var(--space-4xl);
+  }
+}
+
+@media (width >= 1440px) {
+  .carousel .carousel-slide .carousel-slide-content {
+    padding: var(--space-3xl) var(--main-section-spacing, var(--space-4xl));
+  }
+}
+
+/* display:flex above overrides the [hidden] UA rule — force hide empty content */
+.carousel .carousel-slide .carousel-slide-content[hidden] {
+  display: none;
+}
+
+.carousel .carousel-slide .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 24.125rem; /* 386px */
+}
+
+/* Title Styling */
+.carousel .slide-title {
+  font: var(--title-font);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: var(--accent-color, var(--color-ink));
+}
+
+.carousel p {
+  /* stylelint-disable-next-line declaration-no-important */
+  max-width: 30rem !important;
+}
+
+.carousel .slide-title + p {
+  margin-top: var(--space-m);
+  color: var(--foreground-color, var(--color-ink));
+}
+
+/* Paragraph Styling */
+.carousel .carousel-slide .carousel-slide-content p:not(.button-container) {
+  font: var(--body-font-size-m) / var(--body-line-height) var(--body-font-family);
+  color: var(--foreground-color, var(--color-ink));
+}
+
+/* Button Styling */
+.carousel .carousel-slide .carousel-slide-content .button-container {
+  margin-top: var(--space-xl);
+}
+
+.carousel .carousel-slide .carousel-slide-content .button-container + .button-container {
+  margin-top: var(--space-xs);
+}
+
+.carousel .carousel-slide .carousel-slide-content .carousel-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-s);
+  margin-top: var(--space-xl);
+}
+
+.carousel .carousel-slide .carousel-slide-content .carousel-cta-group .button-container {
+  margin-top: 0;
+}
+
+.carousel .carousel-slide .carousel-slide-content .button-container a {
+  margin: 0;
+}
+
+.carousel .carousel-slide .carousel-slide-content .button {
+  font-size: var(--body-font-size-m);
+  gap: 0.5rem;
+  margin: 2rem 0;
+  background-color: var(--accent-color, var(--color-ink));
+  border-radius: 0.25rem;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  color: var(--color-parchment);
+}
+
+.carousel .carousel-slide .carousel-slide-content .button-container + .button-container .button {
+  margin-top: 0;
+}
+
+.carousel .carousel-slide .carousel-slide-content .button.secondary {
+  background-color: transparent;
+  border: 3px solid var(--accent-color, var(--color-ink));
+  color: var(--accent-color, var(--color-ink));
+}
+
+.carousel .carousel-slide .carousel-slide-content .button.secondary:hover,
+.carousel .carousel-slide .carousel-slide-content .button.secondary:focus {
+  background-color: var(--accent-color, var(--color-ink));
+  color: var(--color-parchment);
+}
+
+/* -----------------------------------------------------------------------------
+ * 4. Navigation and Indicator Controls
+ * -------------------------------------------------------------------------- */
+
+/* Navigation Controls */
+.carousel .carousel-navigation-buttons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.75rem;
+  right: 0.75rem;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+/* Navigation Button Styling - no transitions */
+.carousel .carousel-navigation-buttons button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  background-color: var(--color-parchment);
+}
+
+/* Button States */
+.carousel .carousel-navigation-buttons button:hover,
+.carousel .carousel-navigation-buttons button:focus-visible {
+  background-color: var(--color-parchment);
+}
+
+/* Button Icons */
+.carousel .carousel-navigation-buttons button::after {
+  display: block;
+  content: '';
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-180deg);
+  background: url('../../icons/chevron.svg') center no-repeat;
+}
+
+.carousel .carousel-navigation-buttons button.slide-next::after {
+  transform: translate(-50%, -50%);
+}
+
+/* Slide Indicators */
+.carousel .carousel-slide-indicators {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 12px;
+  padding: 0.75rem;
+  background-color: var(--light-color);
+  line-height: 0;
+  display: none;
+}
+
+.carousel .carousel-slide-indicator button {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--color-parchment);
+}
+
+.carousel .carousel-slide-indicator button:disabled,
+.carousel .carousel-slide-indicator button:hover,
+.carousel .carousel-slide-indicator button:focus-visible {
+  background-color: var(--text-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * 6. Secondary Carousel Styles
+ * -------------------------------------------------------------------------- */
+
+.secondary .carousel-slides-container {
+  height: auto;
+}
+
+.secondary .carousel-slide .carousel-slide-content > *:not(.carousel-cta-group) {
+  /* stylelint-disable-next-line declaration-no-important */
+  max-width: unset !important;
+}
+
+.secondary .carousel-slide .carousel-slide-content {
+  padding-top: var(--space-m);
+}
+
+.secondary .carousel-slide .carousel-slide-image picture {
+  position: unset;
+}
+
+.secondary .slide-title {
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: var(--heading-font-size-l);
+  line-height: var(--heading-line-height);
+}
+
+/* Small Tablet (481px and above) */
+@media (width >= 481px) {
+  main > .section > div.carousel-wrapper {
+    --display-m-font-size: 2rem;
+    --content-padding: var(--space-2xl);
+    --title-font: var(--heading-font-family);
+  }
+
+  .carousel .carousel-slide .carousel-slide-content .carousel-cta-group {
+    flex-flow: row wrap;
+  }
+
+  
+  .carousel .carousel-slide .carousel-slide-content > *:not(.carousel-cta-group) {
+    max-width: 25.25rem; /* 404px */
+  }
+
+  .carousel .carousel-slide .carousel-slide-content[data-align='justify'] {
+    --slide-content-width: auto;
+  }
+
+  .secondary .carousel-slide .carousel-slide-content {
+    padding-top: var(--space-xl);
+  }
+
+  .secondary .slide-title {
+    font: var(--heading-xl-font);
+  }
+}
+
+/* Large Tablet (844px and above) */
+@media (width >= 844px) {
+  .carousel .carousel-slide .carousel-slide-content {
+    --content-padding: var(--space-3xl);
+  }
+
+  .carousel .carousel-slide .carousel-slide-content > *:not(.carousel-cta-group) {
+    max-width: 40.125rem;
+  }
+
+  .carousel .carousel-slide .carousel-slide-content p {
+     /* stylelint-disable-next-line declaration-no-important */
+     max-width: 30rem !important;
+  }
+}
+
+/* Desktop (1024px and above) */
+@media (width > 1024px) {
+  main > .section > div.carousel-wrapper {
+    --display-m-font-size: 2.25rem;
+    --title-font: var(--heading-font-family);
+  }
+
+  .secondary .carousel-slides-container {
+    height: auto;
+  }
+
+  .carousel .carousel-navigation-buttons {
+    left: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+  }
+
+  .secondary .carousel-slide .carousel-slide-image picture {
+    position: absolute;
+  }
+
+  .secondary .carousel-slide .carousel-slide-content > *:not(.carousel-cta-group) {
+    /* stylelint-disable-next-line declaration-no-important */
+    max-width: 400px !important;
+  }
+
+  .secondary .carousel-slide .carousel-slide-content {
+    padding: var(--space-xl);
+  }
+
+  .secondary .slide-title {
+    font-size: var(--heading-font-size-l);
+    line-height: var(--heading-line-height);
+  }
+}
+
+/* Large Desktop (1440px and above) */
+@media (width >= 1440px) {
+  main > .section > div.carousel-wrapper {
+    --content-padding: 0;
+    --title-font: var(--display-s-font);
+  }
+
+  .carousel .carousel-slide .carousel-slide-content p:not(.button-container) {
+    font: var(--body-font-size-l) / var(--body-line-height) var(--body-font-family);
+  }
+
+  .secondary .carousel-slides-container {
+    height: 720px;
+  }
+
+  .secondary .slide-title {
+    font: var(--heading-font-family);
+  }
+}
+
+.carousel  .dropin-button--primary-reversed {
+  border-radius: 4px;
+  border: 1px solid var(--color-parchment);
+  background: var(--color-parchment);
+  color: var(--color-parchment);
+  font: var(--link-m-font);
+  padding-block: var(--space-s);
+  text-transform: uppercase;
+  min-width: 160px;
+  box-sizing: border-box;
+}
+
+.carousel  .dropin-button--primary-reversed:hover {
+  color: var(--color-ink) ;
+  border-color: var(--color-gray-300);
+  background-color: var(--color-gray-300);
+}
+
+@media (width > 375px) {
+  .carousel  .dropin-button--primary-reversed {
+      min-width: 180px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 7. Banner Small Variation
+ * -------------------------------------------------------------------------- */
+
+/*
+ * When the carousel has class `banner-small`, reduce the overall height and
+ * tighten internal spacings so the content fits comfortably.
+ */
+.carousel.banner-small .carousel-slides-container {
+  height: 394px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Design-token data attributes (from slide style column / colors.json)
+ * e.g. data-layout-split="60-40", data-horizontal-alignment="left"
+ * -------------------------------------------------------------------------- */
+
+/* Layout split — content width relative to slide */
+.carousel-slide[data-layout-split='30-70'] .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 30%;
+}
+
+.carousel-slide[data-layout-split='40-60'] .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 40%;
+}
+
+.carousel-slide[data-layout-split='50-50'] .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 50%;
+}
+
+.carousel-slide[data-layout-split='60-40'] .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 60%;
+}
+
+.carousel-slide[data-layout-split='70-30'] .carousel-slide-content > *:not(.carousel-cta-group) {
+  max-width: 70%;
+}
+
+/* Horizontal / vertical alignment */
+.carousel-slide[data-horizontal-alignment='left'] {
+  align-items: flex-start;
+}
+
+.carousel-slide[data-horizontal-alignment='left'] .carousel-slide-content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.carousel-slide[data-horizontal-alignment='left'] .carousel-cta-group {
+  align-items: flex-start;
+}
+
+.carousel-slide[data-horizontal-alignment='center'] {
+  align-items: center;
+}
+
+.carousel-slide[data-horizontal-alignment='center'] .carousel-slide-content {
+  align-items: center;
+  text-align: center;
+}
+
+.carousel-slide[data-horizontal-alignment='center'] .carousel-cta-group {
+  align-items: center;
+}
+
+/* Centered slides use a solid token background (edge alignments use gradients instead) */
+.carousel-slide[data-horizontal-alignment='center']:not(
+  [data-vertical-alignment='top'],
+  [data-vertical-alignment='bottom']
+) .carousel-slide-content:not([hidden]) {
+  background-color: var(--background-color);
+}
+
+.carousel-slide[data-horizontal-alignment='right'] {
+  align-items: flex-end;
+}
+
+.carousel-slide[data-horizontal-alignment='right'] .carousel-slide-content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.carousel-slide[data-horizontal-alignment='right'] .carousel-cta-group {
+  align-items: flex-end;
+}
+
+.carousel-slide[data-vertical-alignment='center'] {
+  justify-content: center;
+}
+
+.carousel-slide[data-vertical-alignment='top'] {
+  justify-content: flex-start;
+}
+
+.carousel-slide[data-vertical-alignment='top'] .carousel-slide-content {
+  justify-content: flex-start;
+}
+
+.carousel-slide[data-vertical-alignment='bottom'] {
+  justify-content: flex-end;
+}
+
+.carousel-slide[data-vertical-alignment='bottom'] .carousel-slide-content {
+  justify-content: flex-end;
+}
+
+/*
+ * Edge alignments (left/right/top/bottom): content covers the full slide with a
+ * gradient from --background-color into transparent toward the opposite edge.
+ */
+.carousel-slide:is(
+  [data-horizontal-alignment='left'],
+  [data-horizontal-alignment='right'],
+  [data-vertical-alignment='top'],
+  [data-vertical-alignment='bottom']
+) .carousel-slide-content:not([hidden]) {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.carousel-slide[data-horizontal-alignment='left'] .carousel-slide-content:not([hidden]) {
+  background-image: linear-gradient(
+    to right,
+    var(--background-color) 0%,
+    transparent 70%
+  );
+}
+
+.carousel-slide[data-horizontal-alignment='right'] .carousel-slide-content:not([hidden]) {
+  background-image: linear-gradient(
+    to left,
+    var(--background-color) 0%,
+    transparent 70%
+  );
+}
+
+.carousel-slide[data-vertical-alignment='top'] .carousel-slide-content:not([hidden]) {
+  background-image: linear-gradient(
+    to bottom,
+    var(--background-color) 0%,
+    transparent 70%
+  );
+}
+
+.carousel-slide[data-vertical-alignment='bottom'] .carousel-slide-content:not([hidden]) {
+  background-image: linear-gradient(
+    to top,
+    var(--background-color) 0%,
+    transparent 70%
+  );
+}
+
+/* Combined horizontal + vertical edge alignments stack both gradients */
+.carousel-slide[data-horizontal-alignment='left'][data-vertical-alignment='top'] .carousel-slide-content:not([hidden]) {
+  background-image:
+    linear-gradient(to right, var(--background-color) 0%, transparent 70%),
+    linear-gradient(to bottom, var(--background-color) 0%, transparent 70%);
+}
+
+.carousel-slide[data-horizontal-alignment='left'][data-vertical-alignment='bottom'] .carousel-slide-content:not([hidden]) {
+  background-image:
+    linear-gradient(to right, var(--background-color) 0%, transparent 70%),
+    linear-gradient(to top, var(--background-color) 0%, transparent 70%);
+}
+
+.carousel-slide[data-horizontal-alignment='right'][data-vertical-alignment='top'] .carousel-slide-content:not([hidden]) {
+  background-image:
+    linear-gradient(to left, var(--background-color) 0%, transparent 70%),
+    linear-gradient(to bottom, var(--background-color) 0%, transparent 70%);
+}
+
+.carousel-slide[data-horizontal-alignment='right'][data-vertical-alignment='bottom'] .carousel-slide-content:not([hidden]) {
+  background-image:
+    linear-gradient(to left, var(--background-color) 0%, transparent 70%),
+    linear-gradient(to top, var(--background-color) 0%, transparent 70%);
+}
+
+/* Font sizes */
+.carousel-slide[data-font-sizes='small'] .slide-title {
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height);
+}
+
+.carousel-slide[data-font-sizes='small'] .carousel-slide-content p:not(.button-container) {
+  font-size: var(--body-font-size-s);
+  line-height: var(--body-line-height);
+}
+
+.carousel-slide[data-font-sizes='medium'] .slide-title {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height);
+}
+
+.carousel-slide[data-font-sizes='medium'] .carousel-slide-content p:not(.button-container) {
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+}
+
+.carousel-slide[data-font-sizes='large'] .slide-title {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height);
+}
+
+.carousel-slide[data-font-sizes='large'] .carousel-slide-content p:not(.button-container) {
+  font-size: var(--body-font-size-l);
+  line-height: var(--body-line-height);
+}
+
+@media (width >= 844px) {
+  .carousel-slide[data-font-sizes='small'] .slide-title {
+    font-size: var(--heading-font-size-l);
+    line-height: var(--heading-line-height);
+  }
+
+  .carousel-slide[data-font-sizes='medium'] .slide-title {
+    font-size: var(--heading-font-size-l);
+    line-height: var(--heading-line-height);
+  }
+
+  .carousel-slide[data-font-sizes='large'] .slide-title {
+    font-size: var(--heading-font-size-xl);
+    line-height: var(--heading-line-height);
+  }
+}
+
+@media (width >= 1440px) {
+  .carousel-slide[data-font-sizes='small'] .slide-title {
+    font-size: var(--heading-font-size-l);
+    line-height: var(--heading-line-height);
+  }
+
+  .carousel-slide[data-font-sizes='medium'] .slide-title {
+    font-size: var(--heading-font-size-xl);
+    line-height: var(--heading-line-height);
+  }
+
+  .carousel-slide[data-font-sizes='large'] .slide-title {
+    font-size: var(--display-s-font-size);
+    line-height: var(--display-s-line-height);
+  }
+}
