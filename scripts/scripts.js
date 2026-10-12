@@ -25,6 +25,7 @@ import {
 import { getAllMetadata, getLocale } from './shared.js';
 import { initPageSchemas } from './schema.js';
 import dynamicBlocks from '../blocks/dynamic/index.js';
+import { applyDesignTokenDataAttributes, applyDesignTokenStyle, loadDesignTokens } from './design-tokens.js';
 
 const AUDIENCES = {
   mobile: () => window.innerWidth < 600,
@@ -174,6 +175,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  applyDesignTokenDataAttributes(main);
   if (document.contains(main)) initPageSchemas();
 }
 
@@ -322,6 +324,11 @@ async function loadEager(doc) {
   getLocale();
   decorateTemplateAndTheme();
   applyTheme();
+  await loadDesignTokens();
+  if (!window.daStyleSwitcherLive) {
+    const theme = getMetadata('theme');
+    if (theme) applyDesignTokenStyle(document.body, theme);
+  }
 
   // Consent stub — wire to real CMP later; true for demo
   const isConsentGiven = true;
@@ -519,6 +526,11 @@ export async function loadPage() {
 }
 
 if (!window.hlx?.suppressLoadPage) {
+  // Experience Workspace canvas (Layout mode): let the style-switcher plugin restyle the page
+  if (window.self !== window.top) {
+    import('./style-switcher.js').then(({ initCanvasStyleSwitcher }) => initCanvasStyleSwitcher());
+  }
+
   loadPage();
 
   (async function loadDa() {
