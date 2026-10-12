@@ -1,0 +1,21 @@
+{
+  "variantName": "carousel-condition",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "condition-education-slideshow",
+    "imagePattern": "full-bleed-photo",
+    "structure": "background image + heading + overlay card(heading + text + CTA)",
+    "slides": 2
+  },
+  "contentPattern": "Each row = slide. Cell 1: photo. Cell 2: h2 headline, h3 card heading, paragraph, primary CTA link.",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

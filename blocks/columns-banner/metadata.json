@@ -1,0 +1,21 @@
+{
+  "variantName": "columns-banner",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "blue",
+    "density": "moderate",
+    "purpose": "cta-banner",
+    "imagePattern": "device-screenshot",
+    "structure": "heading + text + CTA | image",
+    "container": "rounded solid blue"
+  },
+  "contentPattern": "1 row x 2 columns. Cell 1: h2, paragraph, CTA link to https://healthanswers.pfizer.com/?exitCode=pfa. Cell 2: image.",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

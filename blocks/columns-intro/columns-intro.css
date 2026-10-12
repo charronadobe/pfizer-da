@@ -1,0 +1,93 @@
+/* intro panel overlapping the bottom of the hero carousel (source: .hero-content)
+   white full-bleed panel, 32px top radius, pulled up 32px over the hero */
+main .section > .carousel-hero-wrapper + .columns-intro-wrapper {
+  position: relative;
+  z-index: 5;
+  max-width: none;
+  margin-top: calc(-1 * var(--radius-xl));
+  padding-top: var(--space-2xl);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background-color: var(--background-color);
+}
+
+.columns-intro {
+  max-width: var(--grid-container-width);
+  margin-inline: auto;
+}
+
+.columns-intro .columns-intro-row {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.columns-intro .columns-intro-logo picture {
+  display: block;
+}
+
+/* logos keep their intrinsic ratio (overrides the global 16:9 placeholder ratio) */
+.columns-intro .columns-intro-logo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 63px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* vector logo: the source SVG uses fill="currentColor", which an <img> cannot inherit,
+   so the brand color is painted through the logo shape (img stays for alt text + sizing) */
+.columns-intro .columns-intro-logo-vector picture {
+  background-color: light-dark(var(--pfa-core), var(--pfa-core-light));
+  mask: var(--columns-intro-logo-src) left center / contain no-repeat;
+}
+
+.columns-intro .columns-intro-logo-vector img {
+  opacity: 0;
+}
+
+.columns-intro .columns-intro-content h2 {
+  margin: 0 0 var(--space-m);
+  color: light-dark(var(--pfa-core), var(--pfa-core-light));
+  font-size: var(--heading-font-size-xxl);
+  line-height: var(--heading-line-height-xxl);
+}
+
+.columns-intro .columns-intro-content > :first-child {
+  margin-top: 0;
+}
+
+.columns-intro .columns-intro-content > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  main .section > .carousel-hero-wrapper + .columns-intro-wrapper {
+    padding-top: 160px;
+  }
+
+  .columns-intro .columns-intro-row {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+
+  .columns-intro .columns-intro-row > div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .columns-intro .columns-intro-row > .columns-intro-logo {
+    max-width: 517px;
+  }
+
+  .columns-intro .columns-intro-row > .columns-intro-content {
+    max-width: 628px;
+  }
+
+  .columns-intro .columns-intro-logo img {
+    width: 100%;
+    height: auto;
+  }
+}

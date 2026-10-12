@@ -1,0 +1,306 @@
+/* full-bleed hero: release the section's max-width / inline padding for this block only */
+main .section.carousel-hero-container > .carousel-hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.carousel-hero {
+  position: relative;
+  color: var(--pfa-white);
+}
+
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero .carousel-hero-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  overflow: scroll clip;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* slide: content sits at the bottom, above the controls row
+   (bottom padding = controls offset 64px + controls height 52px + gap 34px) */
+.carousel-hero .carousel-hero-slide {
+  position: relative;
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 400px;
+  padding: 140px 24px 150px;
+  scroll-snap-align: start;
+}
+
+/* fallback for slides whose background video/image is unavailable */
+.carousel-hero .carousel-hero-slide.carousel-hero-slide-no-media {
+  background-color: var(--pfa-core-darker);
+}
+
+.carousel-hero .carousel-hero-slide-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* dark scrim over the background media */
+.carousel-hero .carousel-hero-slide-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 40%);
+}
+
+.carousel-hero .carousel-hero-slide-media picture,
+.carousel-hero .carousel-hero-slide-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-hero .carousel-hero-slide-media img,
+.carousel-hero .carousel-hero-slide-media video {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.carousel-hero .carousel-hero-slide-media .carousel-hero-media-desktop {
+  display: none;
+}
+
+/* slide text */
+.carousel-hero .carousel-hero-slide-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.carousel-hero .carousel-hero-slide-content h1,
+.carousel-hero .carousel-hero-slide-content h2 {
+  margin: 0;
+  color: var(--pfa-white);
+  font-family: var(--heading-font-family);
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 56px;
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 0;
+  color: var(--pfa-white);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.carousel-hero .carousel-hero-slide-content p.button-container {
+  margin: 16px 0 6px;
+}
+
+.carousel-hero .carousel-hero-slide-content a.button:any-link {
+  width: 100%;
+  border-width: 0;
+}
+
+/* controls row: prev, dash indicators, next, pause */
+.carousel-hero .carousel-hero-controls {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 64px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  color: var(--pfa-white);
+}
+
+/* mobile: two groups (arrows + dashes, pause) spread with equal space around */
+.carousel-hero .carousel-hero-prev {
+  margin-inline-start: auto;
+}
+
+.carousel-hero .carousel-hero-next {
+  margin-inline-end: auto;
+}
+
+.carousel-hero .carousel-hero-toggle {
+  margin-inline: auto;
+}
+
+/* low-specificity reset so per-control margins below can override it */
+.carousel-hero :where(.carousel-hero-controls button) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+}
+
+.carousel-hero .carousel-hero-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+/* 20px tall hit area; the visible dash is drawn by ::before */
+.carousel-hero .carousel-hero-indicator button {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 20px;
+  transition: width 0.3s ease;
+}
+
+.carousel-hero .carousel-hero-indicator button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentcolor;
+  opacity: 0.3;
+  transform: translateY(-50%);
+}
+
+.carousel-hero .carousel-hero-indicator button[aria-current='true'] {
+  width: 48px;
+}
+
+.carousel-hero .carousel-hero-indicator button[aria-current='true']::before {
+  opacity: 1;
+}
+
+.carousel-hero .carousel-hero-prev,
+.carousel-hero .carousel-hero-next,
+.carousel-hero .carousel-hero-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+}
+
+.carousel-hero .carousel-hero-controls .carousel-hero-prev:hover,
+.carousel-hero .carousel-hero-controls .carousel-hero-next:hover {
+  background-color: var(--pfa-hover-overlay-reversed);
+}
+
+/* source hover/state transitions; skipped when the user prefers reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .carousel-hero .carousel-hero-controls .carousel-hero-prev,
+  .carousel-hero .carousel-hero-controls .carousel-hero-next {
+    transition: background-color 0.2s;
+  }
+
+  .carousel-hero .carousel-hero-controls .carousel-hero-toggle {
+    transition: opacity 0.2s;
+  }
+}
+
+.carousel-hero .carousel-hero-prev::after,
+.carousel-hero .carousel-hero-next::after,
+.carousel-hero .carousel-hero-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.625 4.534v1.542L8.002 12l9.623 5.92v1.54l-11.25-6.92v-1.08z'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+}
+
+.carousel-hero .carousel-hero-next::after {
+  transform: scaleX(-1);
+}
+
+/* pause: outlined circle with two bars */
+.carousel-hero .carousel-hero-toggle::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='20.28' fill='none' stroke='%23000' stroke-width='1.72'/%3E%3Crect x='16.16' y='14.16' width='2.64' height='15.68' rx='1.32'/%3E%3Crect x='25.2' y='14.16' width='2.64' height='15.68' rx='1.32'/%3E%3C/svg%3E");
+  mask-size: 44px 44px;
+}
+
+/* play: outlined circle with a triangle */
+.carousel-hero .carousel-hero-toggle[aria-pressed='true']::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='20.28' fill='none' stroke='%23000' stroke-width='1.72'/%3E%3Cpath d='M17 14.5v15a1 1 0 0 0 1.5.86l12.3-7.5a1 1 0 0 0 0-1.72l-12.3-7.5A1 1 0 0 0 17 14.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-hero .carousel-hero-controls button:focus-visible {
+  outline: 2px solid var(--pfa-white);
+  outline-offset: 2px;
+}
+
+@media (width >= 900px) {
+  /* bottom padding = controls offset 64px + controls height 52px + gap 46px */
+  .carousel-hero .carousel-hero-slide {
+    min-height: 700px;
+    padding: 160px 80px 162px;
+  }
+
+  .carousel-hero .carousel-hero-slide-media .carousel-hero-media-desktop {
+    display: block;
+  }
+
+  .carousel-hero .carousel-hero-slide-media .carousel-hero-media-mobile {
+    display: none;
+  }
+
+  .carousel-hero .carousel-hero-slide-content {
+    max-width: 845px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content h1,
+  .carousel-hero .carousel-hero-slide-content h2 {
+    font-size: 74px;
+    line-height: 96px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content p {
+    font-size: var(--body-font-size-l);
+  }
+
+  .carousel-hero .carousel-hero-slide-content a.button:any-link {
+    width: auto;
+  }
+
+  /* desktop: arrows + dashes on the left, pause on the right */
+  .carousel-hero .carousel-hero-controls {
+    padding: 0 80px;
+  }
+
+  .carousel-hero .carousel-hero-prev {
+    margin-inline-start: 0;
+  }
+
+  .carousel-hero .carousel-hero-next {
+    margin-inline-end: 0;
+  }
+
+  .carousel-hero .carousel-hero-toggle {
+    margin-inline: auto 0;
+  }
+}

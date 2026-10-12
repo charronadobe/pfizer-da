@@ -1,0 +1,20 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "promo-split",
+    "imagePattern": "rounded-image-half",
+    "structure": "heading + text + CTA | image"
+  },
+  "contentPattern": "1 row x 2 columns. Cell 1: h2, paragraph, small-print paragraph with 'See here' link, primary CTA. Cell 2: image. Cell order may be swapped (image first) - the authored order is kept on desktop.",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

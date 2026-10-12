@@ -359,3 +359,30 @@ export function getBlockContext(block) {
     isEmbed,
   };
 }
+
+/**
+ * Fetch localized placeholders from `{locale prefix}/placeholders.json` (cached per prefix).
+ * Keys are converted to camelCase (e.g. "Next Slide" → nextSlide).
+ * Resolves to an empty object when no placeholders sheet exists, so callers
+ * should provide accessible fallbacks.
+ * @param {string} [prefix] Locale prefix (defaults to the current locale)
+ * @returns {Promise<Record<string, string>>}
+ */
+export async function fetchPlaceholders(prefix = getLocale().prefix) {
+  window.placeholders = window.placeholders || {};
+  if (!window.placeholders[prefix]) {
+    window.placeholders[prefix] = fetch(`${prefix}/placeholders.json`)
+      .then((resp) => (resp.ok ? resp.json() : {}))
+      .then((json) => {
+        const placeholders = {};
+        (json.data || []).forEach(({ Key, Text }) => {
+          if (!Key) return;
+          const key = Key.toLowerCase().replace(/[^0-9a-z]+(.)/g, (m, c) => c.toUpperCase());
+          placeholders[key] = Text;
+        });
+        return placeholders;
+      })
+      .catch(() => ({}));
+  }
+  return window.placeholders[prefix];
+}

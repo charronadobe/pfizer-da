@@ -1,0 +1,94 @@
+/* spacing between the section heading (default content) and the tiles: 40px
+   (collapses with the heading's 16px bottom margin) */
+main .section > .cards-action-wrapper {
+  margin-top: 40px;
+}
+
+.cards-action .cards-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-action .cards-action-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  box-sizing: border-box;
+  padding: 28px var(--space-l) var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+  cursor: pointer;
+}
+
+/* line icon: natural (square) ratio, 36px tall */
+.cards-action .cards-action-icon {
+  align-self: flex-start;
+}
+
+.cards-action .cards-action-icon picture {
+  display: block;
+}
+
+.cards-action .cards-action-icon img,
+.cards-action .cards-action-icon .icon {
+  display: block;
+  width: auto;
+  height: 36px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.cards-action .cards-action-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cards-action .cards-action-body h3 {
+  margin: 0 0 var(--space-m);
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+  color: var(--text-color);
+}
+
+.cards-action .cards-action-body p {
+  margin: 0;
+}
+
+/* 24px content gap + 20px CTA padding on source; CTA pinned to tile bottom */
+.cards-action .cards-action-body .cards-action-cta {
+  margin: auto 0 0;
+  padding-top: 44px;
+}
+
+.cards-action .cards-action-cta a.button:any-link {
+  width: 100%;
+  height: 44px;
+}
+
+/* whole tile clickable via the single CTA link */
+.cards-action .cards-action-cta a.button:any-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-l);
+}
+
+@media (width >= 900px) {
+  .cards-action .cards-action-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-l);
+  }
+
+  .cards-action .cards-action-cta a.button:any-link {
+    width: auto;
+  }
+}

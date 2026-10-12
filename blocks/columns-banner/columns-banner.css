@@ -1,0 +1,139 @@
+/* columns-banner: contained, rounded core-blue CTA banner (text + CTA | device screenshot) */
+.columns-banner {
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core);
+  color: var(--pfa-white);
+}
+
+.columns-banner .columns-banner-row {
+  display: flex;
+  flex-direction: column;
+}
+
+/* text column */
+.columns-banner .columns-banner-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px var(--space-l) var(--space-xl);
+}
+
+.columns-banner .columns-banner-content > * {
+  margin: 0;
+}
+
+.columns-banner .columns-banner-content :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: var(--space-m);
+  color: var(--pfa-white);
+}
+
+.columns-banner .columns-banner-content p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* CTA: reversed (white) small pill */
+.columns-banner p.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.columns-banner .columns-banner-content p:not(.button-container) + p.button-container {
+  margin-top: var(--space-xl);
+}
+
+main .columns-banner a.button:any-link {
+  width: 100%;
+  height: 44px;
+  padding: 12px var(--space-l);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-95);
+}
+
+main .columns-banner a.button:any-link:hover {
+  background-color: rgb(255 255 255 / 90%);
+  color: var(--pfa-gray-95);
+}
+
+main .columns-banner a.button:any-link:focus-visible {
+  outline-color: var(--pfa-white);
+}
+
+/* decorative external-link glyph; the link text stays the accessible name */
+main .columns-banner a.button.columns-banner-external:any-link::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.41154 4.74075V5.92593L3.55391 5.954L3.55507 20.1458H17.9123V15.4074H19.0975V17.4271H19.0999V21.1979H19.0975V21.3333H2.37501V4.74075H8.41154Z'/%3E%3Cpath d='M21.3278 3.90047V11.8519H20.1413L20.1402 4.38427L11.2274 13.2789L10.2846 12.3368L13.4727 9.15626L13.4704 9.15394L19.0813 3.55556H11.9732V2.37038H19.7946L21.3278 3.90047Z'/%3E%3Cpath d='M8.55999 4.5926V6.07292L8.4127 6.07408L3.70293 6.1007L3.70409 19.9977H17.7638V15.2593H19.246V17.2789H19.2483V21.3461H19.246V21.4815H2.22656V4.5926H8.55999ZM19.856 2.22223L19.9001 2.26505L21.4333 3.79515L21.4762 3.83913V12H19.9929L19.9917 4.7419L11.333 13.3843L11.2274 13.4884L10.0746 12.3368L13.2616 9.1551L13.2605 9.15394L13.3649 9.04862L18.7218 3.70371H11.8247V2.22223H19.856ZM12.1216 3.40741H19.4397L19.1868 3.66089L13.6803 9.15394L13.6826 9.15626L10.4933 12.3368L11.2263 13.0683L20.0346 4.27894L20.2886 4.02663L20.2898 11.7037H21.1793V3.96297L19.7319 2.51853H12.1216V3.40741ZM2.52346 21.1852H18.9491V21.0498H18.9514V17.5752H18.9491V15.5556H18.0607V20.294H3.40719L3.40603 5.95371L3.40488 5.80672L3.55332 5.80556L8.26309 5.77778V4.8889H2.52346V21.1852Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* image column: device artwork, full bleed to the banner edges */
+.columns-banner .columns-banner-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.columns-banner .columns-banner-image picture {
+  display: block;
+}
+
+.columns-banner .columns-banner-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .columns-banner .columns-banner-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+    min-height: 407px;
+  }
+
+  .columns-banner .columns-banner-content {
+    flex: 1 1 0;
+    align-items: flex-start;
+    min-width: 0;
+    max-width: 519px;
+    padding: var(--space-3xl) 0 var(--space-3xl) var(--space-4xl);
+  }
+
+  .columns-banner p.button-container {
+    justify-content: flex-start;
+    width: auto;
+  }
+
+  main .columns-banner a.button:any-link {
+    width: auto;
+  }
+
+  .columns-banner .columns-banner-image {
+    flex: 0 1 543px;
+    align-self: stretch;
+    max-width: min(543px, 50%);
+    border-radius: 0 var(--radius-l) var(--radius-l) 0;
+  }
+
+  .columns-banner .columns-banner-image picture,
+  .columns-banner .columns-banner-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .columns-banner .columns-banner-image img {
+    aspect-ratio: auto;
+  }
+}

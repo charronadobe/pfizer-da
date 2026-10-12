@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://www.pfizerforall.com/"
+      ],
+      "representativeUrl": "https://www.pfizerforall.com/",
+      "description": "Pfizer For All homepage: hero slideshow with brand intro, action cards, condition carousel, two media/text splits, and a Health Answers banner",
+      "urlPattern": "/",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            ".hero.has-carousel .hero-image-and-info-container"
+          ]
+        },
+        {
+          "name": "columns-intro",
+          "instances": [
+            ".hero.has-carousel .hero-content"
+          ]
+        },
+        {
+          "name": "cards-action",
+          "instances": [
+            ".card-grid .cards-grid-container"
+          ]
+        },
+        {
+          "name": "carousel-condition",
+          "instances": [
+            ".content-cards-carousel.block"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            ".image-1-2-wrapper"
+          ]
+        },
+        {
+          "name": "columns-banner",
+          "instances": [
+            ".banner-1-2-wrapper"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc2",
+          "name": "hero",
+          "selector": [
+            ".section.hero-container"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-hero",
+            "columns-intro"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc3",
+          "name": "next-step-cards",
+          "selector": [
+            ".section.card-grid-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-action"
+          ],
+          "defaultContent": [
+            ".card-grid .card-grid-content-container"
+          ]
+        },
+        {
+          "id": "rc4",
+          "name": "condition-carousel",
+          "selector": [
+            ".section.content-cards-carousel-container"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-condition"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc5",
+          "name": "self-pay-savings",
+          "selector": [
+            ".section.image-1-2-container:nth-of-type(4)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc6",
+          "name": "prescription-savings",
+          "selector": [
+            ".section.image-1-2-container:nth-of-type(5)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc7",
+          "name": "health-answers-banner",
+          "selector": [
+            ".section.banner-1-2-container"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-banner"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

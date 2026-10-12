@@ -1,0 +1,20 @@
+{
+  "variantName": "columns-intro",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "brand-intro",
+    "imagePattern": "logo",
+    "structure": "logo + heading + text"
+  },
+  "contentPattern": "1 row x 2 columns. Cell 1: PfizerForAll logo image. Cell 2: h2 'Step-by-step guidance, from questions to care' + paragraph.",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

@@ -1,0 +1,21 @@
+{
+  "variantName": "cards-action",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue tiles",
+    "density": "moderate",
+    "purpose": "action-links",
+    "imagePattern": "icon",
+    "structure": "icon + heading + text + CTA",
+    "columns": 2
+  },
+  "contentPattern": "2 rows x 2 columns. Cell 1: icon image. Cell 2: h3, paragraph, CTA link (secondary/outlined).",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

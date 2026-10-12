@@ -1,0 +1,48 @@
+/* Pfizer For All brand tokens – extracted from https://www.pfizerforall.com/
+   Semantic tokens in styles.css (:root) map onto these values. */
+
+:root {
+  /* core (primary) */
+  --pfa-core: #0000c9;
+  --pfa-core-dark: #00009d;
+  --pfa-core-darker: #00004e;
+  --pfa-core-light: #9cc0ff;
+  --pfa-core-lighter: #e8f2ff;
+
+  /* accent */
+  --pfa-accent: #006eb2;
+  --pfa-accent-dark: #005589;
+  --pfa-accent-light: #68d1ff;
+  --pfa-accent-lighter: #e0f5ff;
+
+  /* extended */
+  --pfa-extended: #bf3300;
+
+  /* neutrals */
+  --pfa-white: #fff;
+  --pfa-black: #000;
+  --pfa-gray-10: #f0f0f0;
+  --pfa-gray-90: #292929;
+  --pfa-gray-95: #171717;
+  --pfa-outline-variant: #c9c9c9;
+  --pfa-hover-overlay: rgb(0 0 0 / 10%);
+  --pfa-hover-overlay-reversed: rgb(255 255 255 / 10%);
+
+  /* relief (dark) surfaces */
+  --pfa-relief-surface: #001c1b;
+  --pfa-relief-on-surface: #d9f9f5;
+  --pfa-relief-accent: #29ccb4;
+  --pfa-relief-outline: #007c70;
+
+  /* fonts */
+  --pfa-font-body: 'Pfizer Diatype', pfizer-diatype-fallback, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, 'Helvetica Neue', arial, sans-serif;
+  --pfa-font-heading: 'Pfizer Tomorrow', pfizer-tomorrow-fallback, serif;
+
+  /* radii */
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+}

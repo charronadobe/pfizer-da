@@ -48,9 +48,8 @@ const THEME_STORAGE_KEY = 'demo-theme';
 
 function applyTheme(theme) {
   let t = theme ?? (() => { try { return localStorage.getItem(THEME_STORAGE_KEY); } catch (e) { return null; } })();
-  if (t !== 'light' && t !== 'dark') {
-    t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
+  // light unless the visitor opted into relief (dark) mode
+  if (t !== 'light' && t !== 'dark') t = 'light';
   document.documentElement.dataset.theme = t;
   document.body.classList.remove('light-scheme', 'dark-scheme');
   document.body.classList.add(`${t}-scheme`);

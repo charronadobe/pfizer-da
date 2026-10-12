@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "pfizer-da": {
+      "previewOrg": "charronadobe",
+      "previewSite": "pfizer-da",
+      "contentHostUrl": "https://content.da.live/charronadobe/pfizer-da/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

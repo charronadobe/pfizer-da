@@ -1,0 +1,21 @@
+{
+  "variantName": "carousel-hero",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "homepage-hero-slideshow",
+    "imagePattern": "full-bleed-video-or-photo",
+    "structure": "background media + heading + text + CTA",
+    "slides": 5
+  },
+  "contentPattern": "Each row = slide. Cell 1: picture (desktop crop; mobile crop may be a second picture) or link to the .mp4 video. Cell 2: heading (first slide h1, others h2), paragraph, primary CTA link.",
+  "usage": {
+    "pagesUsing": ["https://www.pfizerforall.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-12"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

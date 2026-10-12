@@ -1,6 +1,55 @@
 /* stylelint-disable max-line-length */
 
-/* Project primary font – used by --font-family in styles.css */
+/* Pfizer brand fonts – body: Pfizer Diatype, headings: Pfizer Tomorrow */
+@font-face {
+  font-family: 'Pfizer Diatype';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/PfizerDiatype-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pfizer Diatype';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/PfizerDiatype-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pfizer Diatype';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/PfizerDiatype-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pfizer Diatype';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/PfizerDiatype-RegularItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pfizer Tomorrow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/PfizerTomorrow-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Pfizer Tomorrow';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/PfizerTomorrow-Bold.woff2') format('woff2');
+}
+
+/* Legacy project font – used by older blocks */
 @font-face {
   font-family: montserrat;
   font-style: normal;
