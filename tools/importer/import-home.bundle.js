@@ -42,13 +42,18 @@ var CustomImportScript = (() => {
   });
 
   // tools/importer/parsers/carousel-hero.js
-  function parse(element, { document: document2 }) {
+  function parse(element, { document: document2, params }) {
     const slides = [...element.querySelectorAll(".hero-overlay-slide")];
     const backgrounds = [...element.querySelectorAll(".hero-carousel-backgrounds > .hero-carousel-background-item, .hero-carousel-background-item")].filter((el, idx, arr) => arr.indexOf(el) === idx);
     const videoLink = (src) => {
+      let href = src;
+      try {
+        href = new URL(src, params == null ? void 0 : params.originalURL).href;
+      } catch (e) {
+      }
       const a = document2.createElement("a");
-      a.href = src;
-      a.textContent = src;
+      a.href = href;
+      a.textContent = href;
       return a;
     };
     const getPictures = (scope, desktopSel, mobileSel) => {

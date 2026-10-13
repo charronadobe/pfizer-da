@@ -20,15 +20,23 @@
  *     - .hero-overlay-button-group a
  * Iteration is keyed on the block-level div.hero-overlay-slide (not on anchors).
  */
-export default function parse(element, { document }) {
+export default function parse(element, { document, params }) {
   const slides = [...element.querySelectorAll('.hero-overlay-slide')];
   const backgrounds = [...element.querySelectorAll('.hero-carousel-backgrounds > .hero-carousel-background-item, .hero-carousel-background-item')]
     .filter((el, idx, arr) => arr.indexOf(el) === idx);
 
+  // video paths are site-relative on the source; resolve them against the source page
+  // so the migrated slides keep playing the original files
   const videoLink = (src) => {
+    let href = src;
+    try {
+      href = new URL(src, params?.originalURL).href;
+    } catch (e) {
+      // keep the authored value if it cannot be resolved
+    }
     const a = document.createElement('a');
-    a.href = src;
-    a.textContent = src;
+    a.href = href;
+    a.textContent = href;
     return a;
   };
 
