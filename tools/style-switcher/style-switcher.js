@@ -111,16 +111,19 @@ function getSelectOptions(column) {
   return null;
 }
 
+/** Unstyled page: white surface, ink text. Accent falls back to ink too. */
+const DEFAULT_PREVIEW = {
+  bg: '#ffffff',
+  fg: '#292929',
+  accent: '#292929',
+};
+
 /**
  * @param {{ values: Record<string, string> }} token
  * @param {string[]} columns
  */
 function getPreviewColors(token, columns) {
-  const colors = {
-    bg: '#f5f5f2',
-    fg: '#2a2e33',
-    accent: '#005ab7',
-  };
+  const colors = { ...DEFAULT_PREVIEW };
 
   columns.slice(1).forEach((column) => {
     const color = sanitizeHexColor(token.values[column]);
@@ -613,10 +616,10 @@ class StylePicker {
 
     if (token) paintPreview(frame, content, title, action, token, this.columns);
     else {
-      content.style.backgroundColor = '#f5f2ed';
-      content.style.color = '#1a1a1a';
-      title.style.color = '#a14f2b';
-      action.style.backgroundColor = '#a14f2b';
+      content.style.backgroundColor = DEFAULT_PREVIEW.bg;
+      content.style.color = DEFAULT_PREVIEW.fg;
+      title.style.color = DEFAULT_PREVIEW.accent;
+      action.style.backgroundColor = DEFAULT_PREVIEW.accent;
     }
     return frame;
   }
