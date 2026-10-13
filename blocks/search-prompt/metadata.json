@@ -1,0 +1,25 @@
+{
+  "variantName": "search-prompt",
+  "baseBlock": "search",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "search-entry",
+    "imagePattern": "noimg",
+    "structure": "input + button"
+  },
+  "contentPattern": "1 row, 1 cell: placeholder text paragraph (also the field's accessible name) and a link to the search results page (link text = button label, href = form target; the term is submitted as ?q=). The heading and intro text above are default content.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/cancer",
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/savings-support/self-pay",
+      "https://www.pfizerforall.com/savings-support/prescription-assistance"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-13T16:26:47.867Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

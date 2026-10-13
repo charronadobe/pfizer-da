@@ -1,0 +1,150 @@
+/* full-bleed promo: flush with neighbouring sections, no max-width / inline padding */
+:is(main, article.article-body) > .section.hero-article-container {
+  padding-block: 0;
+}
+
+main .section.hero-article-container > .hero-article-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-article {
+  position: relative;
+  display: flex;
+  min-height: 555px;
+  overflow: hidden;
+  color: var(--pfa-white);
+  background-color: var(--pfa-white);
+}
+
+/* photo fills the block; multiply scrim keeps overlaid text legible */
+.hero-article .hero-article-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-article .hero-article-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--pfa-gray-95);
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+}
+
+.hero-article .hero-article-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-article .hero-article-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-article.hero-article-no-image {
+  background-color: var(--pfa-gray-95);
+}
+
+.hero-article .hero-article-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 28px var(--space-l) var(--space-l);
+}
+
+.hero-article .hero-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin: 0 0 var(--space-xl);
+  padding: 0;
+  list-style: none;
+}
+
+.hero-article .hero-article-tags li {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 22px;
+  padding: 2px var(--space-s);
+  border: 1px solid var(--pfa-outline-variant);
+  border-radius: var(--radius-xs);
+  background-color: var(--pfa-white);
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.hero-article .hero-article-content h1,
+.hero-article .hero-article-content h2,
+.hero-article .hero-article-content h3,
+.hero-article .hero-article-content h4 {
+  margin: 0;
+  color: var(--pfa-white);
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.hero-article .hero-article-content p {
+  margin: var(--space-m) 0 0;
+  color: var(--pfa-white);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.hero-article .hero-article-content > :first-child {
+  margin-top: 0;
+}
+
+.hero-article .hero-article-content p.hero-article-meta {
+  margin-top: var(--space-l);
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+/* mobile: CTA sits at the bottom of the card, at least 40px below the text */
+.hero-article .hero-article-content p.button-container {
+  margin: auto 0 0;
+  padding-top: 40px;
+}
+
+main .hero-article a.button:any-link {
+  width: 100%;
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-95);
+}
+
+main .hero-article a.button:any-link:hover {
+  background-color: rgb(255 255 255 / 90%);
+  color: var(--pfa-gray-95);
+}
+
+@media (width >= 900px) {
+  .hero-article .hero-article-content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 80px 80px 40px;
+  }
+
+  .hero-article .hero-article-content > :not(.hero-article-tags) {
+    max-width: 420px;
+  }
+
+  .hero-article .hero-article-content p.button-container {
+    margin-top: 0;
+  }
+
+  main .hero-article a.button:any-link {
+    width: auto;
+  }
+}

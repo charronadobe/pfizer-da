@@ -1,0 +1,22 @@
+{
+  "variantName": "quiz-entry",
+  "baseBlock": "quiz",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "entry-quiz-launcher",
+    "imagePattern": "noimg",
+    "structure": "question + option chips + continue"
+  },
+  "contentPattern": "Row 1, 1 cell: question heading (h3; the last heading becomes the radio group legend) plus optional intro text. Then 1 row per option, 2 cells: option label | link to the destination URL (e.g. the discussion guide with ?journey=...). A 1-cell row holding only a link also counts as an option (link text = label). Last row, 1 cell: continue button label (first paragraph) + optional note paragraph(s) (e.g. ':clock: Complete in 1 min'). Options are native radios styled as chips; the continue button and note stay hidden (and the button disabled) until an option is chosen, then slide in; continue navigates to the chosen option's URL. If no button label is authored, the 'continue' placeholder is used.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/biomarker-testing/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

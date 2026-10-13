@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/savings-support/prescription-assistance",
+  "path": "savings-support/prescription-assistance",
+  "timestamp": "2026-10-13T18:42:19.767Z",
+  "title": "Prescription Assistance | PfizerForAll™",
+  "template": "savings-support",
+  "blocks": [
+    "hero-page",
+    "cards-fact",
+    "columns-media",
+    "accordion-faq",
+    "search-prompt"
+  ]
+}

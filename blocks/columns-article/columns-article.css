@@ -1,0 +1,120 @@
+/* section intro (default content) sits 40px above the card, as in the source stack gap */
+.default-content-wrapper + .columns-article-wrapper > .columns-article {
+  margin-top: 40px;
+}
+
+.columns-article .columns-article-row {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+}
+
+.columns-article .columns-article-row + .columns-article-row {
+  margin-top: var(--space-l);
+}
+
+/* mobile: text panel on top, photo below */
+.columns-article .columns-article-image p {
+  margin: 0;
+}
+
+.columns-article .columns-article-image picture {
+  display: block;
+  height: 100%;
+}
+
+.columns-article .columns-article-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.columns-article .columns-article-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px var(--space-l) var(--space-xl);
+}
+
+.columns-article .columns-article-content > * {
+  margin: 0;
+}
+
+/* tags */
+.columns-article .columns-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-bottom: var(--space-l);
+  padding: 0;
+  list-style: none;
+}
+
+.columns-article .columns-article-tags li {
+  padding: 2px var(--space-s);
+  border: 1px solid var(--pfa-outline-variant);
+  border-radius: var(--radius-xs);
+  background-color: var(--pfa-white);
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+.columns-article .columns-article-content h3 {
+  font-family: var(--heading-font-family);
+}
+
+.columns-article .columns-article-content > h3 + p {
+  margin-top: var(--space-m);
+}
+
+/* read-time label */
+.columns-article .columns-article-content > .columns-article-label {
+  margin-top: var(--space-l);
+  color: #525252;
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+.columns-article .columns-article-label em {
+  font-style: normal;
+}
+
+/* CTA: full width on mobile */
+.columns-article .columns-article-content > .button-container {
+  margin-top: var(--space-xl);
+}
+
+main .columns-article .columns-article-content a.button:any-link {
+  width: 100%;
+}
+
+@media (width >= 900px) {
+  .columns-article .columns-article-row {
+    flex-direction: row;
+  }
+
+  /* two equal square halves: text panel | photo */
+  .columns-article .columns-article-row > div {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+  }
+
+  .columns-article .columns-article-image img {
+    aspect-ratio: auto;
+  }
+
+  .columns-article .columns-article-content {
+    padding: 0 80px;
+  }
+
+  main .columns-article .columns-article-content a.button:any-link {
+    width: auto;
+  }
+}

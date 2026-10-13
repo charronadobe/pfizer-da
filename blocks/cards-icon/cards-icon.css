@@ -1,0 +1,163 @@
+/* ==========================================================================
+   cards-icon: plain (untiled) list of items - line icon, heading, text.
+   Mobile/tablet: one column, icon left of the copy, dividers between items.
+   Desktop: 3 columns (option two-column: 2), icon above the copy, no dividers.
+   Option one-column: icon stays left on desktop; the section heading sits on the left.
+   ========================================================================== */
+
+.cards-icon .cards-icon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-icon .cards-icon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-l);
+  padding-bottom: var(--space-l);
+  border-bottom: 1px solid var(--pfa-outline-variant);
+}
+
+.cards-icon .cards-icon-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.cards-icon .cards-icon-icon {
+  flex: none;
+  color: light-dark(var(--pfa-core), var(--pfa-relief-accent));
+}
+
+.cards-icon .cards-icon-icon > p {
+  margin: 0;
+}
+
+.cards-icon .cards-icon-icon picture {
+  display: block;
+}
+
+.cards-icon .cards-icon-icon img,
+.cards-icon .cards-icon-icon .icon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* monochrome SVG line icons (see decorate): tint black to --pfa-core (#0000c9).
+   A filter needs no network/CORS access to the (cross-origin) SVG, unlike a CSS mask. */
+.cards-icon .cards-icon-icon-svg img {
+  filter: brightness(0) saturate(100%) invert(10%) sepia(90%) saturate(7493%) hue-rotate(248deg) brightness(71%) contrast(137%);
+}
+
+.cards-icon .cards-icon-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cards-icon .cards-icon-body > * {
+  margin: 0;
+}
+
+.cards-icon .cards-icon-body h3 {
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.cards-icon .cards-icon-body p {
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+}
+
+/* section heading (default content directly before the block): 40px to the list */
+main .section.cards-icon-container > .default-content-wrapper:has(+ .cards-icon-wrapper) > :last-child {
+  margin-bottom: 40px;
+}
+
+@media (width >= 900px) {
+  .cards-icon .cards-icon-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px var(--space-l);
+  }
+
+  .cards-icon .cards-icon-item {
+    flex-direction: column;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  /* option: two-column */
+  .cards-icon.two-column .cards-icon-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* option: one-column - single stack, icon left of the copy */
+  .cards-icon.one-column .cards-icon-list {
+    display: flex;
+    gap: 44px;
+  }
+
+  .cards-icon.one-column .cards-icon-item {
+    flex-direction: row;
+  }
+
+  .cards-icon.one-column .cards-icon-body h3 {
+    font-size: var(--heading-font-size-xs);
+    line-height: var(--heading-line-height-xs);
+  }
+
+  main .section.cards-icon-container > .default-content-wrapper:has(+ .cards-icon-wrapper) h2 {
+    max-width: 737px;
+  }
+
+  /* one-column: section heading (default content) on the left, items on the right */
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    align-items: start;
+    max-width: var(--grid-container-width);
+    margin-inline: auto;
+    padding-inline: var(--content-padding-inline);
+  }
+
+  /* the section now owns width + inline padding; auto margins would shrink the grid items */
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) > .cards-icon-wrapper {
+    margin-top: 40px;
+  }
+
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) > .default-content-wrapper h2 {
+    max-width: 520px;
+  }
+
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) > .default-content-wrapper > :first-child {
+    margin-top: 0;
+  }
+
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) > .default-content-wrapper > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section.cards-icon-container:has(> .default-content-wrapper:first-child + .cards-icon-wrapper:last-child > .cards-icon.one-column) {
+    column-gap: var(--space-l);
+  }
+}

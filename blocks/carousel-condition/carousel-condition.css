@@ -226,19 +226,67 @@ main > .section.carousel-condition-container > .carousel-condition-wrapper {
 }
 
 /* like the source, fade out the arrow that has no slide in its direction;
-   visibility flips after the fade so the hidden arrow is not focusable */
-.carousel-condition:has(.carousel-condition-slide:first-child.is-active) .carousel-condition-prev,
-.carousel-condition:has(.carousel-condition-slide:last-child.is-active) .carousel-condition-next {
+   visibility flips after the fade so the hidden arrow is not focusable
+   (the articles option loops, so both arrows stay visible) */
+.carousel-condition:not(.articles):has(.carousel-condition-slide:first-child.is-active) .carousel-condition-prev,
+.carousel-condition:not(.articles):has(.carousel-condition-slide:last-child.is-active) .carousel-condition-next {
   opacity: 0;
   visibility: hidden;
   transition: background-color 0.2s, opacity 0.3s, visibility 0s linear 0.3s;
 }
 
+/* articles option: slides built from an article index (card only, no headline) */
+.carousel-condition.articles .carousel-condition-slide-content {
+  justify-content: flex-end;
+}
+
+/* badges sit 24px above the title (16px card gap + 8px) */
+.carousel-condition.articles .carousel-condition-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+  padding: 0;
+  list-style: none;
+}
+
+.carousel-condition.articles .carousel-condition-badges li {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 22px;
+  padding: 2px var(--space-s);
+  border: 1px solid var(--pfa-outline-variant);
+  border-radius: var(--radius-xs);
+  background-color: var(--pfa-white);
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+.carousel-condition.articles .carousel-condition-badges li.is-recommended {
+  border: 0;
+  background-color: #aee4ff;
+  color: #003e65;
+}
+
+.carousel-condition.articles .carousel-condition-badges li.is-updated {
+  border: 0;
+  background-color: #adede0;
+  color: #003e3e;
+}
+
+.carousel-condition.articles .carousel-condition-card .carousel-condition-label {
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carousel-condition .carousel-condition-prev,
   .carousel-condition .carousel-condition-next,
-  .carousel-condition:has(.carousel-condition-slide:first-child.is-active) .carousel-condition-prev,
-  .carousel-condition:has(.carousel-condition-slide:last-child.is-active) .carousel-condition-next {
+  .carousel-condition:not(.articles):has(.carousel-condition-slide:first-child.is-active) .carousel-condition-prev,
+  .carousel-condition:not(.articles):has(.carousel-condition-slide:last-child.is-active) .carousel-condition-next {
     transition: none;
   }
 }

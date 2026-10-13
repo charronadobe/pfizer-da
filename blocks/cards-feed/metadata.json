@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-feed",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "description": "3-col article tile grid with load-more, fed by an article index, plus authored promo cards at fixed positions",
+    "colorScheme": "light-blue tiles",
+    "density": "moderate",
+    "purpose": "article-feed",
+    "imagePattern": "photo-top",
+    "structure": "grid of tiles (image + badges + h3 + read time + Read now CTA) + Load more button",
+    "dataSource": "article index JSON (default /query-index.json)"
+  },
+  "contentPattern": "Block 'Cards (Feed)'. Optional 2-cell config rows: source | JSON URL of the article data (default /query-index.json); paths | bulleted path globs (* = one segment, ** = any depth; omit = all rows with an id); visible | page size (e.g. 9; enables Load more, omit = show all). Promo rows, 2 cells: 'insert at N' (1-based position, e.g. insert at 25) | icon paragraph, h3, paragraph (or italic read time), bold CTA link (rendered like a cards-action card, outlined CTA). Section intro (h2 'Explore all') is default content above the block. Tiles are built from the data: up to 2 badges (Recommended or Updated-within-45-days, then indication badge, then content badge), h3 title, reading time, Read now CTA; sorted by publishedDate desc, priority High>Medium>Low, title. Labels from placeholders (readNow, loadMore, cardsShown, recommended, updated; badge values by camelCased key).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/education/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

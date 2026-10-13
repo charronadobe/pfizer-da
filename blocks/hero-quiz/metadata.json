@@ -1,0 +1,22 @@
+{
+  "variantName": "hero-quiz",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light card on core-blue section",
+    "density": "spacious",
+    "purpose": "quiz-launch-hero",
+    "imagePattern": "noimg",
+    "structure": "centered card: eyebrow + h1 + subtitle + CTA + timer note"
+  },
+  "contentPattern": "Row 1, 1 cell: eyebrow paragraph (e.g. <p><strong>IN THE FIGHT AGAINST CANCER</strong></p>), h1, subtitle paragraph (line breaks allowed), CTA paragraph with a bold link (primary button, e.g. 'Get started' -> /find-care/cancer-screening/assessment), note paragraph ':clock: 30 seconds'. Paragraphs before the heading are the eyebrow; paragraphs after the CTA, or with an icon, are the note. Row 2 (optional), 1 cell: alternate CTAs for returning visitors (bold link 'Retake', italic link 'Return to guide'); shown instead of the row 1 CTA when sessionStorage has 'quiz-results'. Section metadata style 'core' gives the blue surface around the white card.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/cancer-screening/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

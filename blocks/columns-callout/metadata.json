@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-callout",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue panel",
+    "density": "compact",
+    "purpose": "partner-callout",
+    "imagePattern": "logo-left",
+    "structure": "logo | heading + text in a rounded panel"
+  },
+  "contentPattern": "1 row, 2 cells: logo image (e.g. American Cancer Society logo, alt 'American Cancer Society') | h2 (e.g. 'Proudly supporting') + paragraph(s), links allowed. A logo paragraph at the top of a single cell also works. The panel surface is part of the block; no section style is needed.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/cancer-screening/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

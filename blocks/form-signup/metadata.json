@@ -1,0 +1,22 @@
+{
+  "variantName": "form-signup",
+  "baseBlock": "form",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "blue",
+    "density": "moderate",
+    "purpose": "newsletter-signup",
+    "imagePattern": "icon",
+    "structure": "icon + heading + text | form fields + consent"
+  },
+  "contentPattern": "Row 1, 2 cells: intro cell = icon paragraph (:email: or image), h2, paragraph | form cell = bulleted list of fields (each item: label text, with a nested list: 1st item = validation message, 2nd item = clear-button aria label), a paragraph with the submit link (bold link; link text = button label, href = POST endpoint), consent paragraph(s) with links. Optional row 2, 1 cell: success message (icon, h3, paragraph) shown only when the endpoint answers resp.ok. Same field-list convention as the footer sign-up. Submits POST JSON {data: {<field_name>: value}}; field names are the label slugified (First name -> first_name, Email -> email). A label containing 'mail' makes an email field; all fields are required.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

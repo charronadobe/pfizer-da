@@ -1,0 +1,38 @@
+{
+  "variantName": "hero-page",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "content-page-hero",
+    "imagePattern": "full-bleed-banner-above",
+    "structure": "image + heading + text"
+  },
+  "contentPattern": "1 row, 1 cell: image, h1, paragraph(s). The breadcrumb is not authored: it is built from the URL path (current page label from the optional 'breadcrumb-title' page metadata, otherwise the last path segment). Option 'dropdown' (care-type selector): add a second row with an optional label paragraph (e.g. 'Choose a condition to get tailored information.') and a bulleted list; one list item without a link is the button text (e.g. 'Select a condition'), every list item with a link is a selector option. If the list stays in the first cell it still works, without a visible label. Option 'announcement' (link strip under the banner image): add a paragraph containing only the link (e.g. 'Introducing savings on 30+ Pfizer brands for eligible patients.') right after the image, before the h1; it renders as a full-width strip between the image and the text panel. Without the option class the paragraph renders as normal content. To hide the auto breadcrumb on a page, set page metadata 'Breadcrumb' to 'off'.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/cancer",
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/find-care/talk-to-a-doctor",
+      "https://www.pfizerforall.com/find-care/biomarker-testing/",
+      "https://www.pfizerforall.com/find-care/prepare-for-care",
+      "https://www.pfizerforall.com/savings-support/self-pay",
+      "https://www.pfizerforall.com/education/",
+      "https://www.pfizerforall.com/savings-support/prescription-assistance"
+    ],
+    "reuseCount": 8,
+    "lastUsed": "2026-10-13T16:26:47.732Z"
+  },
+  "options": [
+    {
+      "class": "dropdown",
+      "label": "Dropdown (hero with a care-type selector)"
+    },
+    {
+      "class": "announcement",
+      "label": "Announcement (link strip under the banner image)"
+    }
+  ],
+  "memberVariantIds": []
+}

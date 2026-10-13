@@ -10,7 +10,9 @@ Single block table. Content: one row, one cell of content.
 
 ## Supported variations
 
-No variations.
+| Variation | Option class |
+| --- | --- |
+| Articles (slides built from an article index; prev/next loop, both arrows always shown) | `articles` |
 
 ## Universal Editor fields
 

@@ -1,0 +1,101 @@
+/* section layout: centered heading + intro (default content) above the search field */
+:is(main, article.article-body) > .section:has(.search-prompt) {
+  padding-block-start: var(--space-l);
+}
+
+.section:has(.search-prompt) > .default-content-wrapper {
+  margin-bottom: var(--space-l);
+  text-align: center;
+}
+
+.section:has(.search-prompt) > .default-content-wrapper h2 {
+  margin: 0 0 var(--space-m);
+  color: var(--color-link);
+  font-size: var(--heading-font-size-xxl);
+  line-height: var(--heading-line-height-xxl);
+}
+
+.section:has(.search-prompt) > .default-content-wrapper p {
+  margin: 0;
+}
+
+/* search form: field + button, stacked on mobile */
+.search-prompt .search-prompt-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.search-prompt .search-prompt-field {
+  position: relative;
+}
+
+/* decorative magnifier inside the field */
+.search-prompt .search-prompt-icon {
+  position: absolute;
+  top: 50%;
+  left: 17px;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 19'%3E%3Cpath d='M13.38 13.13h-1.76l5 5h1.76zm-.96-2.2a6.87 6.87 0 1 0-2.4 2.06 6.9 6.9 0 0 0 2.4-2.06M6.88 1.25a5.63 5.63 0 1 1 0 11.25 5.63 5.63 0 0 1 0-11.25'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search-prompt .search-prompt-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 64px;
+  margin: 0;
+  padding: var(--space-s) var(--space-m) var(--space-s) 52px;
+  border: 1px solid var(--color-link);
+  border-radius: var(--radius-m);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  appearance: none;
+}
+
+.search-prompt .search-prompt-input::placeholder {
+  color: var(--text-color);
+  opacity: 1;
+}
+
+.search-prompt .search-prompt-input:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 1px;
+}
+
+main .search-prompt button.search-prompt-submit {
+  width: 100%;
+}
+
+@media (width >= 900px) {
+  :is(main, article.article-body) > .section:has(.search-prompt) {
+    padding-block-start: 40px;
+  }
+
+  .search-prompt .search-prompt-form {
+    flex-direction: row;
+    gap: var(--space-s);
+    max-width: 626px;
+  }
+
+  .search-prompt .search-prompt-field {
+    flex: 1;
+  }
+
+  main .search-prompt button.search-prompt-submit {
+    flex: 0 0 auto;
+    width: auto;
+    height: 64px;
+    padding: 20px 36px;
+    font-size: var(--body-font-size-m);
+    line-height: 24px;
+  }
+}

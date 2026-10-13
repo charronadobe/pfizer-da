@@ -167,12 +167,45 @@ async function inlineColorIcons(scope) {
   });
 }
 
+/**
+ * Applies a Section Metadata table to its section: `style` becomes classes,
+ * other rows become data attributes. The table is removed afterwards.
+ * @param {Element} section The section element
+ * @param {Element} sectionMeta The div.section-metadata table
+ */
+function applySectionMetadata(section, sectionMeta) {
+  const meta = readBlockConfig(sectionMeta);
+  Object.keys(meta).forEach((key) => {
+    if (key === 'style') {
+      meta.style.split(',').map((s) => toClassName(s.trim())).filter(Boolean)
+        .forEach((s) => section.classList.add(s));
+    } else {
+      section.dataset[toCamelCase(key)] = meta[key];
+    }
+  });
+  const wrapper = sectionMeta.parentElement;
+  sectionMeta.remove();
+  if (wrapper && wrapper !== section && !wrapper.children.length) wrapper.remove();
+}
+
+/**
+ * The delivery pipeline applies Section Metadata server-side; tables that are still
+ * in the markup (e.g. local previews of raw content) are applied here instead.
+ * @param {Element} main The main element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section div.section-metadata').forEach((sectionMeta) => {
+    applySectionMetadata(sectionMeta.closest('.section'), sectionMeta);
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   applyDesignTokenDataAttributes(main);
   if (document.contains(main)) initPageSchemas();
@@ -287,23 +320,9 @@ function watchForTargetInjectedBlocks(main) {
     // blocks are skipped above via the `block` class / `data-block-status` guards.
 
     toDecorate.forEach((block) => {
-      const wrapper = block.parentElement;
-      const sectionMeta = wrapper?.querySelector('div.section-metadata');
-      if (sectionMeta) {
-        const section = block.closest('.section');
-        if (section) {
-          const meta = readBlockConfig(sectionMeta);
-          Object.keys(meta).forEach((key) => {
-            if (key === 'style') {
-              meta.style.split(',').map((s) => toClassName(s.trim())).filter(Boolean)
-                .forEach((s) => section.classList.add(s));
-            } else {
-              section.dataset[toCamelCase(key)] = meta[key];
-            }
-          });
-          sectionMeta.remove();
-        }
-      }
+      const sectionMeta = block.parentElement?.querySelector('div.section-metadata');
+      const section = block.closest('.section');
+      if (sectionMeta && section) applySectionMetadata(section, sectionMeta);
     });
 
     [...toDecorate].forEach((block) => {

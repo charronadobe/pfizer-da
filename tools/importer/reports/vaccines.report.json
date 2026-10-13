@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/vaccines/",
+  "path": "vaccines",
+  "timestamp": "2026-10-13T18:41:33.597Z",
+  "title": "Explore Vaccine Options, Eligibility & More | PfizerForAll™",
+  "template": "content-page",
+  "blocks": [
+    "hero-page",
+    "cards-article",
+    "columns-media",
+    "columns-media",
+    "banner-cta",
+    "cards-nav",
+    "quiz-choice",
+    "columns-article",
+    "quiz-truefalse",
+    "form-signup",
+    "accordion-faq",
+    "search-prompt"
+  ]
+}

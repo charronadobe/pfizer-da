@@ -1,0 +1,143 @@
+/* cards-fact: key-fact cards (source: pfizerforall vertical-card, stacked grid) */
+.cards-fact .cards-fact-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: 1fr; /* stacked cards share one height */
+  gap: var(--space-xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-fact .cards-fact-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+  color: var(--pfa-gray-90);
+}
+
+.cards-fact .cards-fact-topic {
+  padding-bottom: var(--space-m);
+  border-bottom: 1px solid var(--pfa-outline-variant);
+}
+
+.cards-fact .cards-fact-statement {
+  margin-top: var(--space-m);
+  padding-bottom: var(--space-m);
+  border-bottom: 1px solid var(--pfa-outline-variant);
+}
+
+.cards-fact .cards-fact-topic > *,
+.cards-fact .cards-fact-statement > * {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-weight: 700;
+}
+
+/* topic question: 20/32 -> 22/28 -> 24/32 (same scale as the h6 token) */
+.cards-fact .cards-fact-topic > * {
+  color: var(--pfa-gray-90);
+  font-size: var(--heading-font-size-xs);
+  line-height: var(--heading-line-height-xs);
+}
+
+.cards-fact .cards-fact-statement > * {
+  color: var(--pfa-core);
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.cards-fact .cards-fact-statement strong {
+  font-weight: inherit;
+}
+
+.cards-fact .cards-fact-body {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  gap: var(--space-l);
+  padding-top: var(--space-m);
+}
+
+.cards-fact .cards-fact-body > * {
+  margin: 0;
+}
+
+.cards-fact .cards-fact-body p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* optional last-paragraph link: bold underlined text link */
+.cards-fact .cards-fact-body .cards-fact-link {
+  display: flex;
+  align-items: center;
+}
+
+.cards-fact .cards-fact-body .cards-fact-link a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: var(--space-xs) 0;
+  border-radius: var(--radius-s);
+  color: var(--pfa-core);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: underline 1px;
+  text-underline-offset: 6px;
+}
+
+@media (width >= 600px) {
+  .cards-fact .cards-fact-card {
+    padding: var(--space-l);
+  }
+
+  .cards-fact .cards-fact-topic {
+    padding-bottom: var(--space-l);
+  }
+
+  .cards-fact .cards-fact-statement {
+    max-width: 455px;
+    margin-top: var(--space-l);
+    padding-bottom: var(--space-xl);
+  }
+
+  .cards-fact .cards-fact-statement > * {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .cards-fact .cards-fact-body {
+    padding-top: 40px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-fact .cards-fact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    gap: var(--space-l);
+  }
+
+  /* exactly 3 cards: one row of 3 instead of a 2 + 1 wrap */
+  .cards-fact .cards-fact-list.cards-fact-list-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cards-fact .cards-fact-card {
+    justify-content: space-between;
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-fact .cards-fact-statement > * {
+    font-size: 45px;
+    line-height: 56px;
+  }
+}

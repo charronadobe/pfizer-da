@@ -1,0 +1,23 @@
+{
+  "variantName": "quiz-truefalse",
+  "baseBlock": "quiz",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue",
+    "density": "spacious",
+    "purpose": "true-false-knowledge-check",
+    "imagePattern": "noimg",
+    "structure": "eyebrow + statement + 2 answers + result"
+  },
+  "contentPattern": "Row 1, 1 cell: eyebrow paragraph(s) before the statement heading (h2), statement h2, optional italic-only source paragraph ('*Source: U.S. Census Bureau*'). Then 1 row per answer, 2-3 cells: answer label ('True' / 'False', authored - not hard-coded) | feedback shown when that answer is chosen (e.g. h3 'That's correct!' or 'Not quite.') | optional 3rd cell, any text (e.g. 'correct') marks the correct answer. Optional last row, 1 cell: explanation shown after any answer (paragraphs, CTA link). Answering locks the buttons (aria-pressed on the chosen one), reveals the result in an aria-live region and moves focus to it. Nothing is fetched.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/find-care/biomarker-testing/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

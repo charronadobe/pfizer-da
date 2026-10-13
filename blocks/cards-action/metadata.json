@@ -12,9 +12,13 @@
   },
   "contentPattern": "2 rows x 2 columns. Cell 1: icon image. Cell 2: h3, paragraph, CTA link (secondary/outlined).",
   "usage": {
-    "pagesUsing": ["https://www.pfizerforall.com/"],
-    "reuseCount": 1,
-    "lastUsed": "2026-10-12"
+    "pagesUsing": [
+      "https://www.pfizerforall.com/",
+      "https://www.pfizerforall.com/find-care/talk-to-a-doctor",
+      "https://www.pfizerforall.com/education/"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-13"
   },
   "options": [],
   "memberVariantIds": []

@@ -1,0 +1,160 @@
+/* full-bleed: release the section's max-width / inline padding for this block only */
+main .section > .quote-photo-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.quote-photo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 788px;
+  overflow: hidden;
+  background-color: var(--pfa-gray-95);
+  color: var(--pfa-gray-10);
+}
+
+.quote-photo .quote-photo-media {
+  position: absolute;
+  inset: 0;
+}
+
+.quote-photo .quote-photo-media picture {
+  display: block;
+  height: 100%;
+}
+
+.quote-photo .quote-photo-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.quote-photo .quote-photo-media .quote-photo-desktop {
+  display: none;
+}
+
+.quote-photo .quote-photo-media .quote-photo-desktop img {
+  object-position: top center;
+}
+
+/* dark gradient keeps the text readable over the photo */
+.quote-photo .quote-photo-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(23 23 23 / 0%) 0%, rgb(23 23 23 / 80%) 100%);
+}
+
+.quote-photo .quote-photo-content {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: auto;
+  padding: var(--space-xl) var(--space-l);
+}
+
+.quote-photo :is(h1, h2, h3, h4, h5, h6, p) {
+  color: inherit;
+}
+
+.quote-photo .quote-photo-figure {
+  margin: 0;
+}
+
+/* reset the global editorial blockquote styling */
+.quote-photo .quote-photo-quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+/* decorative opening quote mark */
+.quote-photo .quote-photo-quote::before {
+  content: '';
+  display: block;
+  width: 87px;
+  height: 64px;
+  margin-bottom: 34px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 47'%3E%3Cpath d='M59.3398 42.2524L39.1456 42.2524L39.1456 24.5437C39.1456 14.1431 47.0486 5.55345 57.165 4.46607L57.165 8.84839C49.454 9.91017 43.4951 16.545 43.4951 24.5437L43.4951 26.7184L59.6505 26.7184L59.6505 41.9417L64 41.9417L64 22.3689L48.0509 22.3689C49.0705 17.0667 53.7451 13.0485 59.3398 13.0485L61.5146 13.0485L61.5146 0L59.3398 0C45.8059 0 34.7961 11.0097 34.7961 24.5437L34.7961 46.6019L59.3398 46.6019Z'/%3E%3Cpath d='M24.5437 46.6019L24.5437 42.2524L4.34951 42.2524L4.34951 24.5437C4.34951 14.1431 12.2525 5.55345 22.3689 4.46607L22.3689 8.8484C14.6579 9.91018 8.69903 16.545 8.69903 24.5437L8.69903 26.7184L24.8544 26.7184L24.8544 41.9417L29.2039 41.9417L29.2039 22.3689L13.2548 22.3689C14.2744 17.0667 18.949 13.0485 24.5437 13.0485L26.7184 13.0485L26.7184 0L24.5437 0C11.0097 0 0 11.0097 0 24.5437L0 46.6019Z'/%3E%3C/svg%3E") left center / contain no-repeat;
+}
+
+.quote-photo .quote-photo-quote > * {
+  margin: 0 0 var(--space-m);
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+  line-height: var(--heading-line-height-m);
+}
+
+.quote-photo .quote-photo-quote > :last-child {
+  margin-bottom: 0;
+}
+
+.quote-photo .quote-photo-attribution {
+  margin-top: 40px;
+}
+
+.quote-photo .quote-photo-attribution > * {
+  margin: 0;
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+}
+
+.quote-photo .quote-photo-attribution em {
+  font-style: normal;
+}
+
+.quote-photo .button-container {
+  margin-top: 40px;
+}
+
+.quote-photo a.button:any-link {
+  max-width: none;
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-95);
+}
+
+.quote-photo a.button:any-link:hover {
+  background-color: var(--pfa-gray-10);
+  color: var(--pfa-gray-95);
+}
+
+.quote-photo a.button:any-link:focus-visible {
+  outline: 2px solid var(--pfa-white);
+  outline-offset: 2px;
+}
+
+.quote-photo.quote-photo-no-image {
+  min-height: 0;
+}
+
+@media (width >= 900px) {
+  .quote-photo {
+    min-height: 810px;
+  }
+
+  .quote-photo .quote-photo-media .quote-photo-desktop {
+    display: block;
+  }
+
+  .quote-photo .quote-photo-media .quote-photo-mobile {
+    display: none;
+  }
+
+  /* content column aligns with the 1440px page grid on very wide screens */
+  .quote-photo .quote-photo-content {
+    max-width: 1066px;
+    margin-left: max(0px, (100% - 1440px) / 2);
+    padding: 40px 80px 80px;
+  }
+}

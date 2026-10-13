@@ -1,0 +1,118 @@
+/* rounded panel: title, logo and copy stacked + centered on mobile;
+   logo beside title + copy (2-column grid) from 900px */
+.columns-callout {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+  width: 100%;
+  padding: 28px var(--space-l) var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--color-shaded);
+  color: var(--color-text);
+}
+
+.columns-callout .columns-callout-title {
+  width: 100%;
+  text-align: center;
+}
+
+.columns-callout .columns-callout-title :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 400;
+  line-height: var(--heading-line-height-xs);
+}
+
+.columns-callout .columns-callout-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.columns-callout .columns-callout-media > p {
+  margin: 0;
+}
+
+.columns-callout .columns-callout-media picture {
+  display: block;
+}
+
+.columns-callout .columns-callout-media img,
+.columns-callout .columns-callout-media .icon {
+  display: block;
+  width: auto;
+  height: var(--space-3xl);
+  object-fit: contain;
+}
+
+.columns-callout .columns-callout-media .icon img,
+.columns-callout .columns-callout-media .icon svg {
+  width: auto;
+  height: 100%;
+}
+
+.columns-callout .columns-callout-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  width: 100%;
+  margin-top: var(--space-l);
+  text-align: center;
+}
+
+.columns-callout .columns-callout-body > * {
+  margin: 0;
+}
+
+.columns-callout .columns-callout-body p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+@media (width >= 900px) {
+  .columns-callout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-s) 40px;
+    max-width: 846px;
+    margin: 0 auto;
+  }
+
+  .columns-callout .columns-callout-media {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .columns-callout .columns-callout-title,
+  .columns-callout .columns-callout-body {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .columns-callout .columns-callout-title {
+    grid-row: 1;
+  }
+
+  .columns-callout .columns-callout-body {
+    grid-row: 2;
+    margin-top: 0;
+  }
+
+  /* no title: copy spans both rows beside the logo */
+  .columns-callout .columns-callout-media:first-child + .columns-callout-body {
+    grid-row: 1 / 3;
+  }
+
+  /* no logo: single column */
+  .columns-callout:not(:has(> .columns-callout-media)) {
+    grid-template-columns: 1fr;
+  }
+
+  .columns-callout:not(:has(> .columns-callout-media)) > * {
+    grid-column: 1;
+  }
+}

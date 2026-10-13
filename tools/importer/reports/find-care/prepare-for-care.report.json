@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/find-care/prepare-for-care",
+  "path": "find-care/prepare-for-care",
+  "timestamp": "2026-10-13T18:41:14.408Z",
+  "title": "Prepare for Care | Find Care | PfizerForAll™",
+  "template": "content-page",
+  "blocks": [
+    "hero-page",
+    "cards-article",
+    "columns-media",
+    "cards-icon"
+  ]
+}

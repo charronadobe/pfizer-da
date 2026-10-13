@@ -2,8 +2,12 @@
 /* global WebImporter */
 /**
  * Parser for cards-action. Base: cards.
- * Source: https://www.pfizerforall.com/ (.card-grid .cards-grid-container)
- * Generated: 2026-10-12
+ * Sources:
+ *   home template:         https://www.pfizerforall.com/ (.card-grid .cards-grid-container)
+ *   content-page template: #main > div.section.card-grid-container
+ *                          .card-grid.block:not(.navigation):not(.core-title-icon)
+ *                          (/find-care/talk-to-a-doctor: 2 tiles, sprite icons, no CTA)
+ * Generated: 2026-10-12, extended for content-page 2026-10-13
  *
  * Output: 2 columns, one row per tile.
  *   Cell 1: icon image
@@ -23,7 +27,19 @@
  * :icon: notation, which this project cannot resolve (no /icons folder).
  */
 export default function parse(element, { document }) {
+  // content-page instance (#main .card-grid.block, /find-care/talk-to-a-doctor): the
+  // element is the whole block, so the section intro (.card-grid-content-container:
+  // eyebrow, h2, body) sits inside it and is emitted as default content before the
+  // block. The homepage element (.cards-grid-container) never contains it.
+  const intro = [];
+  const introRoot = element.querySelector('.card-grid-content-container');
+  if (introRoot) {
+    introRoot.querySelectorAll('.card-grid-content-eyebrow-container p, .card-grid-content-headline-container h2, .card-grid-content-headline-container h3, .card-grid-content-body-container p')
+      .forEach((el) => intro.push(el));
+  }
+
   let cards = [...element.querySelectorAll(':scope > .card')];
+  if (!cards.length) cards = [...element.querySelectorAll('.cards-grid-container > .card')];
   if (!cards.length) cards = [...element.querySelectorAll('.card')];
 
   const buildIcon = (card) => {
@@ -34,7 +50,8 @@ export default function parse(element, { document }) {
     const img = iconWrap.querySelector('img');
     const span = iconWrap.querySelector('span.icon');
     const iconClass = span && [...span.classList].find((c) => c.startsWith('icon-'));
-    const name = iconClass ? iconClass.replace(/^icon-/, '') : null;
+    // site icon loader strips an `asset-` prefix: icon-asset-pill-bottle -> pill-bottle.svg
+    const name = iconClass ? iconClass.replace(/^icon-/, '').replace(/^asset-/, '') : null;
     const raw = img ? img.getAttribute('src') : '';
     let src = null;
     if (name) src = `https://www.pfizerforall.com/assets/icons/${name}.svg?format=svg`;
@@ -86,5 +103,6 @@ export default function parse(element, { document }) {
   }
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'cards-action', cells });
+  if (intro.length) element.before(...intro);
   element.replaceWith(block);
 }

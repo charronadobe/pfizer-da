@@ -36,6 +36,7 @@ export default function decorate(block) {
     const ctaContainer = cta?.closest('.button-container') || cta?.parentElement;
     if (ctaContainer && ctaContainer !== body && ctaContainer === body.lastElementChild) {
       ctaContainer.classList.add('cards-action-cta');
+      li.classList.add('cards-action-clickable');
       // source CTA is the small outlined pill
       if (cta.classList.contains('button')) cta.classList.add('secondary', 'button-sm');
     }

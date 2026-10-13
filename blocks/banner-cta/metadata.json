@@ -1,0 +1,33 @@
+{
+  "variantName": "banner-cta",
+  "baseBlock": "banner",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "description": "Rounded (24px), centered CTA panel: optional 48px white line icon, Tomorrow h2 (heading-l scale), optional paragraph(s), white small pill CTA (full width on mobile, auto >=900px; external links get an external-link glyph). Gradient option: blue-to-black vertical gradient. Age-input option: small note above a 64px white floating-label field (max 402px); the submit button appears only once a valid age (18-105) is entered and navigates to the CTA link with ?age=<value> (new tab for off-site links).",
+    "colorScheme": "dark",
+    "density": "moderate",
+    "purpose": "cta",
+    "structure": "centered stack"
+  },
+  "contentPattern": "Row 1, 1 cell: icon (optional, standalone :icon: or image paragraph), h2, paragraph(s) (optional), CTA link (last link). Option 'age-input': the last link is turned into a form (its text = submit button text, its href = destination); a short paragraph directly above the CTA (after the description) renders as a small note; optional row 2 = field label (e.g. 'Enter your age') | query parameter name (default 'age'). When row 2 is omitted the CTA text is used as the field label. Clear-button label comes from placeholders key 'Clear input'.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/cancer",
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/education/"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [
+    {
+      "class": "gradient",
+      "label": "Gradient (gradient background panel)"
+    },
+    {
+      "class": "age-input",
+      "label": "Age input (inline age field with CTA)"
+    }
+  ],
+  "memberVariantIds": []
+}

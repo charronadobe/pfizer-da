@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/savings-support/self-pay",
+  "path": "savings-support/self-pay",
+  "timestamp": "2026-10-13T18:41:26.172Z",
+  "title": "Self-Pay | PfizerForAll™",
+  "template": "content-page",
+  "blocks": [
+    "hero-page",
+    "accordion-faq",
+    "search-prompt",
+    "cards-icon"
+  ]
+}
