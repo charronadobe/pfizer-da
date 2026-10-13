@@ -32,8 +32,10 @@ async function fetchFooter() {
 function buildField(li) {
   const [message = '', clearLabel] = [...li.querySelectorAll(':scope > ul > li')]
     .map((item) => item.textContent.trim());
-  const label = [...li.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE)
-    .map((n) => n.textContent.trim()).join(' ').trim();
+  // label is the item's own text, bare or wrapped in a paragraph (as published from DA)
+  const own = li.cloneNode(true);
+  own.querySelectorAll(':scope > ul').forEach((ul) => ul.remove());
+  const label = own.textContent.replace(/\s+/g, ' ').trim();
   fieldId += 1;
   const id = `footer-field-${fieldId}`;
   const input = el('input', 'footer-field-input');
