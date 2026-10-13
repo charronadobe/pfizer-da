@@ -50,8 +50,9 @@ function decorateLink(a, className) {
   return a;
 }
 
+/** Item link. Plain HTML wraps it in a paragraph; some items use a direct <a>. */
 function directLink(li) {
-  return li.querySelector(':scope > a');
+  return li.querySelector(':scope > a, :scope > p > a');
 }
 
 function nestedList(li) {
@@ -411,21 +412,19 @@ export default async function decorate(block) {
   const bar = el('div', 'header-bar');
   const nav = el('nav', 'header-nav');
 
-  // logos: default + relief (dark) variant
+  // logos: default + relief (dark). Pictures may be bare or wrapped in a link.
   const logo = el('a', 'header-logo');
-  const logoLinks = [...(brand?.querySelectorAll('a') || [])];
-  if (logoLinks[0]) {
-    logo.href = logoLinks[0].href;
-    if (!logoLinks[0].querySelector('img')) logo.textContent = logoLinks[0].textContent;
-    logoLinks.forEach((a, i) => {
-      const img = a.querySelector('img');
-      if (!img) return;
-      img.className = `header-logo-img${i ? ' header-logo-relief' : ' header-logo-default'}`;
-      img.loading = i ? 'lazy' : 'eager';
-      if (i) img.alt = '';
-      logo.append(img);
-    });
-  }
+  const logoImages = [...(brand?.querySelectorAll('img') || [])];
+  const logoLink = brand?.querySelector('a');
+  if (logoLink) logo.href = logoLink.href;
+  else if (logoImages.length) logo.href = '/';
+  if (logoLink && !logoImages.length) logo.textContent = logoLink.textContent.trim();
+  logoImages.forEach((img, i) => {
+    img.className = `header-logo-img${i ? ' header-logo-relief' : ' header-logo-default'}`;
+    img.loading = i ? 'lazy' : 'eager';
+    if (i) img.alt = '';
+    logo.append(img);
+  });
   const mobileLogo = logo.cloneNode(true);
 
   /* --- open/close state --- */
