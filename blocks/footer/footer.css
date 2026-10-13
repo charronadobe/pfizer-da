@@ -39,6 +39,7 @@ footer .footer-logo,
 footer .footer a.footer-logo:any-link {
   display: inline-flex;
   align-self: flex-start;
+  margin-bottom: 6px;
   text-decoration: none;
 }
 
@@ -64,6 +65,10 @@ footer .footer-links {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+footer .footer-links li {
+  display: flex;
 }
 
 footer .footer-links a:any-link {
@@ -119,7 +124,7 @@ footer .footer-signup {
   flex-direction: column;
   gap: 32px;
   padding: var(--space-l);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-l);
   background-color: var(--footer-card);
 }
 
@@ -226,6 +231,57 @@ footer .footer-field.is-error .footer-field-icon {
   transform: translateY(-50%);
 }
 
+/* clear button replaces the error icon while the field has a value */
+footer .footer-field.has-value .footer-field-icon {
+  display: none;
+}
+
+footer .footer-field.has-value .footer-field-input,
+footer .footer-field.is-error .footer-field-input {
+  padding-right: 36px;
+}
+
+footer .footer-field-clear {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  display: block;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: var(--footer-text);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 0.3s;
+}
+
+footer .footer-field-clear[hidden] {
+  display: none;
+}
+
+footer .footer-field-clear::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentcolor;
+  mask: url('../../icons/input-clear.svg') center / contain no-repeat;
+}
+
+footer .footer-field-clear:hover {
+  opacity: 0.8;
+}
+
+footer .footer-field-clear:focus-visible {
+  outline: 2px solid var(--footer-text);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+}
+
 footer .footer-field-error {
   margin: var(--space-xs) 0 0 var(--space-m);
   font-size: var(--body-font-size-xs);
@@ -305,12 +361,11 @@ footer .footer-signup-success img {
   footer .footer-logo {
     grid-area: logo;
     justify-self: start;
-    margin-bottom: 6px;
   }
 
   footer .footer-nav {
     grid-area: nav;
-    padding-bottom: 38px;
+    padding-bottom: 41px;
   }
 
   footer .footer-legal {
@@ -321,6 +376,7 @@ footer .footer-signup-success img {
     grid-area: signup;
     align-self: start;
     padding: 40px;
+    border-radius: var(--radius-xl);
   }
 
   footer .footer-signup-title,
