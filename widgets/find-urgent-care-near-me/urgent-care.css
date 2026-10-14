@@ -1,0 +1,353 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #172b3f;
+  background: #f3f7fa;
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.urgent-care-page {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px 16px;
+  background: #f3f7fa;
+}
+
+.urgent-care-main {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.urgent-care-widget {
+  padding: 24px;
+  border: 1px solid #d8e2eb;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(13 51 82 / 8%);
+}
+
+.urgent-care-title {
+  margin: 0;
+  color: #003b71;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.1;
+}
+
+.urgent-care-intro {
+  margin: 12px 0 0;
+  color: #40566a;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.urgent-care-demo-notice {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-left: 4px solid #007c91;
+  border-radius: 4px;
+  background: #eaf6f8;
+  color: #183f4a;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.urgent-care-location {
+  margin-top: 24px;
+}
+
+.urgent-care-section-heading {
+  margin: 0;
+  color: #003b71;
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+.urgent-care-location-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #f2f6f9;
+}
+
+.urgent-care-location-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.urgent-care-location-field label {
+  color: #173d5d;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.urgent-care-location-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #8296a7;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b3f;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.urgent-care-location-input:focus-visible {
+  outline: 3px solid #007c91;
+  outline-offset: 3px;
+}
+
+.urgent-care-location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.urgent-care-button {
+  min-height: 44px;
+  padding: 9px 16px;
+  border: 2px solid #005a9c;
+  border-radius: 24px;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.urgent-care-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.urgent-care-search-button,
+.urgent-care-geolocation-button {
+  background: #005a9c;
+  color: #fff;
+}
+
+.urgent-care-search-button:hover,
+.urgent-care-geolocation-button:hover {
+  border-color: #003b71;
+  background: #003b71;
+}
+
+.urgent-care-reset-button {
+  background: transparent;
+  color: #004b87;
+}
+
+.urgent-care-reset-button:hover {
+  background: #e2edf5;
+}
+
+.urgent-care-location-status {
+  min-height: 1.5em;
+  margin: 14px 0;
+  color: #40566a;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.urgent-care-open-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: #173d5d;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.urgent-care-open-filter-input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: #005a9c;
+}
+
+.urgent-care-button:focus-visible,
+.urgent-care-open-filter-input:focus-visible {
+  outline: 3px solid #007c91;
+  outline-offset: 3px;
+}
+
+.urgent-care-results {
+  margin-top: 14px;
+}
+
+.urgent-care-result-count {
+  margin: 8px 0 16px;
+  color: #4b6274;
+  font-size: 0.9375rem;
+}
+
+.urgent-care-clinic-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.urgent-care-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #d8e2eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.urgent-care-clinic-name {
+  margin: 0;
+  color: #003b71;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.urgent-care-open-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin: 10px 0 12px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.urgent-care-open-status.is-open {
+  background: #e7f5ed;
+  color: #185b35;
+}
+
+.urgent-care-open-status.is-closed {
+  background: #fcebea;
+  color: #822d27;
+}
+
+.urgent-care-map {
+  margin: 0 0 16px;
+}
+
+.urgent-care-map-frame {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: 1px solid #d8e2eb;
+  border-radius: 8px;
+  background: #f2f6f9;
+}
+
+.urgent-care-map-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding-top: 6px;
+  color: #4b6274;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.urgent-care-map-link {
+  color: #004b87;
+  text-underline-offset: 2px;
+}
+
+.urgent-care-details {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.urgent-care-detail {
+  display: grid;
+  grid-template-columns: minmax(105px, 0.7fr) minmax(0, 1.3fr);
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.urgent-care-detail-label {
+  color: #233e54;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.urgent-care-detail-value {
+  min-width: 0;
+  margin: 0;
+  color: #40566a;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.urgent-care-empty-state {
+  grid-column: 1 / -1;
+  padding: 22px;
+  border: 1px dashed #8296a7;
+  border-radius: 12px;
+  color: #40566a;
+}
+
+.urgent-care-empty-state h3 {
+  margin: 0;
+  color: #003b71;
+  font-size: 1.125rem;
+}
+
+.urgent-care-empty-state p {
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+@media (width >= 600px) {
+  .urgent-care-page {
+    padding: 40px 24px;
+  }
+
+  .urgent-care-widget {
+    padding: 36px;
+  }
+
+  .urgent-care-location-form {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+    align-items: end;
+    padding: 22px;
+  }
+
+  .urgent-care-location-actions {
+    justify-content: flex-start;
+  }
+
+  .urgent-care-clinic-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .urgent-care-page {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (width >= 1200px) {
+  .urgent-care-clinic-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .urgent-care-detail {
+    grid-template-columns: minmax(92px, 0.65fr) minmax(0, 1.35fr);
+  }
+}
