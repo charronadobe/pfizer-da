@@ -1,0 +1,35 @@
+{
+  "variantName": "cards-icon",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "purpose": "icon-feature-list",
+    "imagePattern": "icon",
+    "structure": "icon + heading + text",
+    "columns": 3
+  },
+  "contentPattern": "1 row per item, 2 cells: icon (:icon-name: or image) | h3, paragraph. A single cell starting with an icon-only paragraph also works. No tile background, no link. Numbered steps are authored in the heading text ('1. Find your medication'). Default: 3 items per row on desktop; option 'two-column': 2 per row; option 'one-column': a single column with the icon left of the copy and dividers between items, and on desktop the section heading (default content right before the block, alone in the section with it) sits to the left. Section heading (h2) is default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/prepare-for-care",
+      "https://www.pfizerforall.com/savings-support/self-pay",
+      "https://www.pfizerforall.com/find-care/cancer-screening/",
+      "https://www.pfizerforall.com/savings-support/prescription-assistance"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-13T16:26:47.813Z"
+  },
+  "options": [
+    {
+      "class": "two-column",
+      "label": "Two column (icon list in two columns)"
+    },
+    {
+      "class": "one-column",
+      "label": "One column (icon left of copy, dividers, heading on the left)"
+    }
+  ],
+  "memberVariantIds": []
+}

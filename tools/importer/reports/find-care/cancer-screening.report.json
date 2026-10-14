@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/find-care/cancer-screening/",
+  "path": "find-care/cancer-screening",
+  "timestamp": "2026-10-13T18:41:57.732Z",
+  "title": "Cancer Screening | Find Care | PfizerForAll™",
+  "template": "cancer-screening",
+  "blocks": [
+    "hero-quiz",
+    "cards-icon",
+    "columns-callout",
+    "cards-carousel",
+    "accordion-faq"
+  ],
+  "fragments": "/fragments/find-care/cancer-screening/schedule-breast-screening, /fragments/find-care/cancer-screening/schedule-cervical-screening"
+}

@@ -36,7 +36,8 @@ export default function parse(element, { document }) {
       // site's served SVG with a query string so it imports as a real image.
       const iconSpan = pictureWrap.querySelector('span.icon');
       const iconClass = iconSpan && [...iconSpan.classList].find((c) => c.startsWith('icon-') && c !== 'icon');
-      const iconName = iconClass ? iconClass.replace(/^icon-/, '') : null;
+      // site icon loader strips an `asset-` prefix: icon-asset-pill-bottle -> pill-bottle.svg
+      const iconName = iconClass ? iconClass.replace(/^icon-/, '').replace(/^asset-/, '') : null;
       const rawSrc = img ? img.getAttribute('src') : '';
       let src = null;
       if (iconName) src = `https://www.pfizerforall.com/assets/icons/${iconName}.svg?format=svg`;

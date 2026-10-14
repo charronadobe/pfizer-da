@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue tiles",
+    "density": "moderate",
+    "purpose": "article-carousel",
+    "imagePattern": "photo-top-optional",
+    "structure": "image + tags + heading + text + label + CTA"
+  },
+  "contentPattern": "1 row per card, 1-2 cells: optional image cell (image only) | text cell = tags (a bulleted list, or one paragraph of comma-separated tags, placed before the heading; a bold tag such as **Recommended** is highlighted), h3, paragraph, italic-only read-time paragraph ('*4 min read*'), CTA link (bold = primary button; it makes the whole card clickable). Section intro (eyebrow, h2, text) is default content above the block. Previous/next/region labels come from the placeholders sheet (previousSlide, nextSlide, carouselRegion, carouselSlideControls).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/find-care/biomarker-testing/",
+      "https://www.pfizerforall.com/find-care/prepare-for-care"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

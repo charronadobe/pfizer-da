@@ -28,11 +28,14 @@ async function fetchFooter() {
   return [...doc.body.children].filter((c) => c.tagName === 'DIV');
 }
 
-/** a field item: label text + nested list holding the validation message */
+/** a field item: label text + nested list holding the validation message and clear-button label */
 function buildField(li) {
-  const message = li.querySelector('ul > li')?.textContent.trim() || '';
-  const label = [...li.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE)
-    .map((n) => n.textContent.trim()).join(' ').trim();
+  const [message = '', clearLabel] = [...li.querySelectorAll(':scope > ul > li')]
+    .map((item) => item.textContent.trim());
+  // label is the item's own text, bare or wrapped in a paragraph (as published from DA)
+  const own = li.cloneNode(true);
+  own.querySelectorAll(':scope > ul').forEach((ul) => ul.remove());
+  const label = own.textContent.replace(/\s+/g, ' ').trim();
   fieldId += 1;
   const id = `footer-field-${fieldId}`;
   const input = el('input', 'footer-field-input');
@@ -46,10 +49,27 @@ function buildField(li) {
   const error = el('p', 'footer-field-error', message);
   error.id = `${id}-error`;
   error.hidden = true;
-  const box = el('div', 'footer-field-box', labelEl, input, el('span', 'footer-field-icon'));
+  let clear = null;
+  if (clearLabel) {
+    clear = el('button', 'footer-field-clear');
+    clear.type = 'button';
+    clear.setAttribute('aria-label', clearLabel);
+    clear.hidden = true;
+  }
+  const box = el('div', 'footer-field-box', labelEl, input, el('span', 'footer-field-icon'), clear);
   const field = el('div', `footer-field${input.type === 'email' ? ' footer-field-wide' : ''}`, box, error);
 
-  const sync = () => field.classList.toggle('is-filled', input.value !== '' || document.activeElement === input);
+  const sync = () => {
+    const hasValue = input.value !== '';
+    field.classList.toggle('has-value', hasValue);
+    field.classList.toggle('is-filled', hasValue || document.activeElement === input);
+    if (clear) clear.hidden = !hasValue;
+  };
+  clear?.addEventListener('click', () => {
+    input.value = '';
+    input.focus();
+    sync();
+  });
   input.addEventListener('focus', sync);
   input.addEventListener('blur', sync);
   input.addEventListener('input', () => {

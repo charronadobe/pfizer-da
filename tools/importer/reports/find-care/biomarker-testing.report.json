@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/find-care/biomarker-testing/",
+  "path": "find-care/biomarker-testing",
+  "timestamp": "2026-10-13T18:41:07.210Z",
+  "title": "Biomarker Testing | Find Care| PfizerForAll™",
+  "template": "content-page",
+  "blocks": [
+    "hero-page",
+    "cards-article",
+    "columns-media",
+    "columns-media",
+    "cards-nav",
+    "quiz-truefalse",
+    "accordion-faq",
+    "quiz-entry",
+    "cards-fact",
+    "quote-photo"
+  ]
+}

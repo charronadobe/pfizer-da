@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/cancer",
+  "path": "cancer",
+  "timestamp": "2026-10-13T18:41:41.610Z",
+  "title": "Cancer Overview & Educational Resources | PfizerForAll™",
+  "template": "content-page",
+  "blocks": [
+    "hero-page",
+    "cards-carousel",
+    "columns-media",
+    "columns-media",
+    "columns-media",
+    "columns-media",
+    "hero-article",
+    "accordion-faq",
+    "search-prompt"
+  ]
+}

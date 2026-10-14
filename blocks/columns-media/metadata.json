@@ -11,9 +11,17 @@
   },
   "contentPattern": "1 row x 2 columns. Cell 1: h2, paragraph, small-print paragraph with 'See here' link, primary CTA. Cell 2: image. Cell order may be swapped (image first) - the authored order is kept on desktop.",
   "usage": {
-    "pagesUsing": ["https://www.pfizerforall.com/"],
-    "reuseCount": 2,
-    "lastUsed": "2026-10-12"
+    "pagesUsing": [
+      "https://www.pfizerforall.com/",
+      "https://www.pfizerforall.com/cancer",
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/find-care/talk-to-a-doctor",
+      "https://www.pfizerforall.com/find-care/biomarker-testing/",
+      "https://www.pfizerforall.com/find-care/prepare-for-care",
+      "https://www.pfizerforall.com/savings-support/prescription-assistance"
+    ],
+    "reuseCount": 13,
+    "lastUsed": "2026-10-13T16:26:47.785Z"
   },
   "options": [],
   "memberVariantIds": []

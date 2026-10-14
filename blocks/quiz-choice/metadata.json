@@ -1,0 +1,23 @@
+{
+  "variantName": "quiz-choice",
+  "baseBlock": "quiz",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue",
+    "density": "moderate",
+    "purpose": "choose-a-concern-reveal",
+    "imagePattern": "noimg",
+    "structure": "options + reveal answer",
+    "columns": 2
+  },
+  "contentPattern": "Optional first row, 1 cell: question heading (h2) and intro text. Then 1 row per option, 2 cells: option label (plain text) | answer content (paragraphs, links, CTA link). Optional trailing row(s), 1 cell: content appended below every answer. Choosing an option (toggle button, aria-pressed) reveals its answer in an aria-live region; nothing is fetched. The question heading may instead be default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

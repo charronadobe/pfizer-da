@@ -43,6 +43,14 @@ export async function loadFragment(path) {
     } else {
       console.log('Found localized fragment for path: %s', localizedPath);
     }
+    if (!resp.ok && !cleanPath.startsWith('/content/')) {
+      // local previews serve imported content under /content (same as header/footer)
+      const localResp = await fetch(`/content${cleanPath}.plain.html`);
+      if (localResp.ok) {
+        resp = localResp;
+        resolvedPath = `/content${cleanPath}`;
+      }
+    }
 
     if (resp.ok) {
       const main = document.createElement('main');

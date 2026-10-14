@@ -1,0 +1,23 @@
+{
+  "variantName": "cards-carousel",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue tiles",
+    "density": "moderate",
+    "purpose": "condition-link-carousel",
+    "imagePattern": "icon",
+    "structure": "icon + heading + text + CTA"
+  },
+  "contentPattern": "1 row per card, 2 cells: icon/image | h3, paragraph, CTA link. Section intro (eyebrow, h2, text) is default content above the block. Previous/next button labels come from the placeholders sheet (previousSlide, nextSlide).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/cancer",
+      "https://www.pfizerforall.com/find-care/cancer-screening/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

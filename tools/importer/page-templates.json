@@ -10,7 +10,6 @@
       ],
       "representativeUrl": "https://www.pfizerforall.com/",
       "description": "Pfizer For All homepage: hero slideshow with brand intro, action cards, condition carousel, two media/text splits, and a Health Answers banner",
-      "urlPattern": "/",
       "blocks": [
         {
           "name": "carousel-hero",
@@ -124,6 +123,805 @@
             "columns-banner"
           ],
           "defaultContent": []
+        }
+      ],
+      "urlPattern": "/"
+    },
+    {
+      "name": "content-page",
+      "urls": [
+        "https://www.pfizerforall.com/cancer",
+        "https://www.pfizerforall.com/find-care/biomarker-testing/",
+        "https://www.pfizerforall.com/find-care/prepare-for-care",
+        "https://www.pfizerforall.com/find-care/talk-to-a-doctor",
+        "https://www.pfizerforall.com/savings-support/self-pay",
+        "https://www.pfizerforall.com/vaccines/"
+      ],
+      "representativeUrl": "https://www.pfizerforall.com/cancer",
+      "description": "Section landing/content pages (Cancer, Vaccines, Find Care, Self-Pay)",
+      "blocks": [
+        {
+          "name": "hero-page",
+          "instances": [
+            "#main > div.section.hero-container .hero.block"
+          ]
+        },
+        {
+          "name": "cards-carousel",
+          "instances": [
+            "#main > div.section.cards-carousel-container .cards-carousel.block:not(.dynamic-article)"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            "#main > div.section.cards-carousel-container .cards-carousel.block.dynamic-article"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            "#main > div.section.image-1-1-container .image-1-1.block",
+            "#main > div.section.image-1-2-container .image-1-2.block"
+          ]
+        },
+        {
+          "name": "hero-article",
+          "instances": [
+            "#main > div.section.featured-article-container .featured-article.block"
+          ]
+        },
+        {
+          "name": "banner-cta",
+          "instances": [
+            "#main > div.section.banner-container .banner.block",
+            "#main > div.section.banner-vaxassist-container .banner-vaxassist.block"
+          ]
+        },
+        {
+          "name": "cards-nav",
+          "instances": [
+            "#main > div.section.card-grid-container .card-grid.block.navigation",
+            "#main > div.section.card-grid-container .card-grid.block.core-title-icon"
+          ]
+        },
+        {
+          "name": "cards-action",
+          "instances": [
+            "#main > div.section.card-grid-container .card-grid.block:not(.navigation):not(.core-title-icon):not(.dynamic-article)"
+          ]
+        },
+        {
+          "name": "quiz-choice",
+          "instances": [
+            "#main > div.section.question-1-6-container .question-1-6.block"
+          ]
+        },
+        {
+          "name": "columns-article",
+          "instances": [
+            "#main > div.section.image-1-5-container .image-1-5.block"
+          ]
+        },
+        {
+          "name": "quiz-truefalse",
+          "instances": [
+            "#main > div.section.true-false-container .true-false.block",
+            "#main > div.section.question-1-2-container .question-1-2.block"
+          ]
+        },
+        {
+          "name": "form-signup",
+          "instances": [
+            "#main > div.section.form-container .form.block"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            "#main > div.section.accordion-basic-container .accordion-basic.block"
+          ]
+        },
+        {
+          "name": "search-prompt",
+          "instances": [
+            "#main > div.section.search-block-text-2-1-container .search-block-text-2-1-search"
+          ]
+        },
+        {
+          "name": "quiz-entry",
+          "instances": [
+            "#main > div.section.entry-quiz-container .entry-quiz.block"
+          ]
+        },
+        {
+          "name": "cards-fact",
+          "instances": [
+            "#main > div.section.vertical-card-container .vertical-card.block"
+          ]
+        },
+        {
+          "name": "quote-photo",
+          "instances": [
+            "#main > div.section.quote-container .quote.block"
+          ]
+        },
+        {
+          "name": "cards-icon",
+          "instances": [
+            "#main > div.section.icon-list-container .icon-list.block"
+          ]
+        }
+      ],
+      "urlPattern": "/*",
+      "sections": [
+        {
+          "id": "cp-hero",
+          "name": "hero",
+          "selector": [
+            "#main > div.section.hero-container"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-cards-carousel",
+          "name": "cards-carousel",
+          "selector": [
+            "#main > div.section.cards-carousel-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-carousel",
+            "cards-article"
+          ],
+          "defaultContent": [
+            ".cards-carousel-content-section"
+          ]
+        },
+        {
+          "id": "cp-image-1-1-light",
+          "name": "image-text (light blue)",
+          "selector": [
+            "#main > div.section.image-1-1-container:has(.image-1-1.core-lighter)"
+          ],
+          "style": "light-blue",
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-image-1-1",
+          "name": "image-text",
+          "selector": [
+            "#main > div.section.image-1-1-container:not(:has(.image-1-1.core-lighter))"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-image-1-2",
+          "name": "image-text (1:2)",
+          "selector": [
+            "#main > div.section.image-1-2-container"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-featured-article",
+          "name": "featured article",
+          "selector": [
+            "#main > div.section.featured-article-container"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-banner",
+          "name": "cta banner",
+          "selector": [
+            "#main > div.section.banner-container",
+            "#main > div.section.banner-vaxassist-container"
+          ],
+          "style": null,
+          "blocks": [
+            "banner-cta"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-card-grid-light",
+          "name": "card grid (light blue)",
+          "selector": [
+            "#main > div.section.card-grid-container:has(.card-grid.core-lighter)"
+          ],
+          "style": "light-blue",
+          "blocks": [
+            "cards-nav"
+          ],
+          "defaultContent": [
+            ".card-grid-content-container"
+          ]
+        },
+        {
+          "id": "cp-card-grid",
+          "name": "card grid",
+          "selector": [
+            "#main > div.section.card-grid-container:not(:has(.card-grid.core-lighter))"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-nav",
+            "cards-action"
+          ],
+          "defaultContent": [
+            ".card-grid-content-container"
+          ]
+        },
+        {
+          "id": "cp-question-choice",
+          "name": "choice quiz",
+          "selector": [
+            "#main > div.section.question-1-6-container"
+          ],
+          "style": "light-blue",
+          "blocks": [
+            "quiz-choice"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-image-1-5",
+          "name": "featured article split",
+          "selector": [
+            "#main > div.section.image-1-5-container"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-true-false",
+          "name": "true/false quiz (inset card)",
+          "selector": [
+            "#main > div.section.true-false-container"
+          ],
+          "style": null,
+          "blocks": [
+            "quiz-truefalse"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-true-false-band",
+          "name": "true/false quiz (full-width band)",
+          "selector": [
+            "#main > div.section.question-1-2-container"
+          ],
+          "style": "light-blue",
+          "blocks": [
+            "quiz-truefalse"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-form",
+          "name": "sign-up form",
+          "selector": [
+            "#main > div.section.form-container"
+          ],
+          "style": null,
+          "blocks": [
+            "form-signup"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-accordion",
+          "name": "faq",
+          "selector": [
+            "#main > div.section.accordion-basic-container"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": [
+            ".accordion-basic-content-section"
+          ]
+        },
+        {
+          "id": "cp-search",
+          "name": "search prompt",
+          "selector": [
+            "#main > div.section.search-block-text-2-1-container"
+          ],
+          "style": null,
+          "blocks": [
+            "search-prompt"
+          ],
+          "defaultContent": [
+            ".search-block-text-2-1-type-stack"
+          ]
+        },
+        {
+          "id": "cp-entry-quiz",
+          "name": "entry quiz",
+          "selector": [
+            "#main > div.section.entry-quiz-container"
+          ],
+          "style": null,
+          "blocks": [
+            "quiz-entry"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-vertical-card",
+          "name": "fact cards",
+          "selector": [
+            "#main > div.section.vertical-card-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-fact"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-quote",
+          "name": "quote",
+          "selector": [
+            "#main > div.section.quote-container"
+          ],
+          "style": null,
+          "blocks": [
+            "quote-photo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-video",
+          "name": "video",
+          "selector": [
+            "#main > div.section.video-1-1-container"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".video-1-1"
+          ]
+        },
+        {
+          "id": "cp-banner-2-1-quote",
+          "name": "quote (no photo)",
+          "selector": [
+            "#main > div.section.banner-2-1-container:has(.banner-2-1.quote-heading)"
+          ],
+          "style": "quote",
+          "blocks": [],
+          "defaultContent": [
+            ".banner-2-1"
+          ]
+        },
+        {
+          "id": "cp-banner-2-1",
+          "name": "inline cta",
+          "selector": [
+            "#main > div.section.banner-2-1-container:not(:has(.banner-2-1.quote-heading))"
+          ],
+          "style": "cta-inline",
+          "blocks": [],
+          "defaultContent": [
+            ".banner-2-1"
+          ]
+        },
+        {
+          "id": "cp-icon-list",
+          "name": "icon list",
+          "selector": [
+            "#main > div.section.icon-list-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-icon"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cp-rx-search",
+          "name": "rx savings search",
+          "selector": [
+            "#main > div.section.rx-search-results-container"
+          ],
+          "style": "blue",
+          "blocks": [],
+          "defaultContent": [
+            ".rx-search-results"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "education",
+      "urls": [
+        "https://www.pfizerforall.com/education/"
+      ],
+      "representativeUrl": "https://www.pfizerforall.com/education/",
+      "description": "Health Information Center article hub",
+      "blocks": [
+        {
+          "name": "hero-page",
+          "instances": [
+            "#main > div.section.hero-container .hero.block"
+          ]
+        },
+        {
+          "name": "carousel-condition",
+          "instances": [
+            "#main > div.section.content-cards-carousel-container .content-cards-carousel.block"
+          ]
+        },
+        {
+          "name": "cards-feed",
+          "instances": [
+            "#main > div.section.card-grid-container .card-grid.block.dynamic-article"
+          ]
+        },
+        {
+          "name": "cards-action",
+          "instances": [
+            "#main > div.section.card-grid-container .card-grid.block:not(.dynamic-article)"
+          ]
+        },
+        {
+          "name": "banner-cta",
+          "instances": [
+            "#main > div.section.banner-container .banner.block"
+          ]
+        }
+      ],
+      "urlPattern": "/*",
+      "sections": [
+        {
+          "id": "ed-hero",
+          "name": "hero",
+          "selector": [
+            "#main > div.section.hero-container"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "ed-carousel",
+          "name": "latest articles carousel",
+          "selector": [
+            "#main > div.section.content-cards-carousel-container"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-condition"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "ed-feed",
+          "name": "explore all",
+          "selector": [
+            "#main > div.section.card-grid-container:has(.card-grid.dynamic-article)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-feed"
+          ],
+          "defaultContent": [
+            ".card-grid-content-container"
+          ]
+        },
+        {
+          "id": "ed-connect",
+          "name": "connect to care",
+          "selector": [
+            "#main > div.section.card-grid-container:not(:has(.card-grid.dynamic-article))"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-action"
+          ],
+          "defaultContent": [
+            ".card-grid-content-container"
+          ]
+        },
+        {
+          "id": "ed-banner",
+          "name": "cta banner",
+          "selector": [
+            "#main > div.section.banner-container"
+          ],
+          "style": null,
+          "blocks": [
+            "banner-cta"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "cancer-screening",
+      "urls": [
+        "https://www.pfizerforall.com/find-care/cancer-screening/"
+      ],
+      "representativeUrl": "https://www.pfizerforall.com/find-care/cancer-screening/",
+      "description": "Cancer screening landing page",
+      "blocks": [
+        {
+          "name": "hero-quiz",
+          "instances": [
+            "#main > div.section.oncology-quiz-card-container .oncology-quiz-card.block"
+          ]
+        },
+        {
+          "name": "cards-icon",
+          "instances": [
+            "#main > div.section.icon-list-container .icon-list.block"
+          ]
+        },
+        {
+          "name": "columns-callout",
+          "instances": [
+            "#main > div.section.content-card-container .content-card.block"
+          ]
+        },
+        {
+          "name": "cards-carousel",
+          "instances": [
+            "#main > div.section.cards-carousel-container .cards-carousel.block"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            "#main > div.section.accordion-card-1-1-container .accordion-card-1-1.block"
+          ]
+        }
+      ],
+      "urlPattern": "/find-care/*",
+      "sections": [
+        {
+          "id": "cs-hero",
+          "name": "quiz hero",
+          "selector": [
+            "#main > div.section.oncology-quiz-card-container"
+          ],
+          "style": "core",
+          "blocks": [
+            "hero-quiz"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cs-icon-list",
+          "name": "why screening matters",
+          "selector": [
+            "#main > div.section.icon-list-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-icon"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cs-video",
+          "name": "video",
+          "selector": [
+            "#main > div.section.video-1-1-container"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".video-1-1"
+          ]
+        },
+        {
+          "id": "cs-callout",
+          "name": "proudly supporting",
+          "selector": [
+            "#main > div.section.content-card-container"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-callout"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cs-screenings",
+          "name": "what screenings are there",
+          "selector": [
+            "#main > div.section.cards-carousel-container"
+          ],
+          "style": "light-blue",
+          "blocks": [
+            "cards-carousel"
+          ],
+          "defaultContent": [
+            ".cards-carousel-content-section"
+          ]
+        },
+        {
+          "id": "cs-popups",
+          "name": "schedule popups (exported as fragments)",
+          "selector": [
+            "#main > div.section.popup-modal-container"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "cs-cost",
+          "name": "what does it cost",
+          "selector": [
+            "#main > div.section.accordion-card-1-1-container"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "cs-disclaimer",
+          "name": "disclaimer",
+          "selector": [
+            "#main > div.section.rich-text-container"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".rich-text"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "savings-support",
+      "urls": [
+        "https://www.pfizerforall.com/savings-support/prescription-assistance"
+      ],
+      "representativeUrl": "https://www.pfizerforall.com/savings-support/prescription-assistance",
+      "description": "Financial assistance landing page",
+      "blocks": [
+        {
+          "name": "hero-page",
+          "instances": [
+            "#main > div.section.hero-container .hero.block"
+          ]
+        },
+        {
+          "name": "cards-fact",
+          "instances": [
+            "#main > div.section.vertical-card-container .vertical-card.block"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            "#main > div.section.image-1-2-container .image-1-2.block"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            "#main > div.section.accordion-basic-container .accordion-basic.block"
+          ]
+        },
+        {
+          "name": "search-prompt",
+          "instances": [
+            "#main > div.section.search-block-text-2-1-container .search-block-text-2-1-search"
+          ]
+        }
+      ],
+      "urlPattern": "/savings-support/*",
+      "sections": [
+        {
+          "id": "sv-hero",
+          "name": "hero",
+          "selector": [
+            "#main > div.section.hero-container"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sv-rx-search",
+          "name": "rx savings search",
+          "selector": [
+            "#main > div.section.rx-search-results-container"
+          ],
+          "style": "blue",
+          "blocks": [],
+          "defaultContent": [
+            ".rx-search-results"
+          ]
+        },
+        {
+          "id": "sv-options",
+          "name": "find the right option",
+          "selector": [
+            "#main > div.section.vertical-card-container"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-fact"
+          ],
+          "defaultContent": [
+            ".vertical-card-content-container"
+          ]
+        },
+        {
+          "id": "sv-prior-auth",
+          "name": "prior authorization",
+          "selector": [
+            "#main > div.section.image-1-2-container"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "sv-faq",
+          "name": "faq",
+          "selector": [
+            "#main > div.section.accordion-basic-container"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": [
+            ".accordion-basic-content-section"
+          ]
+        },
+        {
+          "id": "sv-search",
+          "name": "search prompt",
+          "selector": [
+            "#main > div.section.search-block-text-2-1-container"
+          ],
+          "style": null,
+          "blocks": [
+            "search-prompt"
+          ],
+          "defaultContent": [
+            ".search-block-text-2-1-type-stack"
+          ]
         }
       ]
     }

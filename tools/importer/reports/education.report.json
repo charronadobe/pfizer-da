@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.pfizerforall.com/education/",
+  "path": "education",
+  "timestamp": "2026-10-13T18:41:49.919Z",
+  "title": "Knowledge Hub | PfizerForAll™",
+  "template": "education",
+  "blocks": [
+    "hero-page",
+    "carousel-condition",
+    "cards-feed",
+    "cards-action",
+    "banner-cta"
+  ]
+}

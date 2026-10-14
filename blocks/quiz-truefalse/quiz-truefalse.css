@@ -1,0 +1,214 @@
+/* default: an inset light-blue card on the page surface; inside a light-blue section the
+   section is the band and the card chrome is dropped (see .section.light-blue rules) */
+.quiz-truefalse {
+  box-sizing: border-box;
+  padding: var(--space-2xl) var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+  color: var(--pfa-gray-90);
+}
+
+/* statement: eyebrow, heading, optional source line */
+.quiz-truefalse .quiz-truefalse-question > :first-child {
+  margin-top: 0;
+}
+
+.quiz-truefalse .quiz-truefalse-eyebrow {
+  margin: 0 0 var(--space-m);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+.quiz-truefalse .quiz-truefalse-question h2 {
+  margin: 0;
+}
+
+.quiz-truefalse .quiz-truefalse-source {
+  margin: var(--space-l) 0 0;
+  color: #525252;
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+/* answers: two tall outlined tiles; the chosen one grows and fills */
+.quiz-truefalse .quiz-truefalse-answers {
+  display: flex;
+  gap: var(--space-m);
+  height: 142px;
+  max-width: 628px;
+  margin: var(--space-xl) auto 0;
+}
+
+.quiz-truefalse .quiz-truefalse-answer {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  justify-content: center;
+  min-width: 1px;
+  height: 100%;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--pfa-core);
+  border-radius: var(--radius-m);
+  background-color: transparent;
+  color: var(--pfa-core);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.quiz-truefalse .quiz-truefalse-answer:hover {
+  padding: 19px;
+  border: 2px solid var(--pfa-core-dark);
+  color: var(--pfa-core-dark);
+}
+
+.quiz-truefalse .quiz-truefalse-answer:focus-visible {
+  outline: 1px solid var(--pfa-core);
+  outline-offset: 2px;
+}
+
+.quiz-truefalse.quiz-truefalse-answered .quiz-truefalse-answer {
+  min-width: 107px;
+}
+
+.quiz-truefalse .quiz-truefalse-answer[aria-pressed='true'] {
+  flex: 8 0 0%;
+  padding: 20px;
+  border: 1px solid var(--pfa-core);
+  background-color: var(--pfa-core);
+  color: var(--pfa-white);
+  cursor: default;
+}
+
+/* result: white card with correctness icon, feedback, explanation and CTA */
+.quiz-truefalse .quiz-truefalse-result {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 628px;
+  margin: var(--space-xl) auto 0;
+  padding: 28px var(--space-l) var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-white);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  text-align: start;
+}
+
+.quiz-truefalse .quiz-truefalse-result[hidden],
+.quiz-truefalse .quiz-truefalse-feedback[hidden] {
+  display: none;
+}
+
+.quiz-truefalse .quiz-truefalse-result > div {
+  align-self: stretch;
+}
+
+/* decorative correctness icon (the feedback heading carries the meaning) */
+.quiz-truefalse .quiz-truefalse-result.is-correct::before,
+.quiz-truefalse .quiz-truefalse-result.is-incorrect::before {
+  content: '';
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--space-l);
+  background: url('correct-answer.svg') center / contain no-repeat;
+}
+
+.quiz-truefalse .quiz-truefalse-result.is-incorrect::before {
+  background-image: url('wrong-answer.svg');
+}
+
+.quiz-truefalse .quiz-truefalse-result h3 {
+  margin: 0 0 var(--space-m);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xl);
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.quiz-truefalse .quiz-truefalse-result p {
+  margin: 0;
+}
+
+.quiz-truefalse .quiz-truefalse-result p + p {
+  margin-top: var(--space-m);
+}
+
+.quiz-truefalse .quiz-truefalse-feedback > :last-child {
+  margin-bottom: 0;
+}
+
+.quiz-truefalse .quiz-truefalse-explanation {
+  margin-top: var(--space-m);
+}
+
+.quiz-truefalse .quiz-truefalse-result p.button-container {
+  margin-top: var(--space-l);
+}
+
+main .quiz-truefalse .quiz-truefalse-result a.button:any-link {
+  width: 100%;
+}
+
+/* decorative external-link glyph; the link text stays the accessible name */
+main .quiz-truefalse a.button.quiz-truefalse-external:any-link::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url('../../icons/external-link.svg') center / contain no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .quiz-truefalse .quiz-truefalse-answer {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .quiz-truefalse .quiz-truefalse-result {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(var(--space-m));
+    }
+  }
+}
+
+@media (width >= 900px) {
+  .quiz-truefalse {
+    padding: 80px;
+  }
+
+  .quiz-truefalse .quiz-truefalse-question {
+    text-align: center;
+  }
+
+  .quiz-truefalse .quiz-truefalse-result {
+    align-items: center;
+    text-align: center;
+  }
+
+  .quiz-truefalse .quiz-truefalse-result.is-correct::before,
+  .quiz-truefalse .quiz-truefalse-result.is-incorrect::before {
+    margin-bottom: 40px;
+  }
+
+  .quiz-truefalse .quiz-truefalse-result h3 {
+    font-size: var(--body-font-size-xxxl);
+  }
+
+  .quiz-truefalse .quiz-truefalse-result p.button-container {
+    margin-top: 40px;
+  }
+
+  main .quiz-truefalse .quiz-truefalse-result a.button:any-link {
+    width: auto;
+  }
+}

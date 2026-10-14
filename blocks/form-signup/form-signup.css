@@ -1,0 +1,366 @@
+/* form-signup – mobile first: stacked card; intro | form side by side from 900px */
+
+.form-signup {
+  --form-signup-text: var(--pfa-white);
+  --form-signup-error: #c00727;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  box-sizing: border-box;
+  padding: var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core);
+  color: var(--form-signup-text);
+}
+
+.form-signup :is(h1, h2, h3, h4, h5, h6, p) {
+  color: inherit;
+}
+
+.form-signup a:any-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-signup a:hover {
+  text-decoration: none;
+}
+
+/* intro: optional icon, heading, text */
+.form-signup .form-signup-intro {
+  text-align: start;
+}
+
+.form-signup .form-signup-intro > * {
+  margin: 0;
+}
+
+.form-signup .form-signup-intro :is(h1, h2, h3) {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 400;
+  line-height: var(--heading-line-height-xl);
+  text-align: center;
+}
+
+.form-signup .form-signup-intro > * + p {
+  margin-top: var(--space-m);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.form-signup .form-signup-intro-icon {
+  text-align: center;
+}
+
+.form-signup .form-signup-intro-icon :is(.icon, img) {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: var(--space-m) auto;
+}
+
+/* form */
+.form-signup .form-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin: 0;
+}
+
+.form-signup .form-signup-form[hidden],
+.form-signup .form-signup-success[hidden],
+.form-signup .form-signup-error[hidden],
+.form-signup .form-signup-clear[hidden] {
+  display: none;
+}
+
+.form-signup .form-signup-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.form-signup .form-signup-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 64px;
+  padding: var(--space-s) var(--space-m);
+  border: 1px solid var(--form-signup-text);
+  border-radius: var(--radius-m);
+}
+
+/* focused or filled: 2px border (inset shadow avoids a layout shift) */
+.form-signup .form-signup-box:focus-within,
+.form-signup .form-signup-field.has-value .form-signup-box {
+  box-shadow: inset 0 0 0 1px var(--form-signup-text);
+}
+
+/* floating label */
+.form-signup .form-signup-label {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  right: 52px;
+  overflow: hidden;
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: top 0.2s, font-size 0.2s, line-height 0.2s, transform 0.2s;
+}
+
+.form-signup .form-signup-field.is-filled .form-signup-label {
+  top: 7px;
+  font-size: 11px;
+  line-height: 16px;
+  transform: none;
+}
+
+.form-signup .form-signup-input {
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  caret-color: currentcolor;
+  font: inherit;
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  outline: none;
+}
+
+/* the box draws the focus state; beat the global lazy-styles focus ring */
+.form-signup .form-signup-box .form-signup-input:focus-visible {
+  outline: none;
+}
+
+.form-signup .form-signup-field.is-filled .form-signup-input {
+  margin-top: var(--space-xs);
+}
+
+.form-signup .form-signup-field.has-value .form-signup-input,
+.form-signup .form-signup-field.is-error .form-signup-input {
+  padding-right: 36px;
+}
+
+.form-signup .form-signup-icon {
+  display: none;
+}
+
+/* error state */
+.form-signup .form-signup-field.is-error .form-signup-box {
+  border-color: var(--form-signup-error);
+  box-shadow: none;
+}
+
+.form-signup .form-signup-field.is-error .form-signup-box:focus-within {
+  outline: 1px solid var(--form-signup-error);
+  outline-offset: 2px;
+}
+
+.form-signup .form-signup-field.is-error .form-signup-icon {
+  position: absolute;
+  top: 50%;
+  right: var(--space-m);
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--form-signup-text);
+  mask: url('../../icons/input-error.svg') center / contain no-repeat;
+  transform: translateY(-50%);
+}
+
+/* clear button replaces the error icon while the field has a value */
+.form-signup .form-signup-field.has-value .form-signup-icon {
+  display: none;
+}
+
+.form-signup .form-signup-clear {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  display: block;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 0.3s;
+}
+
+.form-signup .form-signup-clear::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentcolor;
+  mask: url('../../icons/input-clear.svg') center / contain no-repeat;
+}
+
+.form-signup .form-signup-clear:hover {
+  opacity: 0.8;
+}
+
+.form-signup .form-signup-box .form-signup-clear:focus-visible {
+  outline: 2px solid var(--form-signup-text);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-signup .form-signup-error {
+  margin: var(--space-xs) 0 0;
+  padding: 0 var(--space-m);
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+/* submit: full width on mobile, auto from 900px */
+.form-signup .form-signup-submit {
+  box-sizing: border-box;
+  height: 56px;
+  margin: 0;
+  padding: var(--space-m) 28px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-90);
+  font: inherit;
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.form-signup .form-signup-submit:hover {
+  box-shadow: inset 0 0 0 100px var(--pfa-hover-overlay);
+}
+
+.form-signup .form-signup-submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.form-signup .form-signup-form .form-signup-submit:focus-visible {
+  outline: 2px solid var(--form-signup-text);
+  outline-offset: 2px;
+}
+
+.form-signup .form-signup-disclaimer {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.form-signup .form-signup-disclaimer a:any-link:focus-visible {
+  outline: 1px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.form-signup .form-signup-disclaimer + .form-signup-disclaimer {
+  margin-top: calc(var(--space-s) - var(--space-xl));
+}
+
+/* success: replaces the whole card content, centered */
+.form-signup:has(.form-signup-success:not([hidden])) .form-signup-intro {
+  display: none;
+}
+
+.form-signup .form-signup-success {
+  text-align: center;
+}
+
+.form-signup .form-signup-success:focus {
+  outline: none;
+}
+
+.form-signup .form-signup-success > * {
+  margin: 0 0 var(--space-m);
+}
+
+.form-signup .form-signup-success > :last-child {
+  margin-bottom: 0;
+}
+
+.form-signup .form-signup-success > p:has(picture, img, .icon) {
+  margin: 0;
+}
+
+.form-signup .form-signup-success :is(img, .icon) {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-l);
+}
+
+.form-signup .form-signup-success :is(h2, h3) {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  line-height: var(--heading-line-height-l);
+}
+
+@media (width >= 900px) {
+  .form-signup {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3xl);
+    padding: 40px;
+  }
+
+  .form-signup .form-signup-intro {
+    flex: 1;
+    max-width: 628px;
+  }
+
+  .form-signup .form-signup-intro :is(h1, h2, h3) {
+    text-align: start;
+  }
+
+  .form-signup .form-signup-intro-icon {
+    text-align: start;
+  }
+
+  .form-signup .form-signup-intro-icon :is(.icon, img) {
+    margin: var(--space-l) 0 40px;
+  }
+
+  .form-signup .form-signup-panel {
+    flex: 1;
+    min-width: 0;
+    max-width: 519px;
+  }
+
+  .form-signup:has(.form-signup-success:not([hidden])) .form-signup-panel {
+    max-width: 100%;
+  }
+
+  .form-signup .form-signup-submit {
+    align-self: flex-start;
+    min-width: 125px;
+  }
+
+  .form-signup .form-signup-success :is(img, .icon) {
+    margin-bottom: var(--space-xl);
+  }
+
+  .form-signup .form-signup-success :is(h2, h3) {
+    font-size: var(--heading-font-size-xl);
+    line-height: var(--heading-line-height-xl);
+  }
+}

@@ -23,6 +23,9 @@ function setActive(block, index) {
     else btn.removeAttribute('aria-current');
   });
 
+  // the articles option loops, so both arrows always stay visible
+  if (block.classList.contains('articles')) return;
+
   // prev is hidden on the first slide and next on the last: keep keyboard focus on a visible arrow
   const prev = block.querySelector('.carousel-condition-prev');
   const next = block.querySelector('.carousel-condition-next');
@@ -98,6 +101,80 @@ function createSlide(row, idx, id, total, labels) {
   return slide;
 }
 
+/**
+ * `articles` option: read the optional config rows (source, limit, paths).
+ * @param {Element[]} rows
+ */
+function readArticlesConfig(rows, { readConfigRow, toPositiveInt }) {
+  const config = { source: '', limit: 3, paths: [] };
+  rows.forEach((row) => {
+    const entry = readConfigRow(row);
+    if (!entry) return;
+    if (entry.key === 'source') config.source = entry.href || entry.values[0] || '';
+    if (entry.key === 'limit') config.limit = toPositiveInt(entry.values, config.limit);
+    if (entry.key === 'paths') config.paths = entry.values;
+  });
+  return config;
+}
+
+/** `articles` option: one slide per article (photo + overlay card). */
+function createArticleSlide(article, idx, id, total, labels, { createArticlePicture, getArticleBadges }) {
+  const slide = createTag('li', {
+    class: 'carousel-condition-slide',
+    id: `carousel-condition-${id}-slide-${idx}`,
+    'aria-roledescription': labels.slide,
+    'aria-label': `${idx + 1} ${labels.of} ${total}`,
+  });
+  slide.dataset.slideIndex = idx;
+
+  const picture = createArticlePicture(article.image, article.imageAlt || '', idx === 0, [
+    { media: '(min-width: 900px)', width: '2000' },
+    { width: '900' },
+  ]);
+  if (picture) slide.append(createTag('div', { class: 'carousel-condition-slide-media' }, picture));
+
+  const card = createTag('div', { class: 'carousel-condition-card' });
+  const badges = getArticleBadges(article, labels.ph);
+  if (badges.length) {
+    card.append(createTag('ul', { class: 'carousel-condition-badges' }, badges.map((b) => createTag('li', { class: `is-${b.type}` }, b.label))));
+  }
+  const headingId = `carousel-condition-${id}-title-${idx}`;
+  card.append(createTag('h3', { id: headingId }, article.title));
+  if (article.readingTime) {
+    card.append(createTag('p', { class: 'carousel-condition-label' }, article.readingTime));
+  }
+  const cta = createTag('a', {
+    href: article.path,
+    class: 'button primary button-sm',
+    'aria-describedby': headingId,
+  }, labels.readNow);
+  card.append(createTag('p', { class: 'button-container' }, cta));
+
+  slide.append(createTag('div', { class: 'carousel-condition-slide-content' }, card));
+  return slide;
+}
+
+async function buildArticleSlides(rows, id, labels) {
+  // loaded on demand so authored (homepage) carousels do not pay for it
+  const index = await import('../../scripts/article-index.js');
+  const config = readArticlesConfig(rows, index);
+  let articles = [];
+  try {
+    const all = await index.fetchArticles(config.source);
+    articles = index.selectArticles(all, config.paths).slice(0, config.limit);
+  } catch {
+    articles = [];
+  }
+  return articles.map((article, idx) => createArticleSlide(
+    article,
+    idx,
+    id,
+    articles.length,
+    labels,
+    index,
+  ));
+}
+
 function buildControls(block, total, labels) {
   const nav = createTag('div', { class: 'carousel-condition-controls', role: 'group', 'aria-label': labels.controls });
   const prev = createTag('button', { type: 'button', class: 'carousel-condition-prev', 'aria-label': labels.previous });
@@ -133,6 +210,8 @@ export default async function decorate(block) {
     previous: ph.previousSlide || 'Previous Slide',
     next: ph.nextSlide || 'Next Slide',
     showSlide: ph.showSlide || 'Show Slide',
+    readNow: ph.readNow || 'Read now',
+    ph,
   };
 
   block.id = `carousel-condition-${id}`;
@@ -140,18 +219,30 @@ export default async function decorate(block) {
   block.setAttribute('aria-roledescription', labels.region);
 
   const slidesList = createTag('ul', { class: 'carousel-condition-slides' });
-  rows.forEach((row, idx) => {
-    slidesList.append(createSlide(row, idx, id, rows.length, labels));
-    row.remove();
-  });
+  const isArticles = block.classList.contains('articles');
+  if (isArticles) {
+    slidesList.append(...await buildArticleSlides(rows, id, labels));
+    rows.forEach((row) => row.remove());
+  } else {
+    rows.forEach((row, idx) => {
+      slidesList.append(createSlide(row, idx, id, rows.length, labels));
+      row.remove();
+    });
+  }
+  const total = slidesList.children.length;
 
   const container = createTag('div', { class: 'carousel-condition-slides-container' }, slidesList);
   block.replaceChildren(container);
+  // no articles (empty / failed data source): hide the empty slideshow
+  if (isArticles && !total) {
+    block.closest('.carousel-condition-wrapper')?.setAttribute('hidden', '');
+    return;
+  }
   setActive(block, 0);
 
-  if (rows.length < 2) return;
+  if (total < 2) return;
 
-  container.append(buildControls(block, rows.length, labels));
+  container.append(buildControls(block, total, labels));
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

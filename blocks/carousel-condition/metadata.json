@@ -8,14 +8,23 @@
     "purpose": "condition-education-slideshow",
     "imagePattern": "full-bleed-photo",
     "structure": "background image + heading + overlay card(heading + text + CTA)",
-    "slides": 2
+    "slides": 2,
+    "dataSource": "authored slides (default) or article index (articles option)"
   },
-  "contentPattern": "Each row = slide. Cell 1: photo. Cell 2: h2 headline, h3 card heading, paragraph, primary CTA link.",
+  "contentPattern": "Default (authored slides): each row = slide. Cell 1: photo. Cell 2: h2 headline, h3 card heading, paragraph, primary CTA link. Option articles (Carousel Condition (articles)): no authored slides; optional 2-cell config rows: source | JSON URL of the article data (default /query-index.json), limit | number of slides (default 3), paths | bulleted path globs (* = one segment, ** = any depth; omit = all rows with an id). Slides = newest articles (publishedDate desc, then priority High>Medium>Low, then title): full-bleed photo + white card with up to 2 badges (Recommended or Updated-within-45-days, then indication badge, then content badge), h3 title, reading time, Read now CTA. Labels from placeholders (readNow, recommended, updated, carousel labels).",
   "usage": {
-    "pagesUsing": ["https://www.pfizerforall.com/"],
-    "reuseCount": 1,
-    "lastUsed": "2026-10-12"
+    "pagesUsing": [
+      "https://www.pfizerforall.com/",
+      "https://www.pfizerforall.com/education/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-13"
   },
-  "options": [],
+  "options": [
+    {
+      "class": "articles",
+      "label": "Articles (slides built from an article index)"
+    }
+  ],
   "memberVariantIds": []
 }

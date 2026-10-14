@@ -1,0 +1,22 @@
+{
+  "variantName": "hero-article",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "featured-article-promo",
+    "imagePattern": "full-bleed-background",
+    "structure": "background image + tags + heading + text + label + CTA"
+  },
+  "contentPattern": "1 row, 1 cell: image, tags paragraph (comma-separated topics, e.g. 'Vaccines, Considerations', or a bulleted list) above the heading, h3, description paragraph, read-time paragraph, CTA link.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/cancer"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

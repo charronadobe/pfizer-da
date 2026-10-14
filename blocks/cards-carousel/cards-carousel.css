@@ -1,0 +1,259 @@
+/* the track bleeds to the viewport edges; clip the overflow at the section */
+main .section.cards-carousel-container {
+  overflow-x: clip;
+}
+
+.cards-carousel {
+  position: relative;
+}
+
+/* scroll track: full-bleed so tiles slide off both viewport edges, while the
+   first / snapped tile lines up with the content column (offsets set by JS) */
+.cards-carousel .cards-carousel-track {
+  --bleed-start: var(--cards-carousel-bleed-start, 0px);
+  --bleed-end: var(--cards-carousel-bleed-end, 0px);
+
+  position: relative;
+  display: flex;
+  gap: var(--space-m);
+  margin: 0 calc(-1 * var(--bleed-end)) 0 calc(-1 * var(--bleed-start));
+  padding: 0 var(--bleed-end) 0 var(--bleed-start);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--bleed-start) var(--bleed-end);
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.cards-carousel .cards-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.cards-carousel .cards-carousel-card {
+  position: relative;
+  display: flex;
+  flex: 0 0 calc(100% - var(--space-s));
+  flex-direction: column;
+  gap: 40px;
+  box-sizing: border-box;
+  padding: var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.cards-carousel .cards-carousel-icon {
+  align-self: flex-start;
+  color: var(--color-text);
+}
+
+/* SVG icon drawn as a mask in the current colour */
+.cards-carousel .cards-carousel-glyph {
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-color: currentcolor;
+  mask: var(--cards-carousel-glyph) center / contain no-repeat;
+}
+
+/* white tiles on a light blue section carry core blue icons */
+main .section.light-blue .cards-carousel .cards-carousel-icon {
+  color: var(--color-link);
+}
+
+.cards-carousel .cards-carousel-icon picture {
+  display: block;
+}
+
+.cards-carousel .cards-carousel-icon img,
+.cards-carousel .cards-carousel-icon .icon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.cards-carousel .cards-carousel-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cards-carousel .cards-carousel-body h3 {
+  margin: 0 0 var(--space-m);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.cards-carousel .cards-carousel-body p {
+  margin: 0;
+}
+
+/* CTA pinned to the bottom of the tile, 40px below the copy */
+.cards-carousel .cards-carousel-body .cards-carousel-cta {
+  margin: auto 0 0;
+  padding-top: 40px;
+}
+
+.cards-carousel .cards-carousel-cta a.button:any-link {
+  width: 100%;
+}
+
+/* whole tile clickable via its single CTA */
+.cards-carousel .cards-carousel-cta a:any-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-l);
+}
+
+/* controls: prev arrow, progress bars, next arrow, centered under the track */
+.cards-carousel .cards-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-l);
+  padding: var(--space-xs) 0;
+}
+
+.cards-carousel.cards-carousel-static .cards-carousel-controls {
+  display: none;
+}
+
+.cards-carousel .cards-carousel-indicators {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  width: 199px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-carousel .cards-carousel-indicators li {
+  flex-shrink: 0;
+  width: 24px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-link);
+  opacity: 0.5;
+  transition: width 0.5s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.3s ease-in-out;
+}
+
+.cards-carousel .cards-carousel-indicators.is-compact li {
+  width: 6px;
+}
+
+.cards-carousel .cards-carousel-indicators li.is-active {
+  width: 48px;
+  opacity: 1;
+}
+
+.cards-carousel .cards-carousel-prev,
+.cards-carousel .cards-carousel-next {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--color-link);
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.3s;
+}
+
+.cards-carousel .cards-carousel-prev:hover,
+.cards-carousel .cards-carousel-next:hover {
+  background-color: var(--color-hover-overlay);
+}
+
+.cards-carousel .cards-carousel-prev:focus-visible,
+.cards-carousel .cards-carousel-next:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+/* at either end the arrow fades out but keeps its slot so the bars stay put */
+.cards-carousel .cards-carousel-prev:disabled,
+.cards-carousel .cards-carousel-next:disabled {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cards-carousel .cards-carousel-prev::after,
+.cards-carousel .cards-carousel-next::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.625 4.534v1.542L8.002 12l9.623 5.92v1.54l-11.25-6.92v-1.08z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.cards-carousel .cards-carousel-next::after {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+/* section intro (default content directly before the block) */
+main .section.cards-carousel-container > .default-content-wrapper:has(+ .cards-carousel-wrapper) > :last-child {
+  margin-bottom: 40px;
+}
+
+/* eyebrow: a short paragraph directly above the intro heading */
+main .section.cards-carousel-container > .default-content-wrapper:has(+ .cards-carousel-wrapper) > p:first-child:has(+ h2) {
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+@media (forced-colors: active) {
+  .cards-carousel .cards-carousel-glyph,
+  .cards-carousel .cards-carousel-prev::after,
+  .cards-carousel .cards-carousel-next::after {
+    background-color: CanvasText;
+    forced-color-adjust: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards-carousel .cards-carousel-track {
+    scroll-behavior: auto;
+  }
+
+  .cards-carousel .cards-carousel-indicators li,
+  .cards-carousel .cards-carousel-prev,
+  .cards-carousel .cards-carousel-next {
+    transition: none;
+  }
+}
+
+@media (width >= 900px) {
+  main .section.cards-carousel-container > .default-content-wrapper:has(+ .cards-carousel-wrapper) > * {
+    max-width: 845px;
+  }
+
+  .cards-carousel .cards-carousel-track {
+    gap: var(--space-l);
+  }
+
+  .cards-carousel .cards-carousel-card {
+    flex-basis: min(calc(33.33% - var(--space-m)), 410px);
+  }
+
+  .cards-carousel .cards-carousel-cta a.button:any-link {
+    width: auto;
+  }
+}

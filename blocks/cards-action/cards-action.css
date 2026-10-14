@@ -22,6 +22,10 @@ main .section > .cards-action-wrapper {
   padding: 28px var(--space-l) var(--space-l);
   border-radius: var(--radius-l);
   background-color: var(--pfa-core-lighter);
+}
+
+/* tiles with a CTA are clickable as a whole; text-only tiles are not */
+.cards-action .cards-action-card.cards-action-clickable {
   cursor: pointer;
 }
 

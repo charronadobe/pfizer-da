@@ -329,6 +329,13 @@ body:has(main > .section.carousel-hero-container:first-child) > header {
   height: 0;
 }
 
+/* from 1200px the same applies above a page hero that opens the page */
+@media (width >= 1200px) {
+  body:has(main > .section.hero-page-container:first-child) > header {
+    height: 0;
+  }
+}
+
 header .header,
 footer .footer {
   visibility: hidden;
@@ -691,20 +698,20 @@ main > .section.rust a:any-link {
   text-decoration-color: rgb(255 255 255 / 40%);
 }
 
-/* section-metadata style=core: Pfizer blue full-bleed section */
-:is(main, article.article-body) > .section.core {
+/* section-metadata style=core / blue: Pfizer blue full-bleed section */
+:is(main, article.article-body) > .section:is(.core, .blue) {
   background-color: var(--pfa-core);
   color: var(--pfa-white);
   margin: 0;
   padding: var(--section-block-space) 0;
 }
 
-:is(main, article.article-body) > .section.core :is(h1, h2, h3, h4, h5, h6, p, li),
-:is(main, article.article-body) > .section.core a:any-link:not(.button) {
+:is(main, article.article-body) > .section:is(.core, .blue) :is(h1, h2, h3, h4, h5, h6, p, li),
+:is(main, article.article-body) > .section:is(.core, .blue) a:any-link:not(.button) {
   color: var(--pfa-white);
 }
 
-:is(main, article.article-body) > .section.core a.button:any-link {
+:is(main, article.article-body) > .section:is(.core, .blue) a.button:any-link {
   background-color: var(--pfa-white);
   color: var(--pfa-gray-95);
 }
@@ -731,8 +738,165 @@ main > .section.rust a:any-link {
   box-shadow: 0 8px 24px rgb(0 0 0 / 20%);
 }
 
-:is(main, article.article-body) > .section.core a.button:any-link:hover {
+:is(main, article.article-body) > .section:is(.core, .blue) a.button:any-link:hover {
   background-color: var(--pfa-gray-10);
+}
+
+/* style=core as the first section: blue runs up under the fixed header,
+   the next section overlaps its bottom edge with rounded top corners */
+body:has(main > .section.core:first-child) > header {
+  height: 0;
+}
+
+main > .section.core:first-child {
+  padding: 97px 0 96px;
+}
+
+main > .section.core:first-child + .section {
+  position: relative;
+  top: -32px;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  background-color: var(--background-color);
+}
+
+/* style=blue: savings search band – heading + intro, with the link styled as
+   the source's search field (white, 16px radius, leading search icon) */
+:is(main, article.article-body) > .section.blue > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
+}
+
+:is(main, article.article-body) > .section.blue > .default-content-wrapper a.button:any-link {
+  justify-content: flex-start;
+  gap: var(--space-m);
+  width: 100%;
+  height: 88px;
+  border: 1px solid var(--pfa-core);
+  border-radius: var(--radius-m);
+  padding: var(--space-s) var(--space-m);
+  font-size: var(--body-font-size-l);
+  font-weight: 400;
+  line-height: 24px;
+  text-align: start;
+  color: var(--pfa-gray-90);
+}
+
+:is(main, article.article-body) > .section.blue > .default-content-wrapper a.button:any-link::before {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19 19'%3E%3Cpath d='M13.38 13.13h-1.77l5 5h1.77l-5-5Zm-.96-2.2A6.84 6.84 0 0 0 13.75 6.88 6.88 6.88 0 1 0 6.88 13.75a6.84 6.84 0 0 0 3.14-.76 6.9 6.9 0 0 0 2.4-2.06ZM6.88 1.25a5.63 5.63 0 1 1 0 11.25 5.63 5.63 0 0 1 0-11.25Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+@media (width >= 900px) {
+  :is(main, article.article-body) > .section.blue {
+    padding-bottom: 40px;
+  }
+
+  :is(main, article.article-body) > .section.blue > .default-content-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 548px) minmax(0, 628px);
+    justify-content: space-between;
+    align-items: start;
+    column-gap: 80px;
+  }
+
+  :is(main, article.article-body) > .section.blue > .default-content-wrapper > * {
+    grid-column: 1;
+  }
+
+  :is(main, article.article-body) > .section.blue > .default-content-wrapper > .button-container {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  main > .section.core:first-child {
+    padding: 120px 0 64px;
+  }
+}
+
+/* core section holding the quiz launch card: at least a viewport tall with the
+   card (and the privacy note after it) vertically centred */
+main > .section.core:has(.hero-quiz) {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100dvh - 202px);
+}
+
+/* flex children keep the content width; block margins must not absorb the free space */
+main > .section.core:has(.hero-quiz) > div {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--grid-container-width) + 2 * var(--content-padding-inline));
+  margin-block: 0;
+}
+
+/* privacy note below the card: centred small print at the card's width */
+main > .section.core:has(.hero-quiz) > .default-content-wrapper {
+  max-width: calc(343px + 2 * var(--content-padding-inline));
+}
+
+main > .section.core:has(.hero-quiz) > .default-content-wrapper p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+}
+
+@media (width >= 900px) {
+  main > .section.core:has(.hero-quiz) > .default-content-wrapper {
+    max-width: calc(846px + 2 * var(--content-padding-inline));
+  }
+}
+
+@media (width >= 1200px) {
+  main > .section.core:has(.hero-quiz) {
+    min-height: 100dvh;
+  }
+}
+
+/* a section holding only an auto-blocked YouTube link (the block's own
+   *-wrapper class lands on the section): the player sits flush between the
+   neighbouring sections, full-bleed on mobile and 845px wide centred from 900px */
+main > .section.embed-wrapper:has(> .embed-wrapper:only-child) {
+  padding-block: 0;
+}
+
+main > .section.embed-wrapper:has(> .embed-wrapper:only-child) > .embed-wrapper {
+  padding-inline: 0;
+}
+
+/* reserve the 16:9 player box before the lazy iframe loads (no layout shift) */
+main > .section.embed-wrapper:has(> .embed-wrapper:only-child) .embed {
+  aspect-ratio: 16 / 9;
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  main > .section.embed-wrapper:has(> .embed-wrapper:only-child) > .embed-wrapper {
+    max-width: 845px;
+  }
+}
+
+/* quiz page: the closing ACS disclaimer after the cost accordion is small print */
+main:has(.hero-quiz) > .section.accordion-faq-container + .section {
+  padding-block: 0 var(--space-xl);
+}
+
+main:has(.hero-quiz) > .section.accordion-faq-container + .section p {
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+  color: light-dark(#525252, var(--text-color));
+}
+
+main:has(.hero-quiz) > .section.accordion-faq-container + .section > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
 }
 
 /* section-metadata style=ink: deep dark full-bleed section */
@@ -767,6 +931,87 @@ main > .section.warm {
     );
   margin: 0;
   padding: var(--space-3xl, var(--section-block-space)) 0;
+}
+
+/* section-metadata style=light-blue: light blue (core-lighter) full-bleed surface */
+:is(main, article.article-body) > .section.light-blue {
+  background-color: var(--color-shaded);
+  margin: 0;
+  padding: var(--section-block-space) 0;
+}
+
+/* card-like blocks keep a white card surface on the light blue section */
+:is(main, article.article-body) > .section.light-blue .cards-carousel .cards-carousel-card {
+  background-color: var(--background-color);
+}
+
+/* section-metadata style=quote: centered pull quote (heading + attribution) */
+:is(main, article.article-body) > .section.quote > .default-content-wrapper {
+  text-align: center;
+}
+
+:is(main, article.article-body) > .section.quote > .default-content-wrapper > * {
+  max-width: 840px;
+  margin-inline: auto;
+}
+
+:is(main, article.article-body) > .section.quote > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
+}
+
+/* the light blue section is the surface: the true/false quiz drops its own inset card */
+:is(main, article.article-body) > .section.light-blue .quiz-truefalse {
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+/* section-metadata style=cta-inline: heading + text with the CTA beside it,
+   between full-bleed top/bottom outlines */
+:is(main, article.article-body) > .section.cta-inline {
+  margin: 0;
+  padding: 0;
+  border-block: 1px solid light-dark(#b3b3b3, #999);
+}
+
+:is(main, article.article-body) > .section.cta-inline > .default-content-wrapper {
+  padding-block: var(--section-block-space);
+}
+
+:is(main, article.article-body) > .section.cta-inline > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
+}
+
+:is(main, article.article-body) > .section.cta-inline > .default-content-wrapper a.button:any-link {
+  width: 100%;
+}
+
+@media (width >= 900px) {
+  :is(main, article.article-body) > .section.cta-inline > .default-content-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 845px) auto;
+    justify-content: start;
+    column-gap: var(--space-l);
+  }
+
+  :is(main, article.article-body) > .section.cta-inline > .default-content-wrapper > * {
+    grid-column: 1;
+  }
+
+  :is(main, article.article-body) > .section.cta-inline > .default-content-wrapper > .button-container {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    margin: 0;
+  }
+
+  :is(main, article.article-body) > .section.cta-inline > .default-content-wrapper > :nth-last-child(2) {
+    margin-bottom: 0;
+  }
+
+  :is(main, article.article-body) > .section.cta-inline > .default-content-wrapper a.button:any-link {
+    width: auto;
+  }
 }
 
 /* gradient-text utility: apply to any heading or span for brand gradient text */

@@ -1,0 +1,26 @@
+{
+  "variantName": "cards-nav",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "white tiles on light-blue",
+    "density": "moderate",
+    "purpose": "navigation-links",
+    "imagePattern": "noimg",
+    "structure": "heading + text + chevron",
+    "columns": 3
+  },
+  "contentPattern": "1 row per tile, 1 cell: h3 containing the link (the link makes the whole tile clickable) + optional paragraph. If the h3 is not linked, the tile's first link (e.g. a link paragraph) is moved into the heading. Option 'blue': title only - a single linked paragraph or h3 per row. Section intro (eyebrow, h2, text) is default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/",
+      "https://www.pfizerforall.com/find-care/biomarker-testing/"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [
+    { "class": "blue", "label": "Blue (solid blue tiles)" }
+  ],
+  "memberVariantIds": []
+}

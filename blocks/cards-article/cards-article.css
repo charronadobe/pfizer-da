@@ -1,0 +1,250 @@
+/* spacing between the section intro (default content) and the cards */
+main .section > .cards-article-wrapper {
+  margin-top: 40px;
+}
+
+.cards-article {
+  position: relative;
+}
+
+/* scroll track: bleeds to the wrapper edges so cards run off the right side */
+.cards-article .cards-article-track {
+  display: flex;
+  gap: var(--space-m);
+  margin: 0 calc(-1 * var(--content-padding-inline));
+  padding: 0 var(--content-padding-inline);
+  list-style: none;
+  overflow-x: auto;
+  scroll-padding-inline: var(--content-padding-inline);
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.cards-article .cards-article-track::-webkit-scrollbar {
+  display: none;
+}
+
+.cards-article .cards-article-card {
+  position: relative;
+  display: flex;
+  flex: 0 0 calc(100% - var(--space-s));
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 416px;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core-lighter);
+  scroll-snap-align: start;
+}
+
+/* photo */
+.cards-article .cards-article-image picture {
+  display: block;
+}
+
+.cards-article .cards-article-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-l);
+  object-fit: cover;
+}
+
+/* icon (promo card) */
+.cards-article .cards-article-icon {
+  padding: var(--space-l) var(--space-l) var(--space-m);
+}
+
+.cards-article .cards-article-icon picture {
+  display: block;
+}
+
+.cards-article .cards-article-icon img {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.cards-article .cards-article-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px var(--space-l) var(--space-l);
+}
+
+.cards-article .cards-article-image + .cards-article-body,
+.cards-article .cards-article-icon + .cards-article-body {
+  padding-top: var(--space-l);
+}
+
+.cards-article .cards-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-s);
+  margin: 0 0 var(--space-m);
+  padding: 0;
+  list-style: none;
+}
+
+.cards-article .cards-article-tags li {
+  padding: 2px var(--space-s);
+  border: 1px solid var(--pfa-outline-variant);
+  border-radius: var(--radius-xs);
+  background-color: var(--pfa-white);
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+.cards-article .cards-article-tags li.is-highlight {
+  border: 0;
+  background-color: #aee4ff;
+  color: #003e65;
+}
+
+.cards-article .cards-article-body h3 {
+  margin: 0 0 var(--space-m);
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.cards-article .cards-article-body p {
+  margin: 0;
+}
+
+.cards-article .cards-article-body .cards-article-label {
+  margin-top: var(--space-l);
+  color: #525252;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+.cards-article .cards-article-label em {
+  font-style: normal;
+}
+
+.cards-article .cards-article-body .cards-article-cta {
+  margin: auto 0 0;
+  padding-top: 40px;
+}
+
+/* full-width CTA while one card is in view */
+.cards-article .cards-article-cta a.button:any-link {
+  width: 100%;
+}
+
+/* whole card clickable via its single CTA */
+.cards-article .cards-article-cta a:any-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-l);
+}
+
+/* controls: prev arrow, progress bars, next arrow — centered under the track */
+.cards-article .cards-article-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-l);
+  padding: var(--space-xs) 0;
+}
+
+.cards-article.cards-article-static .cards-article-controls {
+  display: none;
+}
+
+.cards-article .cards-article-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  min-width: 199px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-article .cards-article-indicators li {
+  width: 24px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-link);
+  opacity: 0.5;
+}
+
+.cards-article .cards-article-indicators li.is-active {
+  width: 48px;
+  opacity: 1;
+}
+
+.cards-article .cards-article-prev,
+.cards-article .cards-article-next {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--color-link);
+  cursor: pointer;
+}
+
+/* source hides the arrow at either end (keeps its slot so bars stay centered) */
+.cards-article .cards-article-prev:disabled,
+.cards-article .cards-article-next:disabled {
+  opacity: 0;
+  cursor: default;
+}
+
+.cards-article .cards-article-prev:focus-visible,
+.cards-article .cards-article-next:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.cards-article .cards-article-prev::after,
+.cards-article .cards-article-next::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url('../../icons/chevron-left.svg') center / contain no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.cards-article .cards-article-next::after {
+  mask-image: url('../../icons/chevron-right.svg');
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards-article .cards-article-track {
+    scroll-behavior: auto;
+  }
+}
+
+/* desktop: three cards per view (410px max on the 1280px grid) */
+@media (width >= 900px) {
+  .cards-article .cards-article-track {
+    gap: var(--space-l);
+  }
+
+  .cards-article .cards-article-card {
+    flex-basis: calc((100% - 2 * var(--space-l)) / 3);
+    max-width: 410px;
+  }
+
+  .cards-article .cards-article-cta a.button:any-link {
+    width: auto;
+  }
+}

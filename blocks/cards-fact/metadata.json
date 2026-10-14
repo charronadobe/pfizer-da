@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-fact",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue tiles",
+    "density": "spacious",
+    "purpose": "key-facts",
+    "imagePattern": "noimg",
+    "structure": "label + statement + text",
+    "columns": "2 (3 when the block has exactly 3 cards)"
+  },
+  "contentPattern": "1 row per card, 1 cell: topic question (h3), statement (a second h3, or a fully bold paragraph), explanatory paragraph(s), and an optional last paragraph holding only a link (rendered as an underlined text link pinned to the bottom of the card). Dividers between the three parts are drawn by CSS. With a single heading and no bold paragraph, that heading is the statement. Layout: 1 column on mobile; from 900px 2 per row, or 3 across when the block has exactly 3 cards (automatic, no option). Section intro (h2, text) is default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/biomarker-testing/",
+      "https://www.pfizerforall.com/savings-support/prescription-assistance"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-13T16:26:47.759Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

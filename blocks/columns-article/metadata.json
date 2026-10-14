@@ -1,0 +1,22 @@
+{
+  "variantName": "columns-article",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-blue panel",
+    "density": "spacious",
+    "purpose": "featured-article-split",
+    "imagePattern": "half-image-flush",
+    "structure": "tags + heading + text + label + CTA | image"
+  },
+  "contentPattern": "1 row, 2 cells (either order): text cell = tags (a bulleted list, or one paragraph of comma-separated tags, placed before the heading), h3, paragraph(s), italic-only read-time paragraph (e.g. '*5 min read*'), CTA link (bold = primary button) | image cell = image only. Section heading ('Take a deeper look.') is default content above the block. Mobile shows the image above the text.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/vaccines/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

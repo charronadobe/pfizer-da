@@ -144,7 +144,7 @@ var CustomImportScript = (() => {
       } else if (img || pictureWrap.querySelector("span.icon")) {
         const iconSpan = pictureWrap.querySelector("span.icon");
         const iconClass = iconSpan && [...iconSpan.classList].find((c) => c.startsWith("icon-") && c !== "icon");
-        const iconName = iconClass ? iconClass.replace(/^icon-/, "") : null;
+        const iconName = iconClass ? iconClass.replace(/^icon-/, "").replace(/^asset-/, "") : null;
         const rawSrc = img ? img.getAttribute("src") : "";
         let src = null;
         if (iconName) src = `https://www.pfizerforall.com/assets/icons/${iconName}.svg?format=svg`;
@@ -179,7 +179,13 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/cards-action.js
   function parse3(element, { document: document2 }) {
+    const intro = [];
+    const introRoot = element.querySelector(".card-grid-content-container");
+    if (introRoot) {
+      introRoot.querySelectorAll(".card-grid-content-eyebrow-container p, .card-grid-content-headline-container h2, .card-grid-content-headline-container h3, .card-grid-content-body-container p").forEach((el) => intro.push(el));
+    }
     let cards = [...element.querySelectorAll(":scope > .card")];
+    if (!cards.length) cards = [...element.querySelectorAll(".cards-grid-container > .card")];
     if (!cards.length) cards = [...element.querySelectorAll(".card")];
     const buildIcon = (card) => {
       const iconWrap = card.querySelector(".card-icon");
@@ -189,7 +195,7 @@ var CustomImportScript = (() => {
       const img = iconWrap.querySelector("img");
       const span = iconWrap.querySelector("span.icon");
       const iconClass = span && [...span.classList].find((c) => c.startsWith("icon-"));
-      const name = iconClass ? iconClass.replace(/^icon-/, "") : null;
+      const name = iconClass ? iconClass.replace(/^icon-/, "").replace(/^asset-/, "") : null;
       const raw = img ? img.getAttribute("src") : "";
       let src = null;
       if (name) src = `https://www.pfizerforall.com/assets/icons/${name}.svg?format=svg`;
@@ -232,11 +238,95 @@ var CustomImportScript = (() => {
       return;
     }
     const block = WebImporter.Blocks.createBlock(document2, { name: "cards-action", cells });
+    if (intro.length) element.before(...intro);
     element.replaceWith(block);
   }
 
   // tools/importer/parsers/carousel-condition.js
-  function parse4(element, { document: document2 }) {
+  var ARTICLE_INDEX = "/education/article-index.json";
+  var plainCache;
+  function loadPlain(params) {
+    if (plainCache !== void 0) return plainCache;
+    plainCache = null;
+    const bases = [];
+    try {
+      if (/^https?:/.test(window.location.href)) bases.push(window.location.href);
+    } catch (e) {
+    }
+    if (params && params.originalURL) bases.push(params.originalURL);
+    const tried = /* @__PURE__ */ new Set();
+    for (const base of bases) {
+      let u;
+      try {
+        u = new URL(base);
+      } catch (e) {
+        continue;
+      }
+      const p = u.pathname.replace(/\.html?$/, "");
+      const candidates = p.endsWith("/") ? [`${p}index.plain.html`] : [`${p}.plain.html`, `${p}/index.plain.html`];
+      for (const c of candidates) {
+        const href = `${u.origin}${c}`;
+        if (tried.has(href)) continue;
+        tried.add(href);
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", href, false);
+          xhr.send();
+          if (xhr.status === 200 && /<div/.test(xhr.responseText)) {
+            plainCache = new DOMParser().parseFromString(xhr.responseText, "text/html");
+            return plainCache;
+          }
+        } catch (e) {
+        }
+      }
+    }
+    return plainCache;
+  }
+  var clean = (t) => (t || "").replace(/\s+/g, " ").trim();
+  function parseArticles(element, document2, params) {
+    const cells = [["source", ARTICLE_INDEX]];
+    const top = [...element.classList].map((c) => c.match(/^top-(\d+)$/)).find(Boolean);
+    let limit = top ? top[1] : "";
+    let paths = [];
+    const plain = loadPlain(params);
+    if (plain) {
+      const blocks = [...plain.querySelectorAll("div.content-cards-carousel.dynamic-article")];
+      const live = [...element.ownerDocument.querySelectorAll(".content-cards-carousel.block.dynamic-article")];
+      const authored = blocks[Math.max(live.indexOf(element), 0)] || blocks[0];
+      if (authored) {
+        if (!limit) {
+          const t = [...authored.classList].map((c) => c.match(/^top-(\d+)$/)).find(Boolean);
+          if (t) limit = t[1];
+        }
+        [...authored.children].forEach((row) => {
+          const [k, v] = [...row.children];
+          if (!k || !v) return;
+          const key = clean(k.textContent).toLowerCase();
+          if (key === "article-urls" || key === "paths") {
+            const items = [...v.querySelectorAll("li")].map((li) => clean(li.textContent));
+            paths = items.length ? items : clean(v.textContent).split(/[\s,]+/).filter(Boolean);
+          }
+        });
+      }
+    }
+    if (limit) cells.push(["limit", limit]);
+    if (paths.length) {
+      const ul = document2.createElement("ul");
+      paths.forEach((p) => {
+        const li = document2.createElement("li");
+        li.textContent = p;
+        ul.append(li);
+      });
+      cells.push(["paths", ul]);
+    }
+    const block = WebImporter.Blocks.createBlock(document2, { name: "carousel-condition", variants: ["articles"], cells });
+    element.replaceWith(block);
+  }
+  function parse4(element, { document: document2, params }) {
+    if (element.classList.contains("dynamic-article")) {
+      parseArticles(element, document2, params);
+      return;
+    }
     let slides = [...element.querySelectorAll(":scope > .slides-container > .carousel-slide")];
     if (!slides.length) slides = [...element.querySelectorAll(".carousel-slide")];
     const cells = [];
@@ -271,24 +361,129 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/columns-media.js
-  function parse5(element, { document: document2 }) {
-    const root = element.querySelector(":scope > .image-1-2") || (element.classList.contains("image-1-2") ? element : element.querySelector(".image-1-2")) || element;
-    const own = (sel) => [...root.querySelectorAll(sel)].filter((el) => el.closest(".image-1-2") === root || root === element);
+  var ROOT_SEL = ".image-1-2, .image-1-1, .base-image-block";
+  function pageUrl(params) {
+    if (params && params.originalURL) return params.originalURL;
+    try {
+      return window.location.href;
+    } catch (e) {
+      return "";
+    }
+  }
+  var plainDoc;
+  function loadPlain2(params) {
+    if (plainDoc !== void 0) return plainDoc;
+    plainDoc = null;
+    const bases = [];
+    try {
+      if (/^https?:/.test(window.location.href)) bases.push(window.location.href);
+    } catch (e) {
+    }
+    if (params && params.originalURL) bases.push(params.originalURL);
+    const tried = /* @__PURE__ */ new Set();
+    for (const base of bases) {
+      let u;
+      try {
+        u = new URL(base);
+      } catch (e) {
+        continue;
+      }
+      const p = u.pathname.replace(/\.html?$/, "");
+      const candidates = p.endsWith("/") ? [`${p}index.plain.html`] : [`${p}.plain.html`, `${p}/index.plain.html`];
+      for (const c of candidates) {
+        const href = `${u.origin}${c}`;
+        if (tried.has(href)) continue;
+        tried.add(href);
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", href, false);
+          xhr.send();
+          if (xhr.status === 200 && /<div/.test(xhr.responseText)) {
+            plainDoc = new DOMParser().parseFromString(xhr.responseText, "text/html");
+            return plainDoc;
+          }
+        } catch (e) {
+        }
+      }
+    }
+    return plainDoc;
+  }
+  var norm = (t) => (t || "").replace(/\s+/g, " ").trim().toLowerCase();
+  function plainImage(root, alt, params) {
+    const plain = loadPlain2(params);
+    if (!plain) return null;
+    if (alt) {
+      const byAlt = [...plain.querySelectorAll("img")].find((i) => (i.getAttribute("alt") || "") === alt);
+      if (byAlt) return byAlt;
+    }
+    const type = ["image-1-1", "image-1-2"].find((c) => root.classList.contains(c));
+    const heading = root.querySelector("h1, h2, h3");
+    if (!type || !heading) return null;
+    const h = norm(heading.textContent);
+    const block = [...plain.querySelectorAll(`div.${type}`)].find((b) => h && norm(b.textContent).includes(h));
+    if (!block) return null;
+    const row = [...block.children].find((r) => norm((r.children[0] || {}).textContent) === "image");
+    return (row || block).querySelector("img");
+  }
+  function fixImage(picture, document2, params, root) {
+    let img = picture.tagName === "IMG" ? picture : picture.querySelector("img");
+    const base = pageUrl(params);
+    let src = img ? img.getAttribute("src") || "" : "";
+    if (!img || !src || src.startsWith("data:")) {
+      const match = plainImage(root, img ? img.getAttribute("alt") || "" : "", params);
+      src = match ? match.getAttribute("src") : "";
+      if (!src) return null;
+      if (/\.gif(\?|$)/i.test(src)) src = src.replace(/\?.*$/, "");
+      const fresh = document2.createElement("img");
+      fresh.setAttribute("src", src);
+      fresh.setAttribute("alt", img && img.getAttribute("alt") || match.getAttribute("alt") || "");
+      img = fresh;
+      picture = fresh;
+    }
+    if (base && !/^https?:/.test(src)) {
+      try {
+        src = new URL(src, base).href;
+      } catch (e) {
+      }
+    }
+    if (src !== img.getAttribute("src")) img.setAttribute("src", src);
+    return picture;
+  }
+  function parse5(element, { document: document2, params }) {
+    const root = element.querySelector(`:scope > ${ROOT_SEL.split(", ").join(", :scope > ")}`) || (element.matches(ROOT_SEL) ? element : element.querySelector(ROOT_SEL)) || element;
+    const own = (sel) => [...root.querySelectorAll(sel)].filter((el) => el.closest(ROOT_SEL) === root || root === element);
     const imageContainer = own(".image-container")[0];
     let picture = null;
     if (imageContainer) {
-      picture = imageContainer.querySelector(".image-1-2-desktop-image picture, .desktop-image picture") || imageContainer.querySelector("picture") || imageContainer.querySelector("img");
+      const candidates = [...imageContainer.querySelectorAll(".image-1-2-desktop-image picture, .image-1-1-desktop-image picture, .desktop-image picture")].concat([...imageContainer.querySelectorAll("picture")], [...imageContainer.querySelectorAll("img")]).filter((el) => !el.closest(".image-relief"));
+      picture = candidates[0] || null;
+      if (picture) picture = fixImage(picture, document2, params, root);
     }
     const content = own(".content-container")[0];
     const textCell = [];
     if (content) {
+      content.querySelectorAll(".image-content-eyebrow-container p").forEach((p) => {
+        if (p.textContent.trim()) textCell.push(p);
+      });
       const heading = content.querySelector(".image-content-headline-container h1, .image-content-headline-container h2, .image-content-headline-container h3") || content.querySelector("h2, h3");
       if (heading) textCell.push(heading);
       content.querySelectorAll(".image-content-body-container p, .image-content-label-container p").forEach((p) => textCell.push(p));
       content.querySelectorAll(".button-group a[href], p.button-container a[href]").forEach((a) => {
         if (textCell.some((el) => el.contains(a))) return;
         const p = document2.createElement("p");
-        p.append(a);
+        if (a.classList.contains("secondary")) {
+          const em = document2.createElement("em");
+          em.append(a);
+          p.append(em);
+        } else if (a.classList.contains("text")) {
+          const strong = document2.createElement("strong");
+          const em = document2.createElement("em");
+          em.append(a);
+          strong.append(em);
+          p.append(strong);
+        } else {
+          p.append(a);
+        }
         textCell.push(p);
       });
     }
@@ -300,7 +495,10 @@ var CustomImportScript = (() => {
     const text = textCell.length ? textCell : "";
     const textFirst = root.classList.contains("desktop-right");
     const cells = [textFirst ? [text, imageCell] : [imageCell, text]];
-    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-media", cells });
+    const variants = [];
+    if (root.classList.contains("image-1-1")) variants.push("full-bleed");
+    if (root.classList.contains("italic-text")) variants.push("italic");
+    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-media", variants, cells });
     element.replaceWith(block);
   }
 
@@ -332,12 +530,172 @@ var CustomImportScript = (() => {
 
   // tools/importer/transformers/pfizerforall-cleanup.js
   var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
+  var YT_ID_PATTERNS = [
+    /youtube(?:-nocookie)?\.com\/embed\/([\w-]{6,})/,
+    /youtube\.com\/watch\?(?:[^#]*&)?v=([\w-]{6,})/,
+    /youtu\.be\/([\w-]{6,})/
+  ];
+  function findYouTubeId(el) {
+    const nodes = [el, ...el.querySelectorAll("*")];
+    for (const node of nodes) {
+      for (const attr of [...node.attributes]) {
+        if (/^(data-)?(video-?)?id$/i.test(attr.name) && /^[\w-]{11}$/.test(attr.value) && node.closest('.video-element-youtube, [class*="youtube"]')) {
+          return attr.value;
+        }
+        for (const re of YT_ID_PATTERNS) {
+          const m = attr.value.match(re);
+          if (m) return m[1];
+        }
+      }
+    }
+    return null;
+  }
+  function getLivePageUrl(payload) {
+    const candidates = [payload && payload.params && payload.params.originalURL, payload && payload.url];
+    for (const c of candidates) {
+      if (!c) continue;
+      try {
+        const u = new URL(c);
+        if (!/^https?:$/.test(u.protocol)) continue;
+        u.search = "";
+        u.hash = "";
+        return u.href;
+      } catch (e) {
+      }
+    }
+    return null;
+  }
+  function getPagePath(payload) {
+    const candidates = [payload && payload.params && payload.params.originalURL, payload && payload.url];
+    for (const c of candidates) {
+      if (!c) continue;
+      try {
+        return new URL(c).pathname.replace(/\/+$/, "");
+      } catch (e) {
+      }
+    }
+    try {
+      const loc = document.location;
+      if (loc && /^https?:$/.test(loc.protocol)) return loc.pathname.replace(/\/+$/, "");
+    } catch (e) {
+    }
+    return null;
+  }
+  function clonePopupContent(doc, popup) {
+    const source = popup.querySelector(".popup-modal-body") || popup.querySelector(".popup-modal-content") || popup;
+    const out = doc.createElement("div");
+    const CONTENT = "h1, h2, h3, h4, h5, h6, p, ul, ol, picture, img";
+    [...source.querySelectorAll(CONTENT)].filter((el) => !el.closest(".popup-modal-close") && !el.parentElement.closest(CONTENT)).forEach((el) => out.append(el.cloneNode(true)));
+    out.querySelectorAll("button, .icon, svg").forEach((el) => el.remove());
+    out.querySelectorAll("a span").forEach((span) => span.replaceWith(...span.childNodes));
+    out.querySelectorAll("*").forEach((el) => {
+      [...el.attributes].forEach((attr) => {
+        if (/^(data-|style$|class$|id$)/.test(attr.name)) el.removeAttribute(attr.name);
+      });
+    });
+    return out;
+  }
+  function createLinkParagraph(doc, href, text) {
+    const p = doc.createElement("p");
+    const a = doc.createElement("a");
+    a.href = href;
+    a.textContent = text;
+    p.append(a);
+    return p;
+  }
   function transform(hookName, element, payload) {
     if (hookName === TransformHook.beforeTransform) {
       WebImporter.DOMUtils.remove(element, [
         "#onetrust-consent-sdk",
         ".core-overlay-host-wrapper"
       ]);
+      WebImporter.DOMUtils.remove(element, [
+        ".hero-inner-container > nav.breadcrumb",
+        ".hero-sticky-dropdown-clone",
+        ".image-container > .image-relief"
+      ]);
+      element.querySelectorAll("#main > div.section").forEach((section) => {
+        if (section.className.trim() === "section" && !section.children.length && !section.textContent.trim()) {
+          section.remove();
+        }
+      });
+      const doc = element.ownerDocument || document;
+      element.querySelectorAll(".video-1-1.block").forEach((block) => {
+        const id = findYouTubeId(block);
+        if (!id) return;
+        const url = `https://www.youtube.com/watch?v=${id}`;
+        block.replaceWith(createLinkParagraph(doc, url, url));
+      });
+      const rxBlocks = [...element.querySelectorAll(".rx-search-results.block")];
+      if (rxBlocks.length) {
+        const toolUrl = getLivePageUrl(payload);
+        if (!toolUrl) console.warn("pfizerforall-cleanup: no source URL, Rx search link omitted");
+        const rxIds = /* @__PURE__ */ new Set();
+        rxBlocks.forEach((block) => {
+          [block, block.closest(".rx-search-results-wrapper"), block.closest("#main > div.section")].forEach((el) => {
+            if (el && el.id) rxIds.add(el.id);
+          });
+        });
+        rxBlocks.forEach((block) => {
+          const action = block.querySelector(".rx-search-action-section");
+          const labelEl = block.querySelector(".type-ahead__label");
+          const input = block.querySelector("input.type-ahead__field");
+          const label = labelEl && labelEl.textContent.trim() || input && (input.getAttribute("aria-label") || input.getAttribute("placeholder") || "").trim() || "";
+          const typeStack = block.querySelector(".rx-search-content-type-stack");
+          if (toolUrl && label && (typeStack || action)) {
+            const p = createLinkParagraph(doc, toolUrl, label);
+            if (typeStack) typeStack.append(p);
+            else action.before(p);
+          }
+          block.querySelectorAll(".rx-search-action-section, .rx-search-cards-container").forEach((el) => el.remove());
+        });
+        if (toolUrl && rxIds.size) {
+          element.querySelectorAll('a[href*="#"]').forEach((a) => {
+            let hash;
+            try {
+              hash = decodeURIComponent(new URL(a.getAttribute("href"), toolUrl).hash.slice(1));
+            } catch (e) {
+              return;
+            }
+            if (rxIds.has(hash)) a.setAttribute("href", toolUrl);
+          });
+        }
+      }
+      element.querySelectorAll("#main > div.section.icon-list-container").forEach((section) => {
+        if (section.querySelector(".icon-list.copay")) section.remove();
+      });
+      const popups = [...element.querySelectorAll(".popup-modal.block[id]")];
+      if (popups.length) {
+        let pagePath = getPagePath(payload);
+        if (pagePath === null) {
+          console.warn("pfizerforall-cleanup: no source URL, popup fragments use /fragments/<id>");
+          pagePath = "";
+        }
+        const ids = new Set(popups.map((p) => p.id));
+        const base = payload.params && payload.params.originalURL || payload.url;
+        element.querySelectorAll('a[href*="#"]').forEach((a) => {
+          if (a.closest(".popup-modal")) return;
+          let hash;
+          try {
+            hash = decodeURIComponent(new URL(a.getAttribute("href"), base).hash.slice(1));
+          } catch (e) {
+            return;
+          }
+          if (ids.has(hash)) a.setAttribute("href", `/fragments${pagePath}/${hash}#_dnb`);
+        });
+        if (!payload.params) payload.params = {};
+        const fragments = payload.params.fragments || (payload.params.fragments = []);
+        popups.forEach((popup) => {
+          fragments.push({
+            path: `/fragments${pagePath}/${popup.id}`,
+            element: clonePopupContent(doc, popup)
+          });
+        });
+        popups.forEach((popup) => {
+          const host = popup.closest("#main > div.section.popup-modal-container") || popup.closest(".popup-modal-wrapper") || popup;
+          host.remove();
+        });
+      }
     }
     if (hookName === TransformHook.afterTransform) {
       WebImporter.DOMUtils.remove(element, [
@@ -352,46 +710,117 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/transformers/pfizerforall-sections.js
-  var SECTION_MARKER_ATTR = "data-excat-section-id";
-  function querySection(root, selectors) {
-    const list = Array.isArray(selectors) ? selectors : [selectors];
-    for (const sel of list) {
-      if (!sel) continue;
-      const el = root.querySelector(sel);
-      if (el) return el;
+  var STYLE_ATTR = "data-excat-section-style";
+  var FIRST_ATTR = "data-excat-section-first";
+  function splitHas(sel) {
+    const filters = [];
+    let base = "";
+    let i = 0;
+    while (i < sel.length) {
+      const rest = sel.slice(i);
+      const m = rest.match(/^:not\(\s*:has\(/) || rest.match(/^:has\(/);
+      if (m) {
+        const negate = m[0].startsWith(":not");
+        let depth = 1;
+        let j = i + m[0].length;
+        const start = j;
+        while (j < sel.length && depth > 0) {
+          if (sel[j] === "(") depth += 1;
+          else if (sel[j] === ")") depth -= 1;
+          j += 1;
+        }
+        const inner = sel.slice(start, j - 1).trim();
+        if (negate) {
+          while (j < sel.length && sel[j] !== ")") j += 1;
+          j += 1;
+        }
+        filters.push({ inner, negate, at: base.length });
+        i = j;
+      } else {
+        base += sel[i];
+        i += 1;
+      }
     }
-    return null;
+    return { base: base.trim(), filters };
+  }
+  function supportsHas(root) {
+    try {
+      root.querySelector(":has(*)");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  function queryAll(root, sel, hasSupport) {
+    if (!sel) return [];
+    if (hasSupport || sel.indexOf(":has(") === -1) {
+      try {
+        return [...root.querySelectorAll(sel)];
+      } catch (e) {
+        if (sel.indexOf(":has(") === -1) return [];
+      }
+    }
+    const { base, filters } = splitHas(sel);
+    let els;
+    try {
+      els = [...root.querySelectorAll(base)];
+    } catch (e) {
+      return [];
+    }
+    return els.filter((el) => filters.every(({ inner, negate }) => {
+      let found = false;
+      try {
+        found = !!el.querySelector(inner);
+      } catch (e) {
+        found = false;
+      }
+      return negate ? !found : found;
+    }));
+  }
+  function collectSections(root, sections) {
+    const hasSupport = supportsHas(root);
+    const owner = /* @__PURE__ */ new Map();
+    sections.forEach((section) => {
+      const list = Array.isArray(section.selector) ? section.selector : [section.selector];
+      list.forEach((sel) => {
+        queryAll(root, sel, hasSupport).forEach((el) => {
+          if (!owner.has(el)) owner.set(el, section);
+        });
+      });
+    });
+    const matched = [...owner.entries()].map(([el, section]) => ({ el, section }));
+    matched.sort((a, b) => {
+      if (a.el === b.el) return 0;
+      return a.el.compareDocumentPosition(b.el) & 4 ? -1 : 1;
+    });
+    return matched.filter(({ el }) => !matched.some((o) => o.el !== el && o.el.contains(el)));
   }
   function transform2(hookName, element, payload) {
     const sections = payload && payload.template && payload.template.sections || [];
     if (sections.length < 2) return;
     if (hookName === "beforeTransform") {
-      for (let i = sections.length - 1; i >= 0; i -= 1) {
-        const section = sections[i];
+      const matched = collectSections(element, sections);
+      for (let i = matched.length - 1; i >= 0; i -= 1) {
+        const { el, section } = matched[i];
         if (i === 0 && !section.style) continue;
-        const sectionEl = querySection(element, section.selector);
-        if (!sectionEl) continue;
         const hr = document.createElement("hr");
-        if (section.style) hr.setAttribute(SECTION_MARKER_ATTR, section.id);
-        sectionEl.before(hr);
+        if (section.style) hr.setAttribute(STYLE_ATTR, section.style);
+        if (i === 0) hr.setAttribute(FIRST_ATTR, "true");
+        el.before(hr);
       }
     }
     if (hookName === "afterTransform") {
-      for (let i = sections.length - 1; i >= 0; i -= 1) {
-        const section = sections[i];
-        if (!section.style) continue;
-        const marker = element.querySelector(`[${SECTION_MARKER_ATTR}="${section.id}"]`);
-        const anchor = marker || querySection(element, section.selector);
-        if (!anchor) continue;
+      const markers = [...element.querySelectorAll(`hr[${STYLE_ATTR}]`)];
+      for (let i = markers.length - 1; i >= 0; i -= 1) {
+        const marker = markers[i];
+        const style = marker.getAttribute(STYLE_ATTR);
         const metadataBlock = WebImporter.Blocks.createBlock(document, {
           name: "Section Metadata",
-          cells: { style: section.style }
+          cells: { style }
         });
-        anchor.after(metadataBlock);
-        if (marker) {
-          marker.removeAttribute(SECTION_MARKER_ATTR);
-          if (i === 0) marker.remove();
-        }
+        marker.after(metadataBlock);
+        marker.removeAttribute(STYLE_ATTR);
+        if (marker.hasAttribute(FIRST_ATTR)) marker.remove();
       }
     }
   }

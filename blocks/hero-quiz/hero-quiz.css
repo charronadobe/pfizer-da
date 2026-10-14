@@ -1,0 +1,218 @@
+/* centered quiz-launch card on the section surface, bottom-aligned content */
+.hero-quiz .hero-quiz-card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 343px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-radius: var(--radius-l);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* stacked "second card" peeking out below the card */
+.hero-quiz .hero-quiz-card::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 20px 0 auto;
+  height: 100%;
+  border-radius: inherit;
+  background-color: inherit;
+  opacity: 0.7;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+/* space to the content that follows the card in the section (e.g. a disclaimer) */
+.hero-quiz-wrapper:not(:last-child) > .hero-quiz {
+  margin-bottom: 36px;
+}
+
+.hero-quiz .hero-quiz-card > * {
+  max-width: 100%;
+  margin: 0;
+}
+
+.hero-quiz .hero-quiz-card > :where(h1, h2, h3, h4, h5, h6) ~ * {
+  margin-top: 15px;
+}
+
+/* eyebrow: own paragraph(s) before the heading, or a bold/underlined lead-in inside it */
+.hero-quiz .hero-quiz-eyebrow,
+.hero-quiz .hero-quiz-card > :is(h1, h2, h3, h4, h5, h6) > :is(strong, b, u):first-child {
+  display: block;
+  margin: 0 0 10px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: normal;
+  text-decoration: none;
+  color: light-dark(var(--pfa-black), var(--text-color));
+}
+
+.hero-quiz .hero-quiz-card > :is(h1, h2, h3, h4, h5, h6) > :is(strong, b) > u {
+  text-decoration: none;
+}
+
+.hero-quiz .hero-quiz-eyebrow > * {
+  margin: 0;
+}
+
+.hero-quiz .hero-quiz-card > :is(h1, h2, h3, h4, h5, h6) {
+  width: 295px;
+  margin-bottom: 46px;
+  font-family: var(--body-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -1px;
+}
+
+.hero-quiz .hero-quiz-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+  color: var(--color-link);
+}
+
+.hero-quiz .hero-quiz-body > * {
+  margin: 0;
+}
+
+.hero-quiz .hero-quiz-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-s);
+  width: 295px;
+}
+
+.hero-quiz .hero-quiz-actions[hidden] {
+  display: none;
+}
+
+.hero-quiz .hero-quiz-actions > * {
+  margin: 0;
+}
+
+.hero-quiz .hero-quiz-actions a.button:any-link {
+  width: 100%;
+  font-style: normal;
+}
+
+/* returning visitor: Retake + Return to guide side by side, natural widths */
+.hero-quiz .hero-quiz-returning {
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-quiz .hero-quiz-returning a.button:any-link {
+  width: auto;
+}
+
+/* note: clock icon + duration */
+.hero-quiz .hero-quiz-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: light-dark(#525252, var(--text-color));
+}
+
+.hero-quiz .hero-quiz-note > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.hero-quiz .hero-quiz-note picture {
+  display: flex;
+  flex: none;
+}
+
+/* the authored SVG uses currentColor, which an <img> cannot inherit: tint black to #525252 */
+.hero-quiz .hero-quiz-note img {
+  display: block;
+  flex: none;
+  width: 15px;
+  height: 15px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  filter: invert(32%);
+}
+
+body.dark-scheme .hero-quiz .hero-quiz-note img {
+  filter: invert(90%);
+}
+
+.hero-quiz .hero-quiz-note .icon {
+  flex: none;
+  width: 15px;
+  height: 15px;
+}
+
+@media (width >= 900px) {
+  .hero-quiz .hero-quiz-card {
+    max-width: 846px;
+    padding-bottom: var(--space-l);
+  }
+
+  .hero-quiz .hero-quiz-card::after {
+    transform: scale(0.975);
+  }
+
+  .hero-quiz .hero-quiz-card > :is(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 5px;
+    font-size: 60px;
+    letter-spacing: -2.4px;
+  }
+}
+
+/* the card is a light surface, also inside dark/colored sections (core, blue) */
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-link);
+}
+
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card :is(p, li),
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card a:any-link:not(.button) {
+  color: inherit;
+}
+
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card a.button:any-link {
+  border-color: transparent;
+  background-color: light-dark(var(--pfa-core), var(--pfa-relief-on-surface));
+  color: light-dark(var(--pfa-white), var(--pfa-relief-surface));
+}
+
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card a.button:any-link:hover {
+  background-color: light-dark(var(--pfa-core-dark), var(--pfa-relief-accent));
+  color: light-dark(var(--pfa-white), var(--pfa-relief-surface));
+}
+
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card a.button.secondary:any-link {
+  border-color: currentcolor;
+  background-color: transparent;
+  color: var(--color-link);
+}
+
+:is(main, article.article-body) > .section .hero-quiz .hero-quiz-card a.button.secondary:any-link:hover {
+  background-color: var(--color-hover-overlay);
+  color: var(--color-link);
+}

@@ -1,0 +1,22 @@
+{
+  "variantName": "quote-photo",
+  "baseBlock": "quote",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "patient-testimonial",
+    "imagePattern": "full-bleed-background",
+    "structure": "background image + quote + attribution + CTA"
+  },
+  "contentPattern": "1 row, 2 cells: image cell = photo (optional 2nd photo = mobile crop) | text cell = quote (h2 or a plain paragraph), attribution as italic-only paragraph(s) (e.g. '***Audrey***' line break '*Actual patient with lung cancer*'), CTA link (bold = button). Rendered as figure > blockquote + figcaption over the full-bleed photo; the quote mark is decorative CSS.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.pfizerforall.com/find-care/biomarker-testing/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-13"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

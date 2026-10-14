@@ -1,0 +1,259 @@
+.banner-cta {
+  --banner-cta-error: #c00727;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px var(--space-l);
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-core);
+  color: var(--pfa-white);
+  text-align: center;
+}
+
+.banner-cta .banner-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.banner-cta .banner-cta-content > * {
+  margin: 0;
+}
+
+.banner-cta :is(h1, h2, h3, h4, h5, h6, p, li),
+.banner-cta a:any-link:not(.button) {
+  color: inherit;
+}
+
+.banner-cta .banner-cta-content > :is(h2, h3) {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  line-height: var(--heading-line-height-l);
+}
+
+.banner-cta .banner-cta-content > p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.banner-cta .banner-cta-content > :is(h2, h3, p) + p:not(.button-container) {
+  margin-top: var(--space-m);
+}
+
+/* icon */
+.banner-cta .banner-cta-content > .banner-cta-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.banner-cta .banner-cta-icon :is(.icon, picture, img) {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.banner-cta .banner-cta-icon img {
+  object-fit: contain;
+
+  /* single-colour line icons render white on the dark panel */
+  filter: brightness(0) invert(1);
+}
+
+/* CTA */
+.banner-cta .banner-cta-content > .button-container {
+  width: 100%;
+  margin-top: 40px;
+}
+
+main .banner-cta a.button:any-link,
+main .banner-cta button.button {
+  width: 100%;
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-95);
+}
+
+main .banner-cta a.button:any-link:hover,
+main .banner-cta button.button:hover {
+  background-color: var(--pfa-gray-10);
+  color: var(--pfa-gray-95);
+}
+
+main .banner-cta a.button:any-link:focus-visible,
+main .banner-cta button.button:focus-visible {
+  outline: 2px solid var(--pfa-white);
+  outline-offset: 2px;
+}
+
+/* decorative external-link glyph; the link text stays the accessible name */
+main .banner-cta .button.banner-cta-external::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url('../../icons/external-link.svg') center / contain no-repeat;
+}
+
+/* option: gradient */
+.banner-cta.gradient {
+  background-image: linear-gradient(180deg, var(--pfa-core) 0%, var(--pfa-gray-95) 100%);
+}
+
+/* option: age-input */
+.banner-cta.age-input .banner-cta-content > .banner-cta-note {
+  margin-top: var(--space-l);
+  color: var(--pfa-gray-10);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+.banner-cta.age-input .banner-cta-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-l);
+}
+
+.banner-cta.age-input .banner-cta-field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  width: 100%;
+  height: 64px;
+  padding: var(--space-s) var(--space-m);
+  border: 1.5px solid var(--pfa-core);
+  border-radius: var(--radius-m);
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-90);
+  text-align: start;
+}
+
+.banner-cta.age-input .banner-cta-field:has(input:focus-visible) {
+  outline: 1px solid var(--pfa-white);
+  outline-offset: 2px;
+}
+
+.banner-cta.age-input .banner-cta-input {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 48px;
+}
+
+/* floating label: centred until the field is focused or filled */
+.banner-cta.age-input .banner-cta-label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: top 0.2s ease, font-size 0.2s ease, line-height 0.2s ease, transform 0.2s ease;
+}
+
+.banner-cta.age-input .banner-cta-field:is(:focus-within, .has-value) .banner-cta-label {
+  top: 0;
+  color: var(--pfa-core);
+  font-size: 11px;
+  line-height: 16px;
+  transform: none;
+}
+
+.banner-cta.age-input .banner-cta-field.is-error .banner-cta-label {
+  color: var(--banner-cta-error);
+}
+
+.banner-cta.age-input input {
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  outline: none;
+  transition: margin-top 0.2s ease;
+}
+
+/* the field box carries the focus ring instead of the bare input */
+main .banner-cta.age-input input:focus-visible {
+  outline: none;
+}
+
+.banner-cta.age-input .banner-cta-field:is(:focus-within, .has-value) input {
+  margin-top: var(--space-xs);
+}
+
+.banner-cta.age-input .banner-cta-clear {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: var(--pfa-core);
+  cursor: pointer;
+  mask: url('../../icons/input-clear.svg') center / contain no-repeat;
+}
+
+.banner-cta.age-input .banner-cta-clear:focus-visible {
+  outline: 2px solid var(--pfa-core);
+  outline-offset: 2px;
+}
+
+.banner-cta.age-input .banner-cta-error-icon {
+  display: none;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: var(--banner-cta-error);
+  mask: url('../../icons/input-error.svg') center / contain no-repeat;
+}
+
+/* the error icon replaces the clear button while the value is invalid */
+.banner-cta.age-input .banner-cta-field.is-error .banner-cta-error-icon {
+  display: block;
+}
+
+.banner-cta.age-input .banner-cta-field.is-error .banner-cta-clear,
+.banner-cta.age-input .banner-cta-clear[hidden],
+main .banner-cta.age-input .banner-cta-submit[hidden] {
+  display: none;
+}
+
+.banner-cta.age-input .banner-cta-submit {
+  margin-top: 40px;
+}
+
+@media (width >= 900px) {
+  .banner-cta {
+    padding: 40px 112px;
+  }
+
+  .banner-cta .banner-cta-content > .button-container {
+    width: auto;
+  }
+
+  main .banner-cta a.button:any-link,
+  main .banner-cta button.button {
+    width: auto;
+  }
+
+  .banner-cta.age-input .banner-cta-field {
+    max-width: 402px;
+  }
+}

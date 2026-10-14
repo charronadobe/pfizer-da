@@ -1,0 +1,133 @@
+/* intro copy (default content) sits 40px above the tiles, as in the source stack gap */
+.default-content-wrapper + .cards-nav-wrapper > .cards-nav {
+  margin-top: 40px;
+}
+
+.cards-nav .cards-nav-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-nav .cards-nav-card {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 142px;
+  padding: var(--space-l) 20px 28px;
+  border-radius: var(--radius-l);
+  background-color: var(--pfa-white);
+  color: var(--pfa-gray-90);
+  outline: 1px solid transparent;
+  transition: 0.2s ease-in;
+}
+
+.cards-nav .cards-nav-body > * {
+  margin: 0;
+}
+
+.cards-nav .cards-nav-body > * + * {
+  margin-top: 12px;
+}
+
+.cards-nav .cards-nav-body > p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: #525252;
+}
+
+.cards-nav .cards-nav-title {
+  padding-right: 32px;
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 700;
+  line-height: var(--heading-line-height-xs);
+  color: var(--pfa-gray-90);
+}
+
+/* chevron in the top-right corner of the tile */
+.cards-nav .cards-nav-clickable .cards-nav-title::after {
+  content: '';
+  position: absolute;
+  top: var(--space-l);
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background-color: currentcolor;
+  mask: url('../../icons/chevron-right.svg') center / contain no-repeat;
+  pointer-events: none;
+}
+
+.cards-nav .cards-nav-link:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* the title link covers the whole tile */
+.cards-nav .cards-nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.cards-nav .cards-nav-title .cards-nav-link:focus-visible {
+  outline: none;
+}
+
+/* option: blue (solid blue title-only tiles) */
+.cards-nav.blue .cards-nav-card {
+  min-height: 0;
+  padding: 28px var(--space-l) var(--space-xl);
+  background-color: var(--pfa-core);
+  color: var(--pfa-white);
+  outline: none;
+  transition: none;
+}
+
+.cards-nav.blue .cards-nav-title {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding-right: 48px;
+  font-weight: 400;
+  color: var(--pfa-white);
+}
+
+.cards-nav.blue .cards-nav-clickable .cards-nav-title::after {
+  top: 28px;
+  right: var(--space-l);
+}
+
+/* states: hover ring and keyboard focus ring (blue: no hover, white ring on the link) */
+.cards-nav .cards-nav-clickable:hover {
+  box-shadow: 0 0 0 1.5px var(--pfa-core-dark);
+}
+
+.cards-nav .cards-nav-card:has(.cards-nav-link:focus-visible) {
+  outline: 2px solid var(--pfa-core);
+  outline-offset: 4px;
+}
+
+.cards-nav.blue .cards-nav-clickable:hover {
+  box-shadow: none;
+}
+
+.cards-nav.blue .cards-nav-card:has(.cards-nav-link:focus-visible) {
+  outline: none;
+}
+
+.cards-nav.blue .cards-nav-title .cards-nav-link:focus-visible {
+  outline: 2px solid var(--pfa-white);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+}
+
+@media (width >= 900px) {
+  .cards-nav .cards-nav-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-l);
+  }
+}

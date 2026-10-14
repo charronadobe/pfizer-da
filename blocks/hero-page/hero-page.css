@@ -1,0 +1,293 @@
+/* full-bleed banner: release the section's max-width / inline padding for this block only;
+   the text panel carries its own bottom spacing, so the section adds none */
+main .section.hero-page-container {
+  padding-bottom: 0;
+}
+
+main .section.hero-page-container > .hero-page-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-page {
+  position: relative;
+  background-color: var(--background-color);
+}
+
+.hero-page .hero-page-media {
+  overflow: hidden;
+}
+
+.hero-page .hero-page-media picture {
+  display: block;
+}
+
+.hero-page .hero-page-media img {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* text panel sits below the banner and overlaps its bottom edge with rounded top corners */
+.hero-page .hero-page-body {
+  position: relative;
+  box-sizing: border-box;
+  margin-top: -32px;
+  padding: 48px var(--space-l);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background-color: var(--background-color);
+}
+
+.hero-page.hero-page-no-image .hero-page-body {
+  margin-top: 0;
+}
+
+/* breadcrumb: Home / … / current page */
+.hero-page .hero-page-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0 0 var(--space-m);
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+  list-style: none;
+}
+
+.hero-page .hero-page-breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.hero-page .hero-page-breadcrumb li + li::before {
+  content: '/';
+}
+
+.hero-page .hero-page-breadcrumb a:any-link {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 1px rule 18px below the top of the 20px line, as on the source */
+.hero-page .hero-page-breadcrumb a:any-link::after {
+  content: '';
+  position: absolute;
+  inset: 18px 0 1px;
+  background-color: currentcolor;
+}
+
+.hero-page .hero-page-content {
+  max-width: 845px;
+}
+
+.hero-page .hero-page-content h1 {
+  margin: 0 0 var(--space-m);
+  color: light-dark(var(--pfa-core), var(--pfa-core-light));
+}
+
+.hero-page .hero-page-content p {
+  margin: 0;
+}
+
+.hero-page .hero-page-content p + p {
+  margin-top: var(--space-m);
+}
+
+/* option: announcement (full-width link strip between the banner image and the text panel;
+   it overlaps the image by 32px and the panel overlaps it by 32px) */
+.hero-page.announcement .hero-page-announcement {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -32px;
+  padding: var(--space-m) var(--space-m) var(--space-2xl);
+  background-color: var(--pfa-core);
+  color: var(--pfa-white);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+.hero-page.announcement .hero-page-announcement p {
+  max-width: 240px;
+  margin: 0;
+}
+
+.hero-page.announcement .hero-page-announcement a:any-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* fine-print paragraph (only italic text, e.g. "*Savings vary by product…") */
+.hero-page .hero-page-content p:has(> em:only-child) {
+  margin-top: var(--space-l);
+  color: light-dark(#525252, var(--text-color));
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
+/* option: dropdown (care-type selector) */
+.hero-page.dropdown .hero-page-body {
+  padding-bottom: var(--space-l);
+}
+
+.hero-page.dropdown .hero-page-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  margin-top: var(--space-xl);
+}
+
+.hero-page.dropdown .hero-page-selector-label > * {
+  margin: 0;
+}
+
+.hero-page.dropdown .hero-page-selector-control {
+  position: relative;
+}
+
+.hero-page.dropdown .hero-page-selector-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 64px;
+  margin: 0;
+  padding: 0 var(--space-m) 0 20px;
+  border: 1px solid var(--pfa-core);
+  border-radius: var(--radius-m);
+  background: var(--background-color);
+  color: light-dark(var(--pfa-core), var(--pfa-core-light));
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.hero-page.dropdown .hero-page-selector-button[aria-expanded='true'] {
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+}
+
+.hero-page.dropdown .hero-page-selector-button:focus-visible {
+  outline: 2px solid var(--pfa-core);
+  outline-offset: 2px;
+}
+
+.hero-page.dropdown .hero-page-selector-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 24px chevron-down (thin stroke), flipped while the menu is open */
+.hero-page.dropdown .hero-page-selector-chevron {
+  position: relative;
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+
+.hero-page.dropdown .hero-page-selector-chevron::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 11px;
+  height: 11px;
+  box-sizing: border-box;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: rotate(45deg);
+}
+
+.hero-page.dropdown .hero-page-selector-button[aria-expanded='true'] .hero-page-selector-chevron {
+  transform: rotate(180deg);
+}
+
+.hero-page.dropdown .hero-page-selector-menu {
+  position: absolute;
+  z-index: 10;
+  inset: 100% 0 auto;
+  box-sizing: border-box;
+  max-height: 400px;
+  margin: 0;
+  padding: 12px var(--space-xs) 12px 0;
+  overflow: hidden auto;
+  border: 1px solid var(--pfa-core);
+  border-top: 0;
+  border-radius: 0 0 var(--radius-m) var(--radius-m);
+  background: var(--background-color);
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
+  list-style: none;
+}
+
+.hero-page.dropdown .hero-page-selector-menu[hidden] {
+  display: none;
+}
+
+.hero-page.dropdown .hero-page-selector-menu li {
+  margin: 0;
+}
+
+.hero-page.dropdown .hero-page-selector-menu a:any-link {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 56px;
+  padding: var(--space-m) var(--space-m) var(--space-m) 20px;
+  color: light-dark(var(--pfa-core), var(--pfa-core-light));
+  font-size: var(--body-font-size-l);
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.hero-page.dropdown .hero-page-selector-menu a:hover,
+.hero-page.dropdown .hero-page-selector-menu a:focus-visible {
+  background: var(--color-shaded);
+  outline: none;
+}
+
+@media (width >= 900px) {
+  .hero-page .hero-page-media img {
+    height: 516px;
+  }
+
+  /* 80px gutters, content capped at 1280px and centred on wide screens */
+  .hero-page .hero-page-body {
+    padding: 80px max(80px, (100% - 1280px) / 2);
+  }
+
+  .hero-page.dropdown .hero-page-body {
+    padding-bottom: 40px;
+  }
+
+  .hero-page.announcement .hero-page-announcement {
+    padding-inline: 80px;
+  }
+
+  .hero-page.announcement .hero-page-announcement p {
+    max-width: none;
+  }
+
+  .hero-page.dropdown .hero-page-selector {
+    max-width: 412px;
+  }
+}
+
+@media (width >= 1200px) {
+  /* no banner image: the panel clears the floating header itself */
+  .hero-page.hero-page-no-image .hero-page-body {
+    padding-top: 160px;
+  }
+}

@@ -1,8 +1,12 @@
-/* columns-media: text + rounded image split (source: pfizerforall.com .image-1-2) */
+/* columns-media: text + rounded image split (source: pfizerforall.com .image-1-2 / .image-1-1) */
 .columns-media .columns-media-row {
   display: flex;
   flex-direction: column;
   gap: var(--space-l);
+}
+
+.columns-media .columns-media-empty {
+  display: none;
 }
 
 /* image: first on mobile, square, rounded */
@@ -24,6 +28,11 @@
   object-fit: cover;
 }
 
+/* animated GIFs (infographics) keep their own proportions instead of being cropped */
+.columns-media .columns-media-image.columns-media-image-natural img {
+  aspect-ratio: auto;
+}
+
 /* text */
 .columns-media .columns-media-content h2 {
   margin: 0 0 var(--space-m);
@@ -43,6 +52,12 @@
   margin-top: 0;
 }
 
+.columns-media .columns-media-content > p.columns-media-eyebrow {
+  margin-bottom: var(--space-m);
+  font-size: var(--body-font-size-s);
+  line-height: 20px;
+}
+
 .columns-media .columns-media-content > p.columns-media-small-print {
   margin-top: var(--space-l);
   font-size: var(--body-font-size-s);
@@ -54,10 +69,43 @@
   font-style: normal;
 }
 
+.columns-media.italic .columns-media-small-print em {
+  font-style: italic;
+}
+
 .columns-media .columns-media-content > p.button-container {
   display: flex;
   flex-direction: column;
   margin-top: var(--space-l);
+}
+
+/* two or more CTAs: stacked on mobile, one row on desktop */
+.columns-media .columns-media-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+  margin-top: var(--space-l);
+}
+
+.columns-media .columns-media-buttons > p.button-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* light blue (core-lighter) section: dark blue text */
+.section.light-blue .columns-media .columns-media-content > * {
+  color: light-dark(var(--pfa-core-darker), var(--color-text));
+}
+
+/* full-bleed (source .image-1-1): mobile image spans the viewport, square corners */
+.columns-media.full-bleed .columns-media-image {
+  margin-inline: calc(-1 * var(--content-padding-inline));
+  border-radius: 0;
+}
+
+.section:not(:first-child) > .columns-media-wrapper:first-child > .columns-media.full-bleed {
+  margin-top: calc(-1 * var(--section-block-space));
 }
 
 @media (width >= 900px) {
@@ -88,5 +136,53 @@
   .columns-media .columns-media-content > p.button-container {
     flex-direction: row;
     align-items: center;
+  }
+
+  .columns-media .columns-media-buttons {
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+  .columns-media .columns-media-buttons > p.button-container {
+    flex-direction: row;
+  }
+
+  /* full-bleed: 50/50 split, image runs to the content-grid edge (1440px max) */
+  .columns-media.full-bleed {
+    /* outer image corner is square until the viewport is wider than the 1440px grid */
+    --columns-media-edge-radius: clamp(0px, (100vw - 1440px) * 100, var(--radius-l));
+
+    margin-inline: calc(-1 * var(--content-padding-inline));
+  }
+
+  .section:not(:first-child) > .columns-media-wrapper:first-child > .columns-media.full-bleed {
+    margin-top: 0;
+  }
+
+  .columns-media.full-bleed .columns-media-row > .columns-media-image {
+    flex: 0 1 50%;
+    max-width: 708px;
+    margin-inline: 0;
+    border-radius: var(--columns-media-edge-radius) var(--radius-l) var(--radius-l) var(--columns-media-edge-radius);
+  }
+
+  .columns-media.full-bleed .columns-media-row > .columns-media-content {
+    max-width: 708px;
+    padding-inline: 80px;
+  }
+
+  /* image on the right */
+  .columns-media.full-bleed .columns-media-row:not(.columns-media-image-first) {
+    padding-inline-start: 80px;
+  }
+
+  .columns-media.full-bleed .columns-media-row:not(.columns-media-image-first) > .columns-media-image {
+    flex-basis: 53%;
+    border-radius: var(--radius-l) var(--columns-media-edge-radius) var(--columns-media-edge-radius) var(--radius-l);
+  }
+
+  .columns-media.full-bleed .columns-media-row:not(.columns-media-image-first) > .columns-media-content {
+    max-width: 628px;
+    padding-inline: 0 80px;
   }
 }
