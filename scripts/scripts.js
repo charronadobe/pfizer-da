@@ -123,9 +123,35 @@ async function loadFragments(section) {
   await dynamicBlocks(main);
 }
 
+/**
+ * Turns `/widgets/...` links into widget blocks.
+ * A paragraph that contains only that link is replaced by the block.
+ * @param {Element} main The container element
+ */
+function buildWidgetAutoBlocks(main) {
+  const widgetLinks = [...main.querySelectorAll('a[href*="/widgets/"]')];
+  widgetLinks.forEach((link) => {
+    if (link.closest('.widget')) return;
+    const newLink = link.cloneNode(true);
+    const widgetBlock = buildBlock('widget', { elems: [newLink] });
+    const p = link.closest('p');
+    if (
+      p
+      && p.querySelectorAll('a').length === 1
+      && p.querySelector('a') === link
+      && p.textContent.trim() === link.textContent.trim()
+    ) {
+      p.replaceWith(widgetBlock);
+    } else {
+      link.replaceWith(widgetBlock);
+    }
+  });
+}
+
 function buildAutoBlocks(main) {
   try {
     buildEmbedBlocks(main);
+    buildWidgetAutoBlocks(main);
   } catch (error) {
     console.error('Auto Blocking failed', error);
   }

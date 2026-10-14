@@ -98,11 +98,11 @@
 .banner-image .banner-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: var(--space-s);
   padding: var(--space-xl) var(--space-m);
-  text-align: center;
+  text-align: left;
   background-color: var(--background-color, var(--color-parchment));
   color: var(--foreground-color, var(--color-ink));
 }
